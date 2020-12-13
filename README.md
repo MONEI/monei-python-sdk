@@ -25,7 +25,7 @@ python setup.py install --user
 
 Then import the package:
 ```python
-import monei
+import Monei
 ```
 
 ## Authorization
