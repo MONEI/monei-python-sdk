@@ -9,7 +9,6 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-build/
 develop-eggs/
 dist/
 downloads/
@@ -64,3 +63,8 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+##### MONEI Custom
+
+build/node_modules/
+build/openapi.json
