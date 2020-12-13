@@ -16,6 +16,7 @@
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
 
+setup.py
 README.md
 monei_client/**
 docs/**

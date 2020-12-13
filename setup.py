@@ -26,15 +26,15 @@ REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
 setup(
     name=NAME,
     version=VERSION,
-    description="MONEI API v1",
-    author="OpenAPI Generator community",
-    author_email="team@openapitools.org",
+    description="MONEI PYTHON SDK",
+    author="MONEI",
+    author_email="hi@monei.net",
     url="",
-    keywords=["OpenAPI", "OpenAPI-Generator", "MONEI API v1"],
+    keywords=["monei", "monei pay", "pay", "payments", "payment gateway", "python", "sdk", "rest", "api"],
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
     long_description="""\
-    The MONEI API is organized around [REST](https://en.wikipedia.org/wiki/Representational_State_Transfer). Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.  # noqa: E501
+    The MONEI SDK will allow you to interact with our API in an easy and predictable way.
     """
 )
