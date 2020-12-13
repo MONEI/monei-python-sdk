@@ -6,14 +6,12 @@ class MoneiClient(object):
     def __init__(self, api_key=None, config=None):
 
         self.config = config if config else lib.Configuration(
-            host="http://api.microapps-staging.com/v1" # REMOVE
-            # api_key = {
-            #     'Authorization': api_key
-            # }
+            host="https://api.microapps-staging.com/v1" # REMOVE
         )
 
-        # TODO: Check if this works
-        self.config.api_key = api_key
+        self.config.api_key = {
+            'Authorization': api_key
+        }
 
         # Enter a context with an instance of the API client
         with lib.ApiClient(self.config) as api_client:
