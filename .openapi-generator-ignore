@@ -16,8 +16,9 @@
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
 
+.gitignore
 setup.py
 README.md
-monei_client/**
+Monei/**
 docs/**
 build/**

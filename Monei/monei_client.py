@@ -1,11 +1,12 @@
-import monei
+import lib
 
 class MoneiClient(object):
     _default = None
 
     def __init__(self, api_key=None, config=None):
 
-        self.config = config if config else monei.Configuration(
+        self.config = config if config else lib.Configuration(
+            host="http://api.microapps-staging.com/v1" # REMOVE
             # api_key = {
             #     'Authorization': api_key
             # }
@@ -15,9 +16,9 @@ class MoneiClient(object):
         self.config.api_key = api_key
 
         # Enter a context with an instance of the API client
-        with monei.ApiClient(self.config) as api_client:
+        with lib.ApiClient(self.config) as api_client:
             api_client.user_agent = 'MONEI/PYTHON/0.1.5'
-            self.payments = monei.PaymentsApi(api_client)
+            self.payments = lib.PaymentsApi(api_client)
 
     def verifySignature(self, body, signature):
         """Verifies response signature
