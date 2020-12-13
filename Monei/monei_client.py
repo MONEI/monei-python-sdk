@@ -1,9 +1,14 @@
 import lib
+import json
+import hmac
+import hashlib
 
 class MoneiClient(object):
     _default = None
 
     def __init__(self, api_key=None, config=None):
+
+        self.api_key = api_key
 
         self.config = config if config else lib.Configuration(
             host="https://api.microapps-staging.com/v1" # REMOVE
@@ -24,18 +29,23 @@ class MoneiClient(object):
         :param signature: string signature to verify against
         :return: parsed object of the body
         """
-        # $parts = array_reduce(explode(',', $signature), function ($result, $part) {
-        #     [$key, $value] = explode('=', $part);
-        #     $result[$key] = $value;
-        #     return $result;
-        # }, []);
 
-        # $hmac = hash_hmac('SHA256', $parts['t'] . '.' . $body, $this->config->getApiKey('Authorization'));
+        parts = {}
+        signature_parts = signature.split(',')
+        for part in signature_parts:
+            subparts = part.split('=')
+            parts[subparts[0]] = subparts[1]
 
-        # if ($hmac !== $parts['v1']) {
-        #     throw new ApiException('[401] Signature verification failed', 401);
-        # }
+        calculatedHmac = hmac.new(
+            bytes(self.api_key, 'utf-8'),
+            msg=bytes('{}.{}'.format(parts['t'], body), 'utf-8'),
+            digestmod=hashlib.sha256
+        ).hexdigest()
 
-        # return json_decode($body);
+        if calculatedHmac != parts['v1']:
+            raise lib.rest.ApiException(
+                status=401,
+                reason='[401] Signature verification failed'
+            )
 
-        return {}
+        return json.loads(body)
