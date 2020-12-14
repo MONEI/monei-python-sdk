@@ -4,7 +4,7 @@
     "description": "MONEI PYTHON SDK",
     "author": "monei",
     "scripts": {
-      "build": "openapi-generator generate -i ./openapi.json -g python --remove-operation-id-prefix -c ./config.json -o ../"
+      "build": "openapi-generator generate -i ./openapi.json -g python --remove-operation-id-prefix -c ./config.json -o ../ && ./post-build.sh"
     },
     "license": "MIT",
     "dependencies": {},

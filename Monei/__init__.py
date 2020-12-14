@@ -58,3 +58,5 @@ from Monei.models.payment_transaction_type import PaymentTransactionType
 from Monei.models.recurring_payment_request import RecurringPaymentRequest
 from Monei.models.refund_payment_request import RefundPaymentRequest
 
+# import custom MoneiClient
+from Monei.monei_client import MoneiClient
