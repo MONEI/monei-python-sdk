@@ -18,6 +18,7 @@
 
 .gitignore
 setup.py
+setup.cfg
 README.md
 Monei/monei_client.py
 docs/**
