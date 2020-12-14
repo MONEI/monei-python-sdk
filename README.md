@@ -14,6 +14,20 @@ Python 2.7 and 3.4+
 
 ## Installation & Usage
 
+### pip install
+
+If the python package is hosted on a repository, you can install directly using:
+
+```sh
+pip install --upgrade monei
+```
+(you may need to run `pip` with root permission: `sudo pip install --upgrade monei`)
+
+Then import the package:
+```python
+import Monei
+```
+
 ### Setuptools
 
 Install via [Setuptools](http://pypi.python.org/pypi/setuptools).
@@ -42,7 +56,7 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 ```python
 import Monei
-from Monei.rest import ApiException
+from Monei import ApiException
 from pprint import pprint
 
 # Instantiate the client using the API key
@@ -51,14 +65,14 @@ monei = Monei.MoneiClient(api_key='YOUR_API_KEY')
 try:
     # Cancel Payment
     result = monei.payments.create({
-        'amount' => 1250, # 12.50€
-        'orderId' => '100100000001',
-        'currency' => 'EUR',
-        'description' => 'Items decription',
-        'customer' => [
-            'email' => 'john.doe@monei.net',
-            'name' => 'John Doe'
-        ]
+        'amount': 1250, # 12.50€
+        'orderId': '100200000001',
+        'currency': 'EUR',
+        'description': 'Items decription',
+        'customer': {
+            'email': 'john.doe@monei.net',
+            'name': 'John Doe'
+        }
     })
     pprint(result)
 except ApiException as e:

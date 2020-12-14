@@ -10,9 +10,7 @@ class MoneiClient(object):
 
         self.api_key = api_key
 
-        self.config = config if config else lib.Configuration(
-            host="https://api.microapps-staging.com/v1" # REMOVE
-        )
+        self.config = config if config else lib.Configuration()
 
         self.config.api_key = {
             'Authorization': api_key
