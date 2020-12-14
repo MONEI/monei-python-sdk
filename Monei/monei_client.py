@@ -19,9 +19,9 @@ class MoneiClient(object):
         }
 
         # Enter a context with an instance of the API client
-        with Monei.ApiClient(self.config) as api_client:
+        with ApiClient(self.config) as api_client:
             api_client.user_agent = 'MONEI/PYTHON/0.1.5'
-            self.payments = Monei.PaymentsApi(api_client)
+            self.payments = PaymentsApi(api_client)
 
     def verifySignature(self, body, signature):
         """Verifies response signature
@@ -43,7 +43,7 @@ class MoneiClient(object):
         ).hexdigest()
 
         if calculatedHmac != parts['v1']:
-            raise Monei.ApiException(
+            raise ApiException(
                 status=401,
                 reason='[401] Signature verification failed'
             )
