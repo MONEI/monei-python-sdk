@@ -14,7 +14,7 @@
 
 from __future__ import absolute_import
 
-__version__ = "0.1.7"
+__version__ = "0.0.3"
 
 # import apis into sdk package
 from Monei.api.payments_api import PaymentsApi

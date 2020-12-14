@@ -20,7 +20,7 @@ class MoneiClient(object):
 
         # Enter a context with an instance of the API client
         with ApiClient(self.config) as api_client:
-            api_client.user_agent = 'MONEI/PYTHON/0.1.7'
+            api_client.user_agent = 'MONEI/PYTHON/0.0.3'
             self.payments = PaymentsApi(api_client)
 
     def verifySignature(self, body, signature):
