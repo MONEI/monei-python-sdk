@@ -64,6 +64,9 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 
+# General
+.DS_Store
+
 ##### MONEI Custom
 
 build/node_modules/

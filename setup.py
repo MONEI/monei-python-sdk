@@ -1,9 +1,9 @@
 # coding: utf-8
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 NAME = 'Monei'
-VERSION = '0.0.3'
+VERSION = '0.1.8'
 # To install the library, run the following
 #
 # python setup.py install
@@ -24,7 +24,7 @@ setup(
     url='https://github.com/monei/monei-python-sdk',
     keywords=['monei', 'monei pay', 'pay', 'payments', 'payment gateway', 'python', 'sdk', 'rest', 'api'],
     install_requires=REQUIRES,
-    packages=['Monei'],
+    packages=find_packages(exclude=['test', 'tests']),
     include_package_data=True,
     long_description='The MONEI SDK will allow you to interact with our API in an easy and predictable way',
     classifiers=[
