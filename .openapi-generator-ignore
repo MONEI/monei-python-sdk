@@ -19,6 +19,6 @@
 .gitignore
 setup.py
 README.md
-Monei/**
+Monei/monei_client.py
 docs/**
 build/**

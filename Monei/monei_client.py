@@ -1,7 +1,9 @@
-import lib
 import json
 import hmac
 import hashlib
+
+from Monei import Configuration, ApiClient, PaymentsApi, ApiException
+
 
 class MoneiClient(object):
     _default = None
@@ -10,16 +12,16 @@ class MoneiClient(object):
 
         self.api_key = api_key
 
-        self.config = config if config else lib.Configuration()
+        self.config = config if config else Configuration()
 
         self.config.api_key = {
             'Authorization': api_key
         }
 
         # Enter a context with an instance of the API client
-        with lib.ApiClient(self.config) as api_client:
+        with Monei.ApiClient(self.config) as api_client:
             api_client.user_agent = 'MONEI/PYTHON/0.1.5'
-            self.payments = lib.PaymentsApi(api_client)
+            self.payments = Monei.PaymentsApi(api_client)
 
     def verifySignature(self, body, signature):
         """Verifies response signature
@@ -41,7 +43,7 @@ class MoneiClient(object):
         ).hexdigest()
 
         if calculatedHmac != parts['v1']:
-            raise lib.rest.ApiException(
+            raise Monei.ApiException(
                 status=401,
                 reason='[401] Signature verification failed'
             )

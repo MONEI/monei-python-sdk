@@ -1,7 +1,6 @@
 # coding: utf-8
 
 # flake8: noqa
-
 """
     MONEI API v1
 
@@ -14,20 +13,7 @@
 
 from __future__ import absolute_import
 
-__version__ = "0.1.5"
-
-# import apis into sdk package
-from Monei.api.payments_api import PaymentsApi
-
-# import ApiClient
-from Monei.api_client import ApiClient
-from Monei.configuration import Configuration
-from Monei.exceptions import OpenApiException
-from Monei.exceptions import ApiTypeError
-from Monei.exceptions import ApiValueError
-from Monei.exceptions import ApiKeyError
-from Monei.exceptions import ApiException
-# import models into sdk package
+# import models into model package
 from Monei.models.address import Address
 from Monei.models.cancel_payment_request import CancelPaymentRequest
 from Monei.models.capture_payment_request import CapturePaymentRequest
@@ -57,4 +43,3 @@ from Monei.models.payment_trace_details import PaymentTraceDetails
 from Monei.models.payment_transaction_type import PaymentTransactionType
 from Monei.models.recurring_payment_request import RecurringPaymentRequest
 from Monei.models.refund_payment_request import RefundPaymentRequest
-
