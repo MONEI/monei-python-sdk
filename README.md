@@ -19,9 +19,9 @@ Python 2.7 and 3.4+
 If the python package is hosted on a repository, you can install directly using:
 
 ```sh
-pip install --upgrade monei
+pip install --upgrade Monei
 ```
-(you may need to run `pip` with root permission: `sudo pip install --upgrade monei`)
+(you may need to run `pip` with root permission: `sudo pip install --upgrade Monei`)
 
 Then import the package:
 ```python
