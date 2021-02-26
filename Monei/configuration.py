@@ -74,7 +74,7 @@ conf = Monei.Configuration(
 
     _default = None
 
-    def __init__(self, host="https://api.monei.net/v1",
+    def __init__(self, host="https://api.monei.com/v1",
                  api_key=None, api_key_prefix=None,
                  username=None, password=None,
                  discard_unknown_keys=False,
@@ -362,7 +362,7 @@ conf = Monei.Configuration(
         """
         return [
             {
-                'url': "https://api.monei.net/v1",
+                'url': "https://api.monei.com/v1",
                 'description': "MONEI API v1",
             }
         ]
