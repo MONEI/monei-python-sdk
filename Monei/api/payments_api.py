@@ -285,7 +285,7 @@ class PaymentsApi(object):
     def confirm(self, id, **kwargs):  # noqa: E501
         """Confirm Payment  # noqa: E501
 
-        Confirm a payment that was created without a `paymentToken` or `paymentMethod`. You can only confirm a payment with the `PENDING` status. <br/><br/> You can charge a customer in two steps. First create a payment without payment details and then confirm it after you generate a `paymentToken` on the front-end with monei.js [UI Components](https://docs.monei.net/docs/monei-js-overview). <br/><br/> You can provide additional customer information, it will override the information passed in **create payment** request.  # noqa: E501
+        Confirm a payment that was created without a `paymentToken` or `paymentMethod`. You can only confirm a payment with the `PENDING` status. <br/><br/> You can charge a customer in two steps. First create a payment without payment details and then confirm it after you generate a `paymentToken` on the front-end with monei.js [UI Components](https://docs.monei.com/docs/monei-js-overview). <br/><br/> You can provide additional customer information, it will override the information passed in **create payment** request.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.confirm(id, async_req=True)
@@ -311,7 +311,7 @@ class PaymentsApi(object):
     def confirm_with_http_info(self, id, **kwargs):  # noqa: E501
         """Confirm Payment  # noqa: E501
 
-        Confirm a payment that was created without a `paymentToken` or `paymentMethod`. You can only confirm a payment with the `PENDING` status. <br/><br/> You can charge a customer in two steps. First create a payment without payment details and then confirm it after you generate a `paymentToken` on the front-end with monei.js [UI Components](https://docs.monei.net/docs/monei-js-overview). <br/><br/> You can provide additional customer information, it will override the information passed in **create payment** request.  # noqa: E501
+        Confirm a payment that was created without a `paymentToken` or `paymentMethod`. You can only confirm a payment with the `PENDING` status. <br/><br/> You can charge a customer in two steps. First create a payment without payment details and then confirm it after you generate a `paymentToken` on the front-end with monei.js [UI Components](https://docs.monei.com/docs/monei-js-overview). <br/><br/> You can provide additional customer information, it will override the information passed in **create payment** request.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.confirm_with_http_info(id, async_req=True)

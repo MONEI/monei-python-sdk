@@ -138,7 +138,7 @@ class RecurringPaymentRequest(object):
     def transaction_type(self):
         """Gets the transaction_type of this RecurringPaymentRequest.  # noqa: E501
 
-        Same as the `transactionType` parameter from [create payment](https://docs.monei.net/api/#operation/payments_create). If not sent, it will default in the same transaction type used in the initial payment.  # noqa: E501
+        Same as the `transactionType` parameter from [create payment](https://docs.monei.com/api/#operation/payments_create). If not sent, it will default in the same transaction type used in the initial payment.  # noqa: E501
 
         :return: The transaction_type of this RecurringPaymentRequest.  # noqa: E501
         :rtype: PaymentTransactionType
@@ -149,7 +149,7 @@ class RecurringPaymentRequest(object):
     def transaction_type(self, transaction_type):
         """Sets the transaction_type of this RecurringPaymentRequest.
 
-        Same as the `transactionType` parameter from [create payment](https://docs.monei.net/api/#operation/payments_create). If not sent, it will default in the same transaction type used in the initial payment.  # noqa: E501
+        Same as the `transactionType` parameter from [create payment](https://docs.monei.com/api/#operation/payments_create). If not sent, it will default in the same transaction type used in the initial payment.  # noqa: E501
 
         :param transaction_type: The transaction_type of this RecurringPaymentRequest.  # noqa: E501
         :type: PaymentTransactionType
