@@ -1,6 +1,6 @@
 {
     "name": "monei-python-sdk",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "description": "MONEI PYTHON SDK",
     "author": "monei",
     "scripts": {
