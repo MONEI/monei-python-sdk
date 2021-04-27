@@ -63,7 +63,7 @@ from pprint import pprint
 monei = Monei.MoneiClient(api_key='YOUR_API_KEY')
 
 try:
-    # Cancel Payment
+    # Create Payment
     result = monei.payments.create({
         'amount': 1250, # 12.50€
         'orderId': '100200000001',
