@@ -38,6 +38,7 @@ class PaymentPaymentMethodCard(object):
         'type': 'str',
         'three_d_secure': 'bool',
         'three_d_secure_version': 'str',
+        'expiration': 'int',
         'last4': 'str'
     }
 
@@ -47,10 +48,11 @@ class PaymentPaymentMethodCard(object):
         'type': 'type',
         'three_d_secure': 'threeDSecure',
         'three_d_secure_version': 'threeDSecureVersion',
+        'expiration': 'expiration',
         'last4': 'last4'
     }
 
-    def __init__(self, country=None, brand=None, type=None, three_d_secure=None, three_d_secure_version=None, last4=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, country=None, brand=None, type=None, three_d_secure=None, three_d_secure_version=None, expiration=None, last4=None, local_vars_configuration=None):  # noqa: E501
         """PaymentPaymentMethodCard - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -61,6 +63,7 @@ class PaymentPaymentMethodCard(object):
         self._type = None
         self._three_d_secure = None
         self._three_d_secure_version = None
+        self._expiration = None
         self._last4 = None
         self.discriminator = None
 
@@ -74,6 +77,8 @@ class PaymentPaymentMethodCard(object):
             self.three_d_secure = three_d_secure
         if three_d_secure_version is not None:
             self.three_d_secure_version = three_d_secure_version
+        if expiration is not None:
+            self.expiration = expiration
         if last4 is not None:
             self.last4 = last4
 
@@ -203,6 +208,29 @@ class PaymentPaymentMethodCard(object):
         """
 
         self._three_d_secure_version = three_d_secure_version
+
+    @property
+    def expiration(self):
+        """Gets the expiration of this PaymentPaymentMethodCard.  # noqa: E501
+
+        Time at which the card will expire. Measured in seconds since the Unix epoch.  # noqa: E501
+
+        :return: The expiration of this PaymentPaymentMethodCard.  # noqa: E501
+        :rtype: int
+        """
+        return self._expiration
+
+    @expiration.setter
+    def expiration(self, expiration):
+        """Sets the expiration of this PaymentPaymentMethodCard.
+
+        Time at which the card will expire. Measured in seconds since the Unix epoch.  # noqa: E501
+
+        :param expiration: The expiration of this PaymentPaymentMethodCard.  # noqa: E501
+        :type: int
+        """
+
+        self._expiration = expiration
 
     @property
     def last4(self):
