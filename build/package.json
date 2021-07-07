@@ -1,14 +1,39 @@
 {
-    "name": "monei-python-sdk",
-    "version": "0.1.12",
-    "description": "MONEI PYTHON SDK",
-    "author": "monei",
-    "scripts": {
-      "build": "openapi-generator generate -i https://js.monei.com/api/v1/openapi.json -g python --remove-operation-id-prefix -c ./config.json -o ../ && ./post-build.sh"
+  "name": "monei-python-sdk",
+  "version": "0.1.12",
+  "description": "MONEI PYTHON SDK",
+  "author": "monei",
+  "scripts": {
+    "build": "openapi-generator generate -i https://js.monei.com/api/v1/openapi.json -g python --remove-operation-id-prefix -c ./config.json -o ../ && ./post-build.sh",
+    "release": "release-it",
+    "prepare": "yarn run build"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "1.0.18-4.3.1",
+    "@release-it/bumper": "^2.0.0",
+    "release-it": "^14.10.0"
+  },
+  "release-it": {
+    "git": {
+      "tagName": "v${version}",
+      "commitMessage": "chore: release v${version}"
     },
-    "license": "MIT",
-    "dependencies": {},
-    "devDependencies": {
-      "@openapitools/openapi-generator-cli": "1.0.18-4.3.1"
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": false
+    },
+    "hooks": {
+      "before:init": "yarn build",
+      "after:release": "./release.sh"
+    },
+    "plugins": {
+      "@release-it/bumper": {
+        "out": ["config.json", "setup.py"]
+      }
     }
   }
+}
