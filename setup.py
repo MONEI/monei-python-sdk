@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 
 NAME = 'Monei'
-VERSION = '0.1.12'
+VERSION = '0.1.13'
 # To install the library, run the following
 #
 # python setup.py install

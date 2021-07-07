@@ -27,8 +27,7 @@
       "publish": false
     },
     "hooks": {
-      "after:bump": "yarn build",
-      "after:release": "./release.sh"
+      "after:bump": "yarn build"
     },
     "plugins": {
       "@release-it/bumper": {
