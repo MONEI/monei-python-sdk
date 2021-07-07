@@ -36,9 +36,9 @@ class TestPaymentNextAction(unittest.TestCase):
         # model = MONEI PYTHON SDK.models.payment_next_action.PaymentNextAction()  # noqa: E501
         if include_optional :
             return PaymentNextAction(
-                type = 'CONFIRM', 
-                must_redirect = False, 
-                redirect_url = 'https://secure.monei.net/payments/af6029f80f5fc73a8ad2753eea0b1be0'
+                type = 'CONFIRM',
+                must_redirect = False,
+                redirect_url = 'https://secure.monei.com/payments/af6029f80f5fc73a8ad2753eea0b1be0'
             )
         else :
             return PaymentNextAction(

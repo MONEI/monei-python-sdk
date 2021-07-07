@@ -6,7 +6,7 @@ This library is intended to help you develop an integration around our API, by u
 
 ## Docs in our portal
 
-**You can find the complete information and details in [our documentation portal](https://docs.monei.net/api/).**
+**You can find the complete information and details in [our documentation portal](https://docs.monei.com/api/).**
 
 ## Requirements
 
@@ -44,9 +44,9 @@ import Monei
 
 ## Authorization
 
-The MONEI API uses API key to authenticate requests. You can view and manage your API key in the [MONEI Dashboard](https://dashboard.monei.net/settings/api).
+The MONEI API uses API key to authenticate requests. You can view and manage your API key in the [MONEI Dashboard](https://dashboard.monei.com/settings/api).
 
-For more information about this process, please refer to [our documentation portal](https://docs.monei.net/api/#section/Authentication).
+For more information about this process, please refer to [our documentation portal](https://docs.monei.com/api/#section/Authentication).
 
 
 
@@ -70,7 +70,7 @@ try:
         'currency': 'EUR',
         'description': 'Items decription',
         'customer': {
-            'email': 'john.doe@monei.net',
+            'email': 'john.doe@monei.com',
             'name': 'John Doe'
         }
     })
@@ -82,4 +82,4 @@ except ApiException as e:
 
 ## Documentation for API Endpoints
 
-For more detailed information about this library and the full list of methods, please refer to [our documentation portal](https://docs.monei.net/api/).
+For more detailed information about this library and the full list of methods, please refer to [our documentation portal](https://docs.monei.com/api/).

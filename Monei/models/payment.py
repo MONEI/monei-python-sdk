@@ -58,6 +58,7 @@ class Payment(object):
         'payment_method': 'PaymentPaymentMethod',
         'sequence': 'PaymentSequence',
         'sequence_id': 'str',
+        'point_of_sale_id': 'str',
         'next_action': 'PaymentNextAction',
         'created_at': 'int',
         'updated_at': 'int'
@@ -89,12 +90,13 @@ class Payment(object):
         'payment_method': 'paymentMethod',
         'sequence': 'sequence',
         'sequence_id': 'sequenceId',
+        'point_of_sale_id': 'pointOfSaleId',
         'next_action': 'nextAction',
         'created_at': 'createdAt',
         'updated_at': 'updatedAt'
     }
 
-    def __init__(self, id=None, amount=None, currency=None, order_id=None, description=None, account_id=None, authorization_code=None, livemode=None, status=None, status_code=None, status_message=None, customer=None, shop=None, billing_details=None, shipping_details=None, refunded_amount=None, last_refund_amount=None, last_refund_reason=None, cancellation_reason=None, session_details=None, trace_details=None, payment_token=None, payment_method=None, sequence=None, sequence_id=None, next_action=None, created_at=None, updated_at=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, id=None, amount=None, currency=None, order_id=None, description=None, account_id=None, authorization_code=None, livemode=None, status=None, status_code=None, status_message=None, customer=None, shop=None, billing_details=None, shipping_details=None, refunded_amount=None, last_refund_amount=None, last_refund_reason=None, cancellation_reason=None, session_details=None, trace_details=None, payment_token=None, payment_method=None, sequence=None, sequence_id=None, point_of_sale_id=None, next_action=None, created_at=None, updated_at=None, local_vars_configuration=None):  # noqa: E501
         """Payment - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -125,6 +127,7 @@ class Payment(object):
         self._payment_method = None
         self._sequence = None
         self._sequence_id = None
+        self._point_of_sale_id = None
         self._next_action = None
         self._created_at = None
         self._updated_at = None
@@ -180,6 +183,8 @@ class Payment(object):
             self.sequence = sequence
         if sequence_id is not None:
             self.sequence_id = sequence_id
+        if point_of_sale_id is not None:
+            self.point_of_sale_id = point_of_sale_id
         if next_action is not None:
             self.next_action = next_action
         if created_at is not None:
@@ -739,6 +744,29 @@ class Payment(object):
         """
 
         self._sequence_id = sequence_id
+
+    @property
+    def point_of_sale_id(self):
+        """Gets the point_of_sale_id of this Payment.  # noqa: E501
+
+        A unique identifier of the Point of Sale. If specified the payment is attached to this Point of Sale. If there is a QR code attached to the same Point of Sale, this payment will be available by scanning the QR code.  # noqa: E501
+
+        :return: The point_of_sale_id of this Payment.  # noqa: E501
+        :rtype: str
+        """
+        return self._point_of_sale_id
+
+    @point_of_sale_id.setter
+    def point_of_sale_id(self, point_of_sale_id):
+        """Sets the point_of_sale_id of this Payment.
+
+        A unique identifier of the Point of Sale. If specified the payment is attached to this Point of Sale. If there is a QR code attached to the same Point of Sale, this payment will be available by scanning the QR code.  # noqa: E501
+
+        :param point_of_sale_id: The point_of_sale_id of this Payment.  # noqa: E501
+        :type: str
+        """
+
+        self._point_of_sale_id = point_of_sale_id
 
     @property
     def next_action(self):

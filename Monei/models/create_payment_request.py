@@ -47,6 +47,7 @@ class CreatePaymentRequest(object):
         'allowed_payment_methods': 'PaymentPaymentMethods',
         'transaction_type': 'PaymentTransactionType',
         'sequence': 'PaymentSequence',
+        'point_of_sale_id': 'str',
         'description': 'str',
         'customer': 'PaymentCustomer',
         'billing_details': 'PaymentBillingDetails',
@@ -69,6 +70,7 @@ class CreatePaymentRequest(object):
         'allowed_payment_methods': 'allowedPaymentMethods',
         'transaction_type': 'transactionType',
         'sequence': 'sequence',
+        'point_of_sale_id': 'pointOfSaleId',
         'description': 'description',
         'customer': 'customer',
         'billing_details': 'billingDetails',
@@ -76,7 +78,7 @@ class CreatePaymentRequest(object):
         'session_details': 'sessionDetails'
     }
 
-    def __init__(self, amount=None, currency=None, order_id=None, callback_url=None, complete_url=None, fail_url=None, cancel_url=None, payment_token=None, session_id=None, generate_payment_token=False, payment_method=None, allowed_payment_methods=None, transaction_type=None, sequence=None, description=None, customer=None, billing_details=None, shipping_details=None, session_details=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, amount=None, currency=None, order_id=None, callback_url=None, complete_url=None, fail_url=None, cancel_url=None, payment_token=None, session_id=None, generate_payment_token=False, payment_method=None, allowed_payment_methods=None, transaction_type=None, sequence=None, point_of_sale_id=None, description=None, customer=None, billing_details=None, shipping_details=None, session_details=None, local_vars_configuration=None):  # noqa: E501
         """CreatePaymentRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -96,6 +98,7 @@ class CreatePaymentRequest(object):
         self._allowed_payment_methods = None
         self._transaction_type = None
         self._sequence = None
+        self._point_of_sale_id = None
         self._description = None
         self._customer = None
         self._billing_details = None
@@ -126,6 +129,8 @@ class CreatePaymentRequest(object):
             self.transaction_type = transaction_type
         if sequence is not None:
             self.sequence = sequence
+        if point_of_sale_id is not None:
+            self.point_of_sale_id = point_of_sale_id
         if description is not None:
             self.description = description
         if customer is not None:
@@ -460,6 +465,29 @@ class CreatePaymentRequest(object):
         """
 
         self._sequence = sequence
+
+    @property
+    def point_of_sale_id(self):
+        """Gets the point_of_sale_id of this CreatePaymentRequest.  # noqa: E501
+
+        A unique identifier of the Point of Sale. If specified the payment is attached to this Point of Sale. If there is a QR code attached to the same Point of Sale, this payment will be available by scanning the QR code.  # noqa: E501
+
+        :return: The point_of_sale_id of this CreatePaymentRequest.  # noqa: E501
+        :rtype: str
+        """
+        return self._point_of_sale_id
+
+    @point_of_sale_id.setter
+    def point_of_sale_id(self, point_of_sale_id):
+        """Sets the point_of_sale_id of this CreatePaymentRequest.
+
+        A unique identifier of the Point of Sale. If specified the payment is attached to this Point of Sale. If there is a QR code attached to the same Point of Sale, this payment will be available by scanning the QR code.  # noqa: E501
+
+        :param point_of_sale_id: The point_of_sale_id of this CreatePaymentRequest.  # noqa: E501
+        :type: str
+        """
+
+        self._point_of_sale_id = point_of_sale_id
 
     @property
     def description(self):
