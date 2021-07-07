@@ -32,7 +32,7 @@
     },
     "plugins": {
       "@release-it/bumper": {
-        "out": ["config.json", "setup.py"]
+        "out": ["config.json", "../setup.py"]
       }
     }
   }
