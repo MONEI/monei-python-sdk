@@ -3,5 +3,6 @@
   "packageVersion": "0.1.12",
   "gitHost": "github.com",
   "gitUserId": "monei",
-  "gitRepoId": "monei-python-sdk"
+  "gitRepoId": "monei-python-sdk",
+  "version": "0.1.13"
 }

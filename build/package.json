@@ -1,6 +1,6 @@
 {
   "name": "monei-python-sdk",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "MONEI PYTHON SDK",
   "author": "monei",
   "scripts": {
@@ -32,7 +32,10 @@
     },
     "plugins": {
       "@release-it/bumper": {
-        "out": ["config.json", "../setup.py"]
+        "out": [
+          "config.json",
+          "../setup.py"
+        ]
       }
     }
   }
