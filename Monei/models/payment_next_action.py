@@ -66,7 +66,7 @@ class PaymentNextAction(object):
     def type(self):
         """Gets the type of this PaymentNextAction.  # noqa: E501
 
-        - `CONFIRM` - Your customer needs to be redirected to a   [hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)   or confirm payment using   [payment token](https://docs.monei.com/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).   The **redirectUrl** will point to the hosted payment page. - `CHALLENGE` - Your customer needs to be redirected to the   3d secure challenge page provided by the bank. The **redirectUrl**   will point to the 3d secure challenge page provided by the bank. - `COMPLETE` - The payment is completed. The **redirectUrl** will be   the **completeUrl** if it was provided when the payment was created.  # noqa: E501
+        - `CONFIRM` - Your customer needs to be redirected to a   [hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)   or confirm payment using   [payment token](https://docs.monei.com/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).   The **redirectUrl** will point to the hosted payment page. - `FRICTIONLESS_CHALLENGE` - Your customer needs to be redirected to the frictionless    3d secure challenge page provided by the bank. The **redirectUrl**    will point to the frictionless 3d secure challenge page provided by the bank. - `CHALLENGE` - Your customer needs to be redirected to the   3d secure challenge page provided by the bank. The **redirectUrl**   will point to the 3d secure challenge page provided by the bank. - `COMPLETE` - The payment is completed. The **redirectUrl** will be   the **completeUrl** if it was provided when the payment was created.  # noqa: E501
 
         :return: The type of this PaymentNextAction.  # noqa: E501
         :rtype: str
@@ -77,12 +77,12 @@ class PaymentNextAction(object):
     def type(self, type):
         """Sets the type of this PaymentNextAction.
 
-        - `CONFIRM` - Your customer needs to be redirected to a   [hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)   or confirm payment using   [payment token](https://docs.monei.com/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).   The **redirectUrl** will point to the hosted payment page. - `CHALLENGE` - Your customer needs to be redirected to the   3d secure challenge page provided by the bank. The **redirectUrl**   will point to the 3d secure challenge page provided by the bank. - `COMPLETE` - The payment is completed. The **redirectUrl** will be   the **completeUrl** if it was provided when the payment was created.  # noqa: E501
+        - `CONFIRM` - Your customer needs to be redirected to a   [hosted payment page](https://docs.monei.com/docs/use-prebuilt-payment-page)   or confirm payment using   [payment token](https://docs.monei.com/docs/accept-card-payment#3-submitting-the-payment-to-monei-client-side).   The **redirectUrl** will point to the hosted payment page. - `FRICTIONLESS_CHALLENGE` - Your customer needs to be redirected to the frictionless    3d secure challenge page provided by the bank. The **redirectUrl**    will point to the frictionless 3d secure challenge page provided by the bank. - `CHALLENGE` - Your customer needs to be redirected to the   3d secure challenge page provided by the bank. The **redirectUrl**   will point to the 3d secure challenge page provided by the bank. - `COMPLETE` - The payment is completed. The **redirectUrl** will be   the **completeUrl** if it was provided when the payment was created.  # noqa: E501
 
         :param type: The type of this PaymentNextAction.  # noqa: E501
         :type: str
         """
-        allowed_values = ["CONFIRM", "CHALLENGE", "COMPLETE"]  # noqa: E501
+        allowed_values = ["CONFIRM", "CHALLENGE", "FRICTIONLESS_CHALLENGE", "COMPLETE"]  # noqa: E501
         if self.local_vars_configuration.client_side_validation and type not in allowed_values:  # noqa: E501
             raise ValueError(
                 "Invalid value for `type` ({0}), must be one of {1}"  # noqa: E501
