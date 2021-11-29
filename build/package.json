@@ -36,6 +36,10 @@
           {
             "file": "config.json",
             "path": "packageVersion"
+          },
+          {
+            "file": "config.json",
+            "path": "version"
           }
         ]
       }
