@@ -1,6 +1,6 @@
 {
   "name": "monei-python-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MONEI PYTHON SDK",
   "author": "monei",
   "scripts": {
@@ -35,7 +35,10 @@
         "out": [
           {
             "file": "config.json",
-            "path": ["packageVersion", "version"]
+            "path": [
+              "packageVersion",
+              "version"
+            ]
           }
         ]
       }
