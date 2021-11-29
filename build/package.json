@@ -34,12 +34,7 @@
       "@release-it/bumper": {
         "out": [
           {
-            "file": "config.json",
-            "path": "packageVersion"
-          },
-          {
-            "file": "config.json",
-            "path": "version"
+            "file": "config.json"
           }
         ]
       }
