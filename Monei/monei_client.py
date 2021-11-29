@@ -2,8 +2,7 @@ import json
 import hmac
 import hashlib
 
-from Monei import Configuration, ApiClient, PaymentsApi, ApiException, SubscriptionsApi, ApplePayDomainApi
-from setup import VERSION
+from Monei import Configuration, ApiClient, PaymentsApi, ApiException, SubscriptionsApi, ApplePayDomainApi, __version__
 
 
 class MoneiClient(object):
@@ -21,7 +20,7 @@ class MoneiClient(object):
 
         # Enter a context with an instance of the API client
         with ApiClient(self.config) as api_client:
-            api_client.user_agent = "MONEI/PYTHON/" + VERSION
+            api_client.user_agent = "MONEI/PYTHON/" + __version__
             self.Payments = PaymentsApi(api_client)
             self.Subscriptions = SubscriptionsApi(api_client)
             self.ApplePayDomain = ApplePayDomainApi(api_client)

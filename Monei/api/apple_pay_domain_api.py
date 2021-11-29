@@ -36,17 +36,17 @@ class ApplePayDomainApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def register(self, inline_object, **kwargs):  # noqa: E501
+    def register(self, register_domain_request, **kwargs):  # noqa: E501
         """Register  # noqa: E501
 
         <p>Registers custom domain for Apple Pay.</p> <p>Download this <a href=\"https://assets.monei.com/apple-pay/apple-developer-merchantid-domain-association/\">domain association file</a> and host it at <code>/well-known/apple-developer-merchantid-domain-association</code> on your site.</p> <p>For example, if you’re registering <code>example.com</code>, make that file available at <code>https://example.com/.well-known/apple-developer-merchantid-domain-association</code>.</p>   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.register(inline_object, async_req=True)
+        >>> thread = api.register(register_domain_request, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param InlineObject inline_object: (required)
+        :param RegisterDomainRequest register_domain_request: (required)
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -59,19 +59,19 @@ class ApplePayDomainApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        return self.register_with_http_info(inline_object, **kwargs)  # noqa: E501
+        return self.register_with_http_info(register_domain_request, **kwargs)  # noqa: E501
 
-    def register_with_http_info(self, inline_object, **kwargs):  # noqa: E501
+    def register_with_http_info(self, register_domain_request, **kwargs):  # noqa: E501
         """Register  # noqa: E501
 
         <p>Registers custom domain for Apple Pay.</p> <p>Download this <a href=\"https://assets.monei.com/apple-pay/apple-developer-merchantid-domain-association/\">domain association file</a> and host it at <code>/well-known/apple-developer-merchantid-domain-association</code> on your site.</p> <p>For example, if you’re registering <code>example.com</code>, make that file available at <code>https://example.com/.well-known/apple-developer-merchantid-domain-association</code>.</p>   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.register_with_http_info(inline_object, async_req=True)
+        >>> thread = api.register_with_http_info(register_domain_request, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param InlineObject inline_object: (required)
+        :param RegisterDomainRequest register_domain_request: (required)
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -89,7 +89,7 @@ class ApplePayDomainApi(object):
         local_var_params = locals()
 
         all_params = [
-            'inline_object'
+            'register_domain_request'
         ]
         all_params.extend(
             [
@@ -108,10 +108,10 @@ class ApplePayDomainApi(object):
                 )
             local_var_params[key] = val
         del local_var_params['kwargs']
-        # verify the required parameter 'inline_object' is set
-        if self.api_client.client_side_validation and ('inline_object' not in local_var_params or  # noqa: E501
-                                                        local_var_params['inline_object'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `inline_object` when calling `register`")  # noqa: E501
+        # verify the required parameter 'register_domain_request' is set
+        if self.api_client.client_side_validation and ('register_domain_request' not in local_var_params or  # noqa: E501
+                                                        local_var_params['register_domain_request'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `register_domain_request` when calling `register`")  # noqa: E501
 
         collection_formats = {}
 
@@ -125,8 +125,8 @@ class ApplePayDomainApi(object):
         local_var_files = {}
 
         body_params = None
-        if 'inline_object' in local_var_params:
-            body_params = local_var_params['inline_object']
+        if 'register_domain_request' in local_var_params:
+            body_params = local_var_params['register_domain_request']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501

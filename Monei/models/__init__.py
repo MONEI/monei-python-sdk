@@ -26,7 +26,6 @@ from Monei.models.confirm_payment_request_payment_method_card import ConfirmPaym
 from Monei.models.create_payment_request import CreatePaymentRequest
 from Monei.models.create_subscription_request import CreateSubscriptionRequest
 from Monei.models.error import Error
-from Monei.models.inline_object import InlineObject
 from Monei.models.inline_response200 import InlineResponse200
 from Monei.models.pause_subscription_request import PauseSubscriptionRequest
 from Monei.models.payment import Payment
@@ -52,6 +51,7 @@ from Monei.models.payment_trace_details import PaymentTraceDetails
 from Monei.models.payment_transaction_type import PaymentTransactionType
 from Monei.models.recurring_payment_request import RecurringPaymentRequest
 from Monei.models.refund_payment_request import RefundPaymentRequest
+from Monei.models.register_domain_request import RegisterDomainRequest
 from Monei.models.subscription import Subscription
 from Monei.models.subscription_interval import SubscriptionInterval
 from Monei.models.subscription_last_payment import SubscriptionLastPayment

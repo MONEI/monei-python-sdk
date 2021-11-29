@@ -1,9 +1,9 @@
 # coding: utf-8
 
 from setuptools import setup, find_packages
+from Monei import __version__
 
 NAME = 'Monei'
-VERSION = '0.1.14'
 # To install the library, run the following
 #
 # python setup.py install
@@ -15,7 +15,7 @@ REQUIRES = ['urllib3 >= 1.15', 'six >= 1.10', 'certifi', 'python-dateutil']
 
 setup(
     name=NAME,
-    version=VERSION,
+    version=__version__,
     description='MONEI PYTHON SDK',
     author='MONEI',
     author_email='hi@monei.com',
