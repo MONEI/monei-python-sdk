@@ -20,7 +20,7 @@ class MoneiClient(object):
 
         # Enter a context with an instance of the API client
         with ApiClient(self.config) as api_client:
-            api_client.user_agent = "MONEI/PYTHON/" + __version__
+            api_client.user_agent = "MONEI/Python/" + __version__
             self.Payments = PaymentsApi(api_client)
             self.Subscriptions = SubscriptionsApi(api_client)
             self.ApplePayDomain = ApplePayDomainApi(api_client)
