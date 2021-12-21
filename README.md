@@ -68,7 +68,7 @@ try:
         'amount': 1250, # 12.50€
         'orderId': '100200000001',
         'currency': 'EUR',
-        'description': 'Items decription',
+        'description': 'Items description',
         'customer': {
             'email': 'john.doe@monei.com',
             'name': 'John Doe'
