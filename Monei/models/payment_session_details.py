@@ -44,7 +44,12 @@ class PaymentSessionDetails(object):
         'os_version': 'str',
         'source': 'str',
         'source_version': 'str',
-        'user_agent': 'str'
+        'user_agent': 'str',
+        'browser_accept': 'str',
+        'browser_color_depth': 'int',
+        'browser_screen_height': 'int',
+        'browser_screen_width': 'int',
+        'browser_timezone_offset': 'str'
     }
 
     attribute_map = {
@@ -59,10 +64,15 @@ class PaymentSessionDetails(object):
         'os_version': 'osVersion',
         'source': 'source',
         'source_version': 'sourceVersion',
-        'user_agent': 'userAgent'
+        'user_agent': 'userAgent',
+        'browser_accept': 'browserAccept',
+        'browser_color_depth': 'browserColorDepth',
+        'browser_screen_height': 'browserScreenHeight',
+        'browser_screen_width': 'browserScreenWidth',
+        'browser_timezone_offset': 'browserTimezoneOffset'
     }
 
-    def __init__(self, ip=None, country_code=None, lang=None, device_type=None, device_model=None, browser=None, browser_version=None, os=None, os_version=None, source=None, source_version=None, user_agent=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, ip=None, country_code=None, lang=None, device_type=None, device_model=None, browser=None, browser_version=None, os=None, os_version=None, source=None, source_version=None, user_agent=None, browser_accept=None, browser_color_depth=None, browser_screen_height=None, browser_screen_width=None, browser_timezone_offset=None, local_vars_configuration=None):  # noqa: E501
         """PaymentSessionDetails - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -80,6 +90,11 @@ class PaymentSessionDetails(object):
         self._source = None
         self._source_version = None
         self._user_agent = None
+        self._browser_accept = None
+        self._browser_color_depth = None
+        self._browser_screen_height = None
+        self._browser_screen_width = None
+        self._browser_timezone_offset = None
         self.discriminator = None
 
         if ip is not None:
@@ -106,6 +121,16 @@ class PaymentSessionDetails(object):
             self.source_version = source_version
         if user_agent is not None:
             self.user_agent = user_agent
+        if browser_accept is not None:
+            self.browser_accept = browser_accept
+        if browser_color_depth is not None:
+            self.browser_color_depth = browser_color_depth
+        if browser_screen_height is not None:
+            self.browser_screen_height = browser_screen_height
+        if browser_screen_width is not None:
+            self.browser_screen_width = browser_screen_width
+        if browser_timezone_offset is not None:
+            self.browser_timezone_offset = browser_timezone_offset
 
     @property
     def ip(self):
@@ -382,6 +407,121 @@ class PaymentSessionDetails(object):
         """
 
         self._user_agent = user_agent
+
+    @property
+    def browser_accept(self):
+        """Gets the browser_accept of this PaymentSessionDetails.  # noqa: E501
+
+        Browser accept header.  # noqa: E501
+
+        :return: The browser_accept of this PaymentSessionDetails.  # noqa: E501
+        :rtype: str
+        """
+        return self._browser_accept
+
+    @browser_accept.setter
+    def browser_accept(self, browser_accept):
+        """Sets the browser_accept of this PaymentSessionDetails.
+
+        Browser accept header.  # noqa: E501
+
+        :param browser_accept: The browser_accept of this PaymentSessionDetails.  # noqa: E501
+        :type: str
+        """
+
+        self._browser_accept = browser_accept
+
+    @property
+    def browser_color_depth(self):
+        """Gets the browser_color_depth of this PaymentSessionDetails.  # noqa: E501
+
+        The color depth of the browser session (e.g., `24`).  # noqa: E501
+
+        :return: The browser_color_depth of this PaymentSessionDetails.  # noqa: E501
+        :rtype: int
+        """
+        return self._browser_color_depth
+
+    @browser_color_depth.setter
+    def browser_color_depth(self, browser_color_depth):
+        """Sets the browser_color_depth of this PaymentSessionDetails.
+
+        The color depth of the browser session (e.g., `24`).  # noqa: E501
+
+        :param browser_color_depth: The browser_color_depth of this PaymentSessionDetails.  # noqa: E501
+        :type: int
+        """
+
+        self._browser_color_depth = browser_color_depth
+
+    @property
+    def browser_screen_height(self):
+        """Gets the browser_screen_height of this PaymentSessionDetails.  # noqa: E501
+
+        The screen height of the browser session (e.g., `1152`).  # noqa: E501
+
+        :return: The browser_screen_height of this PaymentSessionDetails.  # noqa: E501
+        :rtype: int
+        """
+        return self._browser_screen_height
+
+    @browser_screen_height.setter
+    def browser_screen_height(self, browser_screen_height):
+        """Sets the browser_screen_height of this PaymentSessionDetails.
+
+        The screen height of the browser session (e.g., `1152`).  # noqa: E501
+
+        :param browser_screen_height: The browser_screen_height of this PaymentSessionDetails.  # noqa: E501
+        :type: int
+        """
+
+        self._browser_screen_height = browser_screen_height
+
+    @property
+    def browser_screen_width(self):
+        """Gets the browser_screen_width of this PaymentSessionDetails.  # noqa: E501
+
+        The screen width of the browser session (e.g., `2048`).  # noqa: E501
+
+        :return: The browser_screen_width of this PaymentSessionDetails.  # noqa: E501
+        :rtype: int
+        """
+        return self._browser_screen_width
+
+    @browser_screen_width.setter
+    def browser_screen_width(self, browser_screen_width):
+        """Sets the browser_screen_width of this PaymentSessionDetails.
+
+        The screen width of the browser session (e.g., `2048`).  # noqa: E501
+
+        :param browser_screen_width: The browser_screen_width of this PaymentSessionDetails.  # noqa: E501
+        :type: int
+        """
+
+        self._browser_screen_width = browser_screen_width
+
+    @property
+    def browser_timezone_offset(self):
+        """Gets the browser_timezone_offset of this PaymentSessionDetails.  # noqa: E501
+
+        The timezone offset of the browser session (e.g., `-120`).  # noqa: E501
+
+        :return: The browser_timezone_offset of this PaymentSessionDetails.  # noqa: E501
+        :rtype: str
+        """
+        return self._browser_timezone_offset
+
+    @browser_timezone_offset.setter
+    def browser_timezone_offset(self, browser_timezone_offset):
+        """Sets the browser_timezone_offset of this PaymentSessionDetails.
+
+        The timezone offset of the browser session (e.g., `-120`).  # noqa: E501
+
+        :param browser_timezone_offset: The browser_timezone_offset of this PaymentSessionDetails.  # noqa: E501
+        :type: str
+        """
+
+        self._browser_timezone_offset = browser_timezone_offset
 
     def to_dict(self):
         """Returns the model properties as a dict"""
