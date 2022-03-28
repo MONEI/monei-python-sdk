@@ -115,8 +115,10 @@ class CreatePaymentRequest(object):
         self.amount = amount
         self.currency = currency
         self.order_id = order_id
-        self.callback_url = callback_url
-        self.complete_url = complete_url
+        if callback_url is not None:
+            self.callback_url = callback_url
+        if complete_url is not None:
+            self.complete_url = complete_url
         if fail_url is not None:
             self.fail_url = fail_url
         if cancel_url is not None:
@@ -247,8 +249,6 @@ class CreatePaymentRequest(object):
         :param callback_url: The callback_url of this CreatePaymentRequest.  # noqa: E501
         :type: str
         """
-        if self.local_vars_configuration.client_side_validation and callback_url is None:  # noqa: E501
-            raise ValueError("Invalid value for `callback_url`, must not be `None`")  # noqa: E501
 
         self._callback_url = callback_url
 
@@ -272,8 +272,6 @@ class CreatePaymentRequest(object):
         :param complete_url: The complete_url of this CreatePaymentRequest.  # noqa: E501
         :type: str
         """
-        if self.local_vars_configuration.client_side_validation and complete_url is None:  # noqa: E501
-            raise ValueError("Invalid value for `complete_url`, must not be `None`")  # noqa: E501
 
         self._complete_url = complete_url
 
@@ -526,7 +524,7 @@ class CreatePaymentRequest(object):
     def auto_recover(self):
         """Gets the auto_recover of this CreatePaymentRequest.  # noqa: E501
 
-        If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. (set this value to `true` to create \"Pay By Link\" payments).  # noqa: E501
+        If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. Is automatically set to `true` if `completeUrl` is not provided.(set this value to `true` to create \"Pay By Link\" payments).  # noqa: E501
 
         :return: The auto_recover of this CreatePaymentRequest.  # noqa: E501
         :rtype: bool
@@ -537,7 +535,7 @@ class CreatePaymentRequest(object):
     def auto_recover(self, auto_recover):
         """Sets the auto_recover of this CreatePaymentRequest.
 
-        If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. (set this value to `true` to create \"Pay By Link\" payments).  # noqa: E501
+        If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. Is automatically set to `true` if `completeUrl` is not provided.(set this value to `true` to create \"Pay By Link\" payments).  # noqa: E501
 
         :param auto_recover: The auto_recover of this CreatePaymentRequest.  # noqa: E501
         :type: bool

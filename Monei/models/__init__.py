@@ -52,6 +52,8 @@ from Monei.models.payment_transaction_type import PaymentTransactionType
 from Monei.models.recurring_payment_request import RecurringPaymentRequest
 from Monei.models.refund_payment_request import RefundPaymentRequest
 from Monei.models.register_domain_request import RegisterDomainRequest
+from Monei.models.send_payment_link_request import SendPaymentLinkRequest
+from Monei.models.send_payment_receipt_request import SendPaymentReceiptRequest
 from Monei.models.subscription import Subscription
 from Monei.models.subscription_interval import SubscriptionInterval
 from Monei.models.subscription_last_payment import SubscriptionLastPayment
