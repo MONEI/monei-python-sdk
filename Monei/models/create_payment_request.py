@@ -49,6 +49,7 @@ class CreatePaymentRequest(object):
         'sequence': 'PaymentSequence',
         'point_of_sale_id': 'str',
         'subscription_id': 'str',
+        'auto_recover': 'bool',
         'description': 'str',
         'customer': 'PaymentCustomer',
         'billing_details': 'PaymentBillingDetails',
@@ -73,6 +74,7 @@ class CreatePaymentRequest(object):
         'sequence': 'sequence',
         'point_of_sale_id': 'pointOfSaleId',
         'subscription_id': 'subscriptionId',
+        'auto_recover': 'autoRecover',
         'description': 'description',
         'customer': 'customer',
         'billing_details': 'billingDetails',
@@ -80,7 +82,7 @@ class CreatePaymentRequest(object):
         'session_details': 'sessionDetails'
     }
 
-    def __init__(self, amount=None, currency=None, order_id=None, callback_url=None, complete_url=None, fail_url=None, cancel_url=None, payment_token=None, session_id=None, generate_payment_token=False, payment_method=None, allowed_payment_methods=None, transaction_type=None, sequence=None, point_of_sale_id=None, subscription_id=None, description=None, customer=None, billing_details=None, shipping_details=None, session_details=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, amount=None, currency=None, order_id=None, callback_url=None, complete_url=None, fail_url=None, cancel_url=None, payment_token=None, session_id=None, generate_payment_token=False, payment_method=None, allowed_payment_methods=None, transaction_type=None, sequence=None, point_of_sale_id=None, subscription_id=None, auto_recover=None, description=None, customer=None, billing_details=None, shipping_details=None, session_details=None, local_vars_configuration=None):  # noqa: E501
         """CreatePaymentRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -102,6 +104,7 @@ class CreatePaymentRequest(object):
         self._sequence = None
         self._point_of_sale_id = None
         self._subscription_id = None
+        self._auto_recover = None
         self._description = None
         self._customer = None
         self._billing_details = None
@@ -136,6 +139,8 @@ class CreatePaymentRequest(object):
             self.point_of_sale_id = point_of_sale_id
         if subscription_id is not None:
             self.subscription_id = subscription_id
+        if auto_recover is not None:
+            self.auto_recover = auto_recover
         if description is not None:
             self.description = description
         if customer is not None:
@@ -516,6 +521,29 @@ class CreatePaymentRequest(object):
         """
 
         self._subscription_id = subscription_id
+
+    @property
+    def auto_recover(self):
+        """Gets the auto_recover of this CreatePaymentRequest.  # noqa: E501
+
+        If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. (set this value to `true` to create \"Pay By Link\" payments).  # noqa: E501
+
+        :return: The auto_recover of this CreatePaymentRequest.  # noqa: E501
+        :rtype: bool
+        """
+        return self._auto_recover
+
+    @auto_recover.setter
+    def auto_recover(self, auto_recover):
+        """Sets the auto_recover of this CreatePaymentRequest.
+
+        If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. (set this value to `true` to create \"Pay By Link\" payments).  # noqa: E501
+
+        :param auto_recover: The auto_recover of this CreatePaymentRequest.  # noqa: E501
+        :type: bool
+        """
+
+        self._auto_recover = auto_recover
 
     @property
     def description(self):
