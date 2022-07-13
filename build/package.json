@@ -29,7 +29,7 @@
       "publish": false
     },
     "hooks": {
-      "after:bump": "yarn build",
+      "after:bump": "yarn build && git add -A",
       "after:release": "yarn publish"
     },
     "plugins": {
