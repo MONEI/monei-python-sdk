@@ -6,6 +6,7 @@
   "scripts": {
     "build": "openapi-generator generate -i https://js.monei.com/api/v1/openapi.json -g python --remove-operation-id-prefix -c ./config.json -o ../ && ./post-build.sh",
     "build:local": "openapi-generator generate -i ./openapi.json -g python --remove-operation-id-prefix -c ./config.json -o ../ && ./post-build.sh",
+    "publish": "./release.sh",
     "release": "release-it",
     "prepare": "yarn run build"
   },
@@ -28,7 +29,7 @@
       "publish": false
     },
     "hooks": {
-      "after:bump": "yarn build"
+      "after:bump": "yarn build && yarn publish"
     },
     "plugins": {
       "@release-it/bumper": {
