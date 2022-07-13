@@ -1,8 +1,8 @@
 {
   "packageName": "Monei",
-  "packageVersion": "1.0.7",
+  "packageVersion": "1.0.8",
   "gitHost": "github.com",
   "gitUserId": "monei",
   "gitRepoId": "monei-python-sdk",
-  "version": "1.0.7"
+  "version": "1.0.8"
 }
