@@ -54,7 +54,8 @@ class CreatePaymentRequest(object):
         'customer': 'PaymentCustomer',
         'billing_details': 'PaymentBillingDetails',
         'shipping_details': 'PaymentShippingDetails',
-        'session_details': 'PaymentSessionDetails'
+        'session_details': 'PaymentSessionDetails',
+        'expire_at': 'float'
     }
 
     attribute_map = {
@@ -79,10 +80,11 @@ class CreatePaymentRequest(object):
         'customer': 'customer',
         'billing_details': 'billingDetails',
         'shipping_details': 'shippingDetails',
-        'session_details': 'sessionDetails'
+        'session_details': 'sessionDetails',
+        'expire_at': 'expireAt'
     }
 
-    def __init__(self, amount=None, currency=None, order_id=None, callback_url=None, complete_url=None, fail_url=None, cancel_url=None, payment_token=None, session_id=None, generate_payment_token=False, payment_method=None, allowed_payment_methods=None, transaction_type=None, sequence=None, point_of_sale_id=None, subscription_id=None, auto_recover=None, description=None, customer=None, billing_details=None, shipping_details=None, session_details=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, amount=None, currency=None, order_id=None, callback_url=None, complete_url=None, fail_url=None, cancel_url=None, payment_token=None, session_id=None, generate_payment_token=False, payment_method=None, allowed_payment_methods=None, transaction_type=None, sequence=None, point_of_sale_id=None, subscription_id=None, auto_recover=None, description=None, customer=None, billing_details=None, shipping_details=None, session_details=None, expire_at=None, local_vars_configuration=None):  # noqa: E501
         """CreatePaymentRequest - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -110,6 +112,7 @@ class CreatePaymentRequest(object):
         self._billing_details = None
         self._shipping_details = None
         self._session_details = None
+        self._expire_at = None
         self.discriminator = None
 
         self.amount = amount
@@ -153,6 +156,8 @@ class CreatePaymentRequest(object):
             self.shipping_details = shipping_details
         if session_details is not None:
             self.session_details = session_details
+        if expire_at is not None:
+            self.expire_at = expire_at
 
     @property
     def amount(self):
@@ -649,6 +654,29 @@ class CreatePaymentRequest(object):
         """
 
         self._session_details = session_details
+
+    @property
+    def expire_at(self):
+        """Gets the expire_at of this CreatePaymentRequest.  # noqa: E501
+
+        Payment expiration time.  # noqa: E501
+
+        :return: The expire_at of this CreatePaymentRequest.  # noqa: E501
+        :rtype: float
+        """
+        return self._expire_at
+
+    @expire_at.setter
+    def expire_at(self, expire_at):
+        """Sets the expire_at of this CreatePaymentRequest.
+
+        Payment expiration time.  # noqa: E501
+
+        :param expire_at: The expire_at of this CreatePaymentRequest.  # noqa: E501
+        :type: float
+        """
+
+        self._expire_at = expire_at
 
     def to_dict(self):
         """Returns the model properties as a dict"""
