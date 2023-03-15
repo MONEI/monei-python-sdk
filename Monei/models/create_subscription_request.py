@@ -85,7 +85,8 @@ class CreateSubscriptionRequest(object):
         self.amount = amount
         self.currency = currency
         self.interval = interval
-        self.interval_count = interval_count
+        if interval_count is not None:
+            self.interval_count = interval_count
         if description is not None:
             self.description = description
         if customer is not None:
@@ -98,8 +99,10 @@ class CreateSubscriptionRequest(object):
             self.trial_period_end = trial_period_end
         if trial_period_days is not None:
             self.trial_period_days = trial_period_days
-        self.callback_url = callback_url
-        self.payment_callback_url = payment_callback_url
+        if callback_url is not None:
+            self.callback_url = callback_url
+        if payment_callback_url is not None:
+            self.payment_callback_url = payment_callback_url
 
     @property
     def amount(self):
@@ -194,8 +197,6 @@ class CreateSubscriptionRequest(object):
         :param interval_count: The interval_count of this CreateSubscriptionRequest.  # noqa: E501
         :type: int
         """
-        if self.local_vars_configuration.client_side_validation and interval_count is None:  # noqa: E501
-            raise ValueError("Invalid value for `interval_count`, must not be `None`")  # noqa: E501
 
         self._interval_count = interval_count
 
@@ -351,8 +352,6 @@ class CreateSubscriptionRequest(object):
         :param callback_url: The callback_url of this CreateSubscriptionRequest.  # noqa: E501
         :type: str
         """
-        if self.local_vars_configuration.client_side_validation and callback_url is None:  # noqa: E501
-            raise ValueError("Invalid value for `callback_url`, must not be `None`")  # noqa: E501
 
         self._callback_url = callback_url
 
@@ -376,8 +375,6 @@ class CreateSubscriptionRequest(object):
         :param payment_callback_url: The payment_callback_url of this CreateSubscriptionRequest.  # noqa: E501
         :type: str
         """
-        if self.local_vars_configuration.client_side_validation and payment_callback_url is None:  # noqa: E501
-            raise ValueError("Invalid value for `payment_callback_url`, must not be `None`")  # noqa: E501
 
         self._payment_callback_url = payment_callback_url
 

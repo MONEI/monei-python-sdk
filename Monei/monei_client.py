@@ -35,19 +35,19 @@ class MoneiClient(object):
         :return: parsed object of the body
         """
 
-        parts = {}
+        parts_dict = {}
         signature_parts = signature.split(',')
         for part in signature_parts:
             parts = part.split('=')
-            parts[parts[0]] = parts[1]
+            parts_dict[parts[0]] = parts[1]
 
         calculated_hmac = hmac.new(
             bytes(self.api_key, 'utf-8'),
-            msg=bytes('{}.{}'.format(parts['t'], body), 'utf-8'),
+            msg=bytes('{}.{}'.format(parts_dict['t'], body), 'utf-8'),
             digestmod=hashlib.sha256
         ).hexdigest()
 
-        if calculated_hmac != parts['v1']:
+        if calculated_hmac != parts_dict['v1']:
             raise ApiException(
                 status=401,
                 reason='[401] Signature verification failed'
