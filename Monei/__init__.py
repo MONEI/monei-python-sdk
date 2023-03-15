@@ -14,7 +14,7 @@
 
 from __future__ import absolute_import
 
-__version__ = "1.1.1"
+__version__ = "1.1.2"
 
 # import apis into sdk package
 from Monei.api.apple_pay_domain_api import ApplePayDomainApi
