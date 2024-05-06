@@ -11,7 +11,6 @@
     "prepare": "yarn run build"
   },
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "1.0.18-4.3.1",
     "@release-it/bumper": "^2.0.0",
@@ -45,5 +44,6 @@
         ]
       }
     }
-  }
+  },
+  "packageManager": "yarn@4.2.1"
 }

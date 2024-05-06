@@ -74,3 +74,11 @@ build/openapi.json
 test.py
 
 .idea
+
+# Yarn
+/build/.yarn/*
+!/build/.yarn/patches
+!/build/.yarn/plugins
+!/build/.yarn/releases
+!/build/.yarn/sdks
+!/build/.yarn/versions

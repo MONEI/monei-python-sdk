@@ -117,7 +117,7 @@ class PaymentPaymentMethod(object):
         :param method: The method of this PaymentPaymentMethod.  # noqa: E501
         :type: str
         """
-        allowed_values = ["card", "bizum", "googlePay", "applePay", "clickToPay", "paypal", "cofidis", "cofidisLoan", "iDeal", "mbway", "multibanco", "sofort", "trustly", "sepa", "klarna", "giropay"]  # noqa: E501
+        allowed_values = ["alipay", "card", "bizum", "paypal", "cofidis", "cofidisLoan", "mbway", "multibanco", "iDeal", "bancontact", "sofort", "trustly", "sepa", "klarna", "giropay", "eps", "blik"]  # noqa: E501
         if self.local_vars_configuration.client_side_validation and method not in allowed_values:  # noqa: E501
             raise ValueError(
                 "Invalid value for `method` ({0}), must be one of {1}"  # noqa: E501

@@ -23,3 +23,8 @@ README.md
 Monei/monei_client.py
 docs/**
 build/**
+
+# Prevent generator from creating these files:
+git_push.sh
+.travis.yml
+.gitlab-ci.yml
