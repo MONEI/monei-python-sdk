@@ -10,7 +10,7 @@
 """
 
 
-__version__ = "1.2.6"
+__version__ = "2.0.0"
 
 # import ApiClient
 from Monei.api_client import ApiClient
