@@ -1,0 +1,50 @@
+{
+  "name": "monei-python-sdk",
+  "version": "1.2.6",
+  "description": "MONEI PYTHON SDK",
+  "author": "monei",
+  "scripts": {
+    "build": "./scripts/build.sh",
+    "build:local": "./scripts/build.sh local",
+    "test": "uv run pytest",
+    "publish": "./scripts/release.sh",
+    "release": "release-it",
+    "prepare": "yarn run build && yarn run test"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "2.17.0",
+    "@release-it/bumper": "^7.0.1",
+    "release-it": "^18.1.2"
+  },
+  "release-it": {
+    "git": {
+      "tagName": "v${version}",
+      "commitMessage": "chore: release v${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": false
+    },
+    "hooks": {
+      "after:bump": "yarn build && yarn test && git add -A",
+      "after:release": "yarn publish"
+    },
+    "plugins": {
+      "@release-it/bumper": {
+        "out": [
+          {
+            "file": "config.json",
+            "path": [
+              "packageVersion",
+              "version"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "packageManager": "yarn@4.7.0"
+}

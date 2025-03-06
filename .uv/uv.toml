@@ -1,0 +1,14 @@
+[python]
+python-version = "3.12"
+
+[venv]
+location = ".venv"
+use-local-python = true
+
+[install]
+upgrade-strategy = "eager"
+
+[sync]
+dev-groups = ["test", "lint"]
+no-deps = false
+index-url = "https://pypi.org/simple"

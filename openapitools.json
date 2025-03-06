@@ -1,0 +1,27 @@
+{
+  "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "6.0.1",
+    "generators": {
+      "monei-python": {
+        "generatorName": "python",
+        "inputSpec": "https://js.monei.com/api/v1/openapi.json",
+        "output": "./",
+        "removeOperationIdPrefix": true,
+        "additionalProperties": {
+          "configFile": "./config.json"
+        }
+      },
+      "monei-python-local": {
+        "generatorName": "python",
+        "inputSpec": "./openapi.json",
+        "output": "./",
+        "removeOperationIdPrefix": true,
+        "additionalProperties": {
+          "configFile": "./config.json"
+        }
+      }
+    }
+  }
+}

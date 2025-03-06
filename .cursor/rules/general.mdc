@@ -1,0 +1,5 @@
+---
+description: General rules
+globs: 
+---
+- always use `uv` instead of `pip` directly
