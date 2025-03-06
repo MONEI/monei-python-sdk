@@ -11,10 +11,10 @@ from Monei.api.payments_api import PaymentsApi
 from Monei.api.subscriptions_api import SubscriptionsApi
 from Monei.api.apple_pay_domain_api import ApplePayDomainApi
 from Monei.api.bizum_api import BizumApi
-import Monei
 
 
-DEFAULT_USER_AGENT = f"MONEI/Python/{Monei.__version__}"
+SDK_VERSION = "1.2.6"
+DEFAULT_USER_AGENT = f"MONEI/Python/{SDK_VERSION}"
 
 
 class MoneiClient(object):

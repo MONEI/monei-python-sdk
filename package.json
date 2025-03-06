@@ -41,7 +41,8 @@
               "packageVersion",
               "version"
             ]
-          }
+          },
+          "Monei/monei_client.py"
         ]
       }
     }
