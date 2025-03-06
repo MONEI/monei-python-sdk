@@ -33,22 +33,44 @@ class MoneiClient(object):
         self.account_id = account_id
         self.user_agent = user_agent or DEFAULT_USER_AGENT
 
-        self.config = config if config else Configuration()
-
-        self.config.api_key = {"Authorization": api_key}
+        # Create a new configuration if one wasn't provided
+        if config is None:
+            self.config = Configuration()
+            # Set the API key directly in the configuration
+            self.config.api_key["APIKey"] = api_key
+        else:
+            self.config = config
+            # If a config was provided, ensure the API key is set
+            if "APIKey" not in self.config.api_key:
+                self.config.api_key["APIKey"] = api_key
 
         # Enter a context with an instance of the API client
         with ApiClient(self.config) as api_client:
             # Set user agent
             api_client.user_agent = self.user_agent
 
-            # Set account ID if provided
-            if self.account_id:
+            # Validate user agent when using account ID
+            # Similar to Node.js SDK implementation
+            if self.account_id and self.user_agent == DEFAULT_USER_AGENT:
+                raise ApiException(
+                    status=400, reason="User-Agent must be provided when using Account ID"
+                )
+
+            # Add a request interceptor to validate user agent before each request
+            original_call_api = api_client.call_api
+
+            def call_api_with_validation(*args, **kwargs):
                 # Validate that a custom user agent is set when using account ID
-                if self.user_agent == DEFAULT_USER_AGENT:
+                if self.account_id and self.user_agent == DEFAULT_USER_AGENT:
                     raise ApiException(
                         status=400, reason="User-Agent must be provided when using Account ID"
                     )
+                return original_call_api(*args, **kwargs)
+
+            api_client.call_api = call_api_with_validation
+
+            # Set account ID if provided
+            if self.account_id:
                 api_client.set_default_header("MONEI-Account-ID", self.account_id)
 
             # Initialize API instances
@@ -60,16 +82,13 @@ class MoneiClient(object):
 
             # Store the api_client for later use
             self._api_client = api_client
-            
+
             # aliases
             self.payments = self.Payments
             self.payment_methods = self.PaymentMethods
             self.subscriptions = self.Subscriptions
             self.apple_pay_domain = self.ApplePayDomain
             self.bizum = self.Bizum
-
-            # aliases
-            self.payments = self.Payments
 
     def set_account_id(self, account_id):
         """Set the account ID to act on behalf of a merchant

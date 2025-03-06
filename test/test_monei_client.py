@@ -4,7 +4,6 @@ import hmac
 import hashlib
 from unittest.mock import patch, MagicMock
 
-import Monei
 from Monei.monei_client import MoneiClient, DEFAULT_USER_AGENT
 from Monei.exceptions import ApiException
 from Monei.api.payments_api import PaymentsApi
@@ -48,6 +47,9 @@ class TestMoneiClient(unittest.TestCase):
         self.assertEqual(client.subscriptions, client.Subscriptions)
         self.assertEqual(client.apple_pay_domain, client.ApplePayDomain)
         self.assertEqual(client.bizum, client.Bizum)
+
+        # Check that the API key is correctly set in the configuration
+        self.assertEqual(client.config.api_key["APIKey"], self.api_key)
 
     def test_init_with_account_id_and_user_agent(self):
         """Test initializing with API key, account ID, and user agent."""
@@ -98,6 +100,105 @@ class TestMoneiClient(unittest.TestCase):
         client.set_user_agent(self.user_agent)
         self.assertEqual(client.user_agent, self.user_agent)
 
+    def test_api_key_in_configuration(self):
+        """Test that the API key is correctly set in the configuration."""
+        # Create a client with a test API key
+        client = MoneiClient(api_key=self.api_key)
+
+        # Check that the API key is correctly set in the configuration
+        self.assertEqual(client.config.api_key["APIKey"], self.api_key)
+
+        # Check the auth_settings in the configuration
+        auth_settings = client.config.auth_settings()
+        self.assertIn("APIKey", auth_settings)
+        self.assertEqual(auth_settings["APIKey"]["key"], "Authorization")
+        self.assertEqual(auth_settings["APIKey"]["value"], self.api_key)
+
+    def test_api_key_in_request_headers(self):
+        """Test that the API key is correctly passed in the request headers."""
+        # Create a client with a test API key
+        client = MoneiClient(api_key=self.api_key)
+
+        # Mock the RESTClientObject.request method to capture the headers
+        with patch("Monei.rest.RESTClientObject.request") as mock_request:
+            # Configure the mock to return a successful response
+            mock_response = MagicMock()
+            mock_response.status = 200
+            mock_response.data = b"{}"
+            mock_response.getheaders.return_value = {}
+            mock_request.return_value = mock_response
+
+            # Make a request using the client
+            try:
+                # Call a method that will make a real HTTP request
+                client.payments.get("dummy_payment_id")
+            except Exception:
+                # We don't care about the actual API call, just the headers
+                pass
+
+            # Check that request was called
+            mock_request.assert_called()
+
+            # Get the headers from the call arguments
+            call_args = mock_request.call_args
+            headers = call_args[1].get("headers", {})
+
+            # Verify that the Authorization header contains the API key
+            self.assertIn("Authorization", headers)
+            self.assertEqual(headers["Authorization"], self.api_key)
+
+            # Verify that the User-Agent header is set
+            self.assertIn("User-Agent", headers)
+            self.assertEqual(headers["User-Agent"], client.user_agent)
+
+    def test_user_agent_validation_before_request(self):
+        """Test that the user agent is validated before making a request."""
+        # Create a client with account_id but without custom user agent
+        client = MoneiClient(api_key=self.api_key)
+
+        # Set account_id after initialization but don't set user_agent
+        # This should not raise an exception yet
+        with patch("Monei.monei_client.ApiException") as mock_exception:
+            client.account_id = self.account_id
+            mock_exception.assert_not_called()
+
+        # Now try to make a request, which should validate the user agent
+        with self.assertRaises(ApiException) as context:
+            # Directly call the validation function to test it
+            client._api_client.call_api(
+                "/payments/{id}",
+                "GET",
+                path_params={"id": "dummy_payment_id"},
+                header_params={"Accept": "application/json"},
+                auth_settings=["APIKey"],
+            )
+
+        # Check that the exception has the correct message
+        self.assertEqual(context.exception.status, 400)
+        self.assertEqual(
+            context.exception.reason, "User-Agent must be provided when using Account ID"
+        )
+
+        # Now set a custom user agent and try again
+        client.set_user_agent(self.user_agent)
+
+        # Mock the __call_api method to avoid actual API calls
+        with patch("Monei.api_client.ApiClient._ApiClient__call_api") as mock_call_api:
+            mock_call_api.return_value = (None, 200, {})
+
+            # This should not raise an exception now
+            try:
+                client._api_client.call_api(
+                    "/payments/{id}",
+                    "GET",
+                    path_params={"id": "dummy_payment_id"},
+                    header_params={"Accept": "application/json"},
+                    auth_settings=["APIKey"],
+                )
+            except ApiException as e:
+                if "User-Agent must be provided" in str(e):
+                    self.fail("User agent validation failed even with custom user agent")
+
     def test_verify_signature_valid(self):
         """Test verifying a valid signature."""
         client = MoneiClient(api_key=self.api_key)
@@ -146,6 +247,17 @@ class TestMoneiClient(unittest.TestCase):
         # Verify the signature should raise an exception
         with self.assertRaises(Exception):
             client.verify_signature(body, malformed_signature)
+
+    def test_default_user_agent_always_set(self):
+        """Test that DEFAULT_USER_AGENT is always set when user_agent is None."""
+        # Create a client without specifying a user agent
+        client = MoneiClient(api_key=self.api_key)
+
+        # Check that the user agent is set to DEFAULT_USER_AGENT
+        self.assertEqual(client.user_agent, DEFAULT_USER_AGENT)
+
+        # Check that the user agent is set in the API client
+        self.assertEqual(client._api_client.user_agent, DEFAULT_USER_AGENT)
 
 
 if __name__ == "__main__":
