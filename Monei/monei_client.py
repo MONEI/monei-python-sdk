@@ -3,12 +3,14 @@ import hmac
 import hashlib
 
 # Import specific modules instead of importing from Monei
+from Monei.api.payment_methods_api import PaymentMethodsApi
 from Monei.configuration import Configuration
 from Monei.api_client import ApiClient
 from Monei.exceptions import ApiException
 from Monei.api.payments_api import PaymentsApi
 from Monei.api.subscriptions_api import SubscriptionsApi
 from Monei.api.apple_pay_domain_api import ApplePayDomainApi
+from Monei.api.bizum_api import BizumApi
 import Monei
 
 
@@ -51,11 +53,20 @@ class MoneiClient(object):
 
             # Initialize API instances
             self.Payments = PaymentsApi(api_client)
+            self.PaymentMethods = PaymentMethodsApi(api_client)
             self.Subscriptions = SubscriptionsApi(api_client)
             self.ApplePayDomain = ApplePayDomainApi(api_client)
+            self.Bizum = BizumApi(api_client)
 
             # Store the api_client for later use
             self._api_client = api_client
+            
+            # aliases
+            self.payments = self.Payments
+            self.payment_methods = self.PaymentMethods
+            self.subscriptions = self.Subscriptions
+            self.apple_pay_domain = self.ApplePayDomain
+            self.bizum = self.Bizum
 
             # aliases
             self.payments = self.Payments

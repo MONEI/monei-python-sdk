@@ -4,9 +4,9 @@
   "description": "MONEI PYTHON SDK",
   "author": "monei",
   "scripts": {
-    "build": "openapi-generator-cli generate -i https://js.monei.com/api/v1/openapi.json -g python --remove-operation-id-prefix -c ./config.json -o ../ && ./post-build.sh",
-    "build:local": "openapi-generator-cli generate -i ./openapi.json -g python --remove-operation-id-prefix -c ./config.json -o ../ && ./post-build.sh",
-    "publish": "./release.sh",
+    "build": "./scripts/build.sh",
+    "build:local": "./scripts/build.sh local",
+    "publish": "./scripts/release.sh",
     "release": "release-it",
     "prepare": "yarn run build"
   },
