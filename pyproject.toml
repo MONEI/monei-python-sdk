@@ -1,0 +1,54 @@
+[project]
+name = "monei-python-sdk"
+version = "0.1.0"
+description = "MONEI Python SDK"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "MONEI", email = "hi@monei.com" }]
+maintainers = [{ name = "MONEI", email = "support@monei.com" }]
+keywords = [
+    "monei",
+    "monei pay",
+    "pay",
+    "payments",
+    "payment gateway",
+    "python",
+    "sdk",
+    "rest",
+    "api",
+]
+dependencies = [
+    "urllib3>=1.25.3",
+    "python_dateutil>=2.5.3",
+    "setuptools>=21.0.0",
+    "six>=1.10",
+    "certifi",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3.12",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["Monei"]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0.0", "pytest-cov>=4.0.0"]
+lint = ["ruff>=0.1.0", "black>=23.0.0"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]

@@ -82,3 +82,13 @@ test.py
 !/build/.yarn/releases
 !/build/.yarn/sdks
 !/build/.yarn/versions
+
+##### UV specific
+.uv/.cache/
+.uv/.tmp/
+.uv/links/
+.uv/storage/
+.uv/indexes/
+.uv/network/
+.uv/pythons/
+.venv/
