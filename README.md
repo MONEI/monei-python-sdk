@@ -1,7 +1,10 @@
 # MONEI PYTHON SDK
 
-[![Monei Python package](https://github.com/MONEI/monei-python-sdk/actions/workflows/python.yml/badge.svg)](https://github.com/MONEI/monei-python-sdk/actions/workflows/python.yml)
-[![Unit Tests](https://github.com/MONEI/monei-python-sdk/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/MONEI/monei-python-sdk/actions/workflows/unit-tests.yml)
+[![PyPI version](https://img.shields.io/pypi/v/Monei.svg)](https://pypi.org/project/Monei/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/Monei.svg)](https://pypi.org/project/Monei/)
+[![PyPI Status](https://img.shields.io/pypi/status/Monei.svg)](https://pypi.org/project/Monei/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/Monei.svg)](https://pypi.org/project/Monei/)
+[![License](https://img.shields.io/github/license/MONEI/monei-python-sdk.svg)](https://github.com/MONEI/monei-python-sdk/blob/main/LICENSE)
 
 The MONEI API is organized around [REST](https://en.wikipedia.org/wiki/Representational_State_Transfer). Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
 
