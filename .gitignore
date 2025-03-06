@@ -69,19 +69,19 @@ target/
 
 ##### MONEI Custom
 
-build/node_modules/
-build/openapi.json
+node_modules/
+openapi.json
 test.py
 
 .idea
 
 # Yarn
-/build/.yarn/*
-!/build/.yarn/patches
-!/build/.yarn/plugins
-!/build/.yarn/releases
-!/build/.yarn/sdks
-!/build/.yarn/versions
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 ##### UV specific
 .uv/.cache/
