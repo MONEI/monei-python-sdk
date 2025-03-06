@@ -7,7 +7,6 @@
     "build": "./scripts/build.sh",
     "build:local": "./scripts/build.sh local",
     "test": "uv run pytest",
-    "publish": "./scripts/release.sh",
     "release": "release-it",
     "prepare": "yarn run build && yarn run test"
   },
@@ -29,8 +28,7 @@
       "publish": false
     },
     "hooks": {
-      "after:bump": "yarn build && yarn test && git add -A",
-      "after:release": "yarn publish"
+      "after:bump": "yarn build && yarn test && git add -A"
     },
     "plugins": {
       "@release-it/bumper": {
