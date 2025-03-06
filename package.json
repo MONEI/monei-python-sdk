@@ -40,7 +40,8 @@
               "version"
             ]
           },
-          "Monei/monei_client.py"
+          "Monei/monei_client.py",
+          "pyproject.toml"
         ]
       }
     }
