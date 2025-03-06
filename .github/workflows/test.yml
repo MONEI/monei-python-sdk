@@ -20,7 +20,7 @@ jobs:
           cache-dependency-glob: "pyproject.toml uv.lock"
       
       - name: Install dependencies
-        run: uv sync --group dev
+        run: uv sync --all-groups
       
       - name: Run tests with pytest
         run: uv run pytest --cov=Monei --cov-report=xml
