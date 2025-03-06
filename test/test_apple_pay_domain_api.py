@@ -13,25 +13,71 @@
 
 
 import unittest
+from unittest.mock import patch, MagicMock
 
 from Monei.api.apple_pay_domain_api import ApplePayDomainApi
+from Monei.api_client import ApiClient
+from Monei.configuration import Configuration
+from Monei.exceptions import ApiException
 
 
 class TestApplePayDomainApi(unittest.TestCase):
     """ApplePayDomainApi unit test stubs"""
 
     def setUp(self) -> None:
-        self.api = ApplePayDomainApi()
+        configuration = Configuration()
+        configuration.api_key = {"Authorization": "test_api_key"}
+        self.api_client = ApiClient(configuration)
+        self.api = ApplePayDomainApi(self.api_client)
 
     def tearDown(self) -> None:
         pass
 
-    def test_register(self) -> None:
+    @patch.object(ApiClient, "call_api")
+    def test_register(self, mock_call_api) -> None:
         """Test case for register
 
-        Register Domain
+        Register Apple Pay Domain
         """
-        pass
+        # Configure the mock to return a successful response
+        mock_response = {
+            "success": True
+        }
+        mock_call_api.return_value = mock_response
+
+        # Test the method
+        domain_data = {
+            "domainName": "example.com"
+        }
+        response = self.api.register(domain_data)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_error_handling(self, mock_call_api) -> None:
+        """Test error handling in API calls"""
+        # Configure the mock to raise an ApiException
+        mock_call_api.side_effect = ApiException(
+            status=400,
+            reason="Bad Request",
+            body='{"status":"ERROR","statusCode":400,"requestId":"req_123","message":"Invalid domain name"}'
+        )
+
+        # Test the method
+        domain_data = {
+            "domainName": "invalid-domain"
+        }
+
+        # Verify that the exception is raised
+        with self.assertRaises(ApiException) as context:
+            self.api.register(domain_data)
+
+        # Verify the exception details
+        self.assertEqual(context.exception.status, 400)
+        self.assertEqual(context.exception.reason, "Bad Request")
+        self.assertIn("Invalid domain name", context.exception.body)
 
 
 if __name__ == '__main__':

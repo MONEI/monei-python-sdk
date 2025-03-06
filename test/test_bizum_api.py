@@ -13,25 +13,91 @@
 
 
 import unittest
+from unittest.mock import patch, MagicMock
 
 from Monei.api.bizum_api import BizumApi
+from Monei.api_client import ApiClient
+from Monei.configuration import Configuration
+from Monei.exceptions import ApiException
 
 
 class TestBizumApi(unittest.TestCase):
     """BizumApi unit test stubs"""
 
     def setUp(self) -> None:
-        self.api = BizumApi()
+        configuration = Configuration()
+        configuration.api_key = {"Authorization": "test_api_key"}
+        self.api_client = ApiClient(configuration)
+        self.api = BizumApi(self.api_client)
 
     def tearDown(self) -> None:
         pass
 
-    def test_validate_phone(self) -> None:
+    @patch.object(ApiClient, "call_api")
+    def test_validate_phone(self, mock_call_api) -> None:
         """Test case for validate_phone
 
-        Validate Phone
+        Validate Bizum Phone
         """
-        pass
+        # Configure the mock to return a successful response
+        mock_response = {
+            "valid": True
+        }
+        mock_call_api.return_value = mock_response
+
+        # Test the method
+        validate_data = {
+            "phoneNumber": "+34600000000"
+        }
+        response = self.api.validate_phone(validate_data)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_validate_phone_invalid(self, mock_call_api) -> None:
+        """Test case for validate_phone with invalid phone number"""
+        # Configure the mock to return a response for invalid phone
+        mock_response = {
+            "valid": False
+        }
+        mock_call_api.return_value = mock_response
+
+        # Test the method
+        validate_data = {
+            "phoneNumber": "+34999999999"  # Invalid phone number
+        }
+        response = self.api.validate_phone(validate_data)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        self.assertFalse(response["valid"])
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_error_handling(self, mock_call_api) -> None:
+        """Test error handling in API calls"""
+        # Configure the mock to raise an ApiException
+        mock_call_api.side_effect = ApiException(
+            status=400,
+            reason="Bad Request",
+            body='{"status":"ERROR","statusCode":400,"requestId":"req_123","message":"Invalid phone number format"}'
+        )
+
+        # Test the method
+        validate_data = {
+            "phoneNumber": "invalid-phone"
+        }
+
+        # Verify that the exception is raised
+        with self.assertRaises(ApiException) as context:
+            self.api.validate_phone(validate_data)
+
+        # Verify the exception details
+        self.assertEqual(context.exception.status, 400)
+        self.assertEqual(context.exception.reason, "Bad Request")
+        self.assertIn("Invalid phone number format", context.exception.body)
 
 
 if __name__ == '__main__':

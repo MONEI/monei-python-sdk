@@ -13,25 +13,123 @@
 
 
 import unittest
+from unittest.mock import patch, MagicMock
 
 from Monei.api.payment_methods_api import PaymentMethodsApi
+from Monei.api_client import ApiClient
+from Monei.configuration import Configuration
+from Monei.exceptions import ApiException
 
 
 class TestPaymentMethodsApi(unittest.TestCase):
     """PaymentMethodsApi unit test stubs"""
 
     def setUp(self) -> None:
-        self.api = PaymentMethodsApi()
+        configuration = Configuration()
+        configuration.api_key = {"Authorization": "test_api_key"}
+        self.api_client = ApiClient(configuration)
+        self.api = PaymentMethodsApi(self.api_client)
 
     def tearDown(self) -> None:
         pass
 
-    def test_get(self) -> None:
+    @patch.object(ApiClient, "call_api")
+    def test_get(self, mock_call_api) -> None:
         """Test case for get
 
-        Get Payment Methods
+        Get Payment Method
         """
-        pass
+        # Configure the mock to return a successful response
+        mock_response = {
+            "id": "pm_123",
+            "type": "CARD",
+            "card": {
+                "last4": "4242",
+                "brand": "VISA",
+                "expiryMonth": 12,
+                "expiryYear": 2025
+            },
+            "customerId": "cus_123",
+            "status": "ACTIVE"
+        }
+        mock_call_api.return_value = mock_response
+
+        # Test the method
+        customer_id = "cus_123"
+        payment_method_id = "pm_123"
+        response = self.api.get(customer_id=customer_id, payment_method_id=payment_method_id)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_list(self, mock_call_api) -> None:
+        """Test case for list
+
+        List Payment Methods
+        """
+        # Configure the mock to return a successful response
+        mock_response = {
+            "data": [
+                {
+                    "id": "pm_123",
+                    "type": "CARD",
+                    "card": {
+                        "last4": "4242",
+                        "brand": "VISA",
+                        "expiryMonth": 12,
+                        "expiryYear": 2025
+                    },
+                    "customerId": "cus_123",
+                    "status": "ACTIVE"
+                },
+                {
+                    "id": "pm_456",
+                    "type": "CARD",
+                    "card": {
+                        "last4": "1234",
+                        "brand": "MASTERCARD",
+                        "expiryMonth": 10,
+                        "expiryYear": 2024
+                    },
+                    "customerId": "cus_123",
+                    "status": "ACTIVE"
+                }
+            ],
+            "hasMore": False
+        }
+        mock_call_api.return_value = mock_response
+
+        # Test the method
+        customer_id = "cus_123"
+        response = self.api.list(customer_id=customer_id)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_error_handling(self, mock_call_api) -> None:
+        """Test error handling in API calls"""
+        # Configure the mock to raise an ApiException
+        mock_call_api.side_effect = ApiException(
+            status=404,
+            reason="Not Found",
+            body='{"status":"ERROR","statusCode":404,"requestId":"req_123","message":"Payment method not found"}'
+        )
+
+        # Test the method
+        payment_method_id = "pm_nonexistent"
+
+        # Verify that the exception is raised
+        with self.assertRaises(ApiException) as context:
+            self.api.get(payment_method_id=payment_method_id)
+
+        # Verify the exception details
+        self.assertEqual(context.exception.status, 404)
+        self.assertEqual(context.exception.reason, "Not Found")
+        self.assertIn("Payment method not found", context.exception.body)
 
 
 if __name__ == '__main__':

@@ -13,81 +13,301 @@
 
 
 import unittest
+from unittest.mock import patch, MagicMock
 
 from Monei.api.subscriptions_api import SubscriptionsApi
+from Monei.api_client import ApiClient
+from Monei.configuration import Configuration
+from Monei.exceptions import ApiException
 
 
 class TestSubscriptionsApi(unittest.TestCase):
     """SubscriptionsApi unit test stubs"""
 
     def setUp(self) -> None:
-        self.api = SubscriptionsApi()
+        configuration = Configuration()
+        configuration.api_key = {"Authorization": "test_api_key"}
+        self.api_client = ApiClient(configuration)
+        self.api = SubscriptionsApi(self.api_client)
 
     def tearDown(self) -> None:
         pass
 
-    def test_activate(self) -> None:
+    @patch.object(ApiClient, "call_api")
+    def test_activate(self, mock_call_api) -> None:
         """Test case for activate
 
         Activate Subscription
         """
-        pass
+        # Configure the mock to return a successful response
+        mock_response = {
+            "id": "sub_123",
+            "customerId": "cus_123",
+            "paymentMethodId": "pm_123",
+            "planId": "plan_123",
+            "status": "ACTIVE"
+        }
+        mock_call_api.return_value = mock_response
 
-    def test_cancel(self) -> None:
+        # Test the method
+        subscription_id = "sub_123"
+        activate_data = {
+            "paymentToken": "tok_123",
+            "sessionId": "sess_123"
+        }
+        response = self.api.activate(subscription_id, activate_data)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_cancel(self, mock_call_api) -> None:
         """Test case for cancel
 
         Cancel Subscription
         """
-        pass
+        # Configure the mock to return a successful response
+        mock_response = {
+            "id": "sub_123",
+            "customerId": "cus_123",
+            "paymentMethodId": "pm_123",
+            "planId": "plan_123",
+            "status": "CANCELED",
+            "cancelAtPeriodEnd": True
+        }
+        mock_call_api.return_value = mock_response
 
-    def test_create(self) -> None:
+        # Test the method
+        subscription_id = "sub_123"
+        cancel_data = {
+            "cancelAtPeriodEnd": True
+        }
+        response = self.api.cancel(subscription_id, cancel_data)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_create(self, mock_call_api) -> None:
         """Test case for create
 
         Create Subscription
         """
-        pass
+        # Configure the mock to return a successful response
+        mock_response = {
+            "id": "sub_123",
+            "status": "ACTIVE",
+            "amount": 1000,
+            "currency": "EUR",
+            "interval": "month",
+            "customerId": "cus_123",
+            "paymentMethodId": "pm_123",
+            "planId": "plan_123",
+            "startDate": "2023-01-01"
+        }
+        mock_call_api.return_value = mock_response
 
-    def test_get(self) -> None:
+        # Test the method
+        subscription_data = {
+            "amount": 1000,
+            "currency": "EUR",
+            "interval": "month",
+            "customerId": "cus_123",
+            "paymentMethodId": "pm_123",
+            "planId": "plan_123",
+            "startDate": "2023-01-01"
+        }
+        response = self.api.create(subscription_data)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_get(self, mock_call_api) -> None:
         """Test case for get
 
         Get Subscription
         """
-        pass
+        # Configure the mock to return a successful response
+        mock_response = {
+            "id": "sub_123",
+            "customerId": "cus_123",
+            "paymentMethodId": "pm_123",
+            "planId": "plan_123",
+            "status": "ACTIVE",
+            "amount": 1000,
+            "currency": "EUR",
+            "interval": "month"
+        }
+        mock_call_api.return_value = mock_response
 
-    def test_pause(self) -> None:
+        # Test the method
+        subscription_id = "sub_123"
+        response = self.api.get(subscription_id)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_pause(self, mock_call_api) -> None:
         """Test case for pause
 
         Pause Subscription
         """
-        pass
+        # Configure the mock to return a successful response
+        mock_response = {
+            "id": "sub_123",
+            "customerId": "cus_123",
+            "paymentMethodId": "pm_123",
+            "planId": "plan_123",
+            "status": "PAUSED",
+            "resumeAt": "2023-06-01"
+        }
+        mock_call_api.return_value = mock_response
 
-    def test_resume(self) -> None:
+        # Test the method
+        subscription_id = "sub_123"
+        pause_data = {
+            "pauseAtPeriodEnd": True,
+            "pauseIntervalCount": 1
+        }
+        response = self.api.pause(subscription_id, pause_data)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_resume(self, mock_call_api) -> None:
         """Test case for resume
 
         Resume Subscription
         """
-        pass
+        # Configure the mock to return a successful response
+        mock_response = {
+            "id": "sub_123",
+            "customerId": "cus_123",
+            "paymentMethodId": "pm_123",
+            "planId": "plan_123",
+            "status": "ACTIVE"
+        }
+        mock_call_api.return_value = mock_response
 
-    def test_send_link(self) -> None:
+        # Test the method
+        subscription_id = "sub_123"
+        response = self.api.resume(subscription_id)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_send_link(self, mock_call_api) -> None:
         """Test case for send_link
 
         Send Subscription Link
         """
-        pass
+        # Configure the mock to return a successful response
+        mock_response = {
+            "success": True
+        }
+        mock_call_api.return_value = mock_response
 
-    def test_send_status(self) -> None:
+        # Test the method
+        subscription_id = "sub_123"
+        link_data = {
+            "customerEmail": "customer@example.com",
+            "customerPhone": "+34600000000"
+        }
+        response = self.api.send_link(subscription_id, link_data)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_send_status(self, mock_call_api) -> None:
         """Test case for send_status
 
         Send Subscription Status
         """
-        pass
+        # Configure the mock to return a successful response
+        mock_response = {
+            "success": True
+        }
+        mock_call_api.return_value = mock_response
 
-    def test_update(self) -> None:
+        # Test the method
+        subscription_id = "sub_123"
+        status_data = {
+            "customerEmail": "customer@example.com"
+        }
+        response = self.api.send_status(subscription_id, status_data)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_update(self, mock_call_api) -> None:
         """Test case for update
 
         Update Subscription
         """
-        pass
+        # Configure the mock to return a successful response
+        mock_response = {
+            "id": "sub_123",
+            "customerId": "cus_123",
+            "paymentMethodId": "pm_123",
+            "planId": "plan_123",
+            "status": "ACTIVE",
+            "amount": 2000,
+            "description": "Updated subscription"
+        }
+        mock_call_api.return_value = mock_response
+
+        # Test the method
+        subscription_id = "sub_123"
+        update_data = {
+            "amount": 2000,
+            "description": "Updated subscription"
+        }
+        response = self.api.update(subscription_id, update_data)
+
+        # Verify the response
+        self.assertEqual(response, mock_response)
+        mock_call_api.assert_called_once()
+
+    @patch.object(ApiClient, "call_api")
+    def test_error_handling(self, mock_call_api) -> None:
+        """Test error handling in API calls"""
+        # Configure the mock to raise an ApiException
+        mock_call_api.side_effect = ApiException(
+            status=400,
+            reason="Bad Request",
+            body='{"status":"ERROR","statusCode":400,"requestId":"req_123","message":"Invalid request"}'
+        )
+
+        # Test the method
+        subscription_data = {
+            "amount": 1000,
+            "currency": "EUR",
+            "interval": "month",
+            "customerId": "cus_123"
+        }
+
+        # Verify that the exception is raised
+        with self.assertRaises(ApiException) as context:
+            self.api.create(subscription_data)
+
+        # Verify the exception details
+        self.assertEqual(context.exception.status, 400)
+        self.assertEqual(context.exception.reason, "Bad Request")
+        self.assertIn("Invalid request", context.exception.body)
 
 
 if __name__ == '__main__':
