@@ -6,9 +6,10 @@
   "scripts": {
     "build": "./scripts/build.sh",
     "build:local": "./scripts/build.sh local",
+    "test": "uv run pytest",
     "publish": "./scripts/release.sh",
     "release": "release-it",
-    "prepare": "yarn run build"
+    "prepare": "yarn run build && yarn run test"
   },
   "license": "MIT",
   "devDependencies": {
@@ -28,7 +29,7 @@
       "publish": false
     },
     "hooks": {
-      "after:bump": "yarn build && git add -A",
+      "after:bump": "yarn build && yarn test && git add -A",
       "after:release": "yarn publish"
     },
     "plugins": {

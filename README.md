@@ -1,5 +1,8 @@
 # MONEI PYTHON SDK
 
+[![Monei Python package](https://github.com/MONEI/monei-python-sdk/actions/workflows/python.yml/badge.svg)](https://github.com/MONEI/monei-python-sdk/actions/workflows/python.yml)
+[![Unit Tests](https://github.com/MONEI/monei-python-sdk/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/MONEI/monei-python-sdk/actions/workflows/unit-tests.yml)
+
 The MONEI API is organized around [REST](https://en.wikipedia.org/wiki/Representational_State_Transfer). Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
 
 This library is intended to help you develop an integration around our API, by using the MONEI Python Client and it's methods.
@@ -416,4 +419,4 @@ python -m pytest test/test_main.py
 python -m pytest --cov=Monei
 ```
 
-The test configuration is defined in `pytest.ini` and includes settings for test discovery, coverage reporting, and custom markers.
+The test configuration is defined in `pyproject.toml` under the `[tool.pytest.ini_options]` section and includes settings for test discovery, coverage reporting, and custom markers.
