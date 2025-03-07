@@ -28,3 +28,6 @@ build/**
 git_push.sh
 .travis.yml
 .gitlab-ci.yml
+requirements.txt
+test-requirements.txt
+tox.ini

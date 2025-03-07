@@ -103,7 +103,4 @@ Monei/model/validate_bizum_phone_request.py
 Monei/model_utils.py
 Monei/models/__init__.py
 Monei/rest.py
-requirements.txt
-test-requirements.txt
 test/__init__.py
-tox.ini
