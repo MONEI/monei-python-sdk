@@ -1,10 +1,10 @@
 {
   "packageName": "Monei",
-  "packageVersion": "2.0.0",
+  "packageVersion": "2.0.1",
   "gitHost": "github.com",
   "gitUserId": "monei",
   "gitRepoId": "monei-python-sdk",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "generatorName": "python",
   "outputDir": "./",
   "removeOperationIdPrefix": true
