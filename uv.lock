@@ -232,7 +232,7 @@ dependencies = [
     { name = "urllib3", version = "2.3.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "mypy", version = "1.14.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
     { name = "mypy", version = "1.15.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
@@ -245,16 +245,19 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "certifi" },
-    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.5" },
     { name = "pydantic", specifier = ">=2" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.2.1" },
-    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=2.8.1" },
     { name = "python-dateutil", specifier = ">=2.8.2" },
-    { name = "types-python-dateutil", marker = "extra == 'dev'", specifier = ">=2.8.19.14" },
     { name = "typing-extensions", specifier = ">=4.7.1" },
     { name = "urllib3", specifier = ">=1.25.3,<3.0.0" },
 ]
-provides-extras = ["dev"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "mypy", specifier = ">=1.5" },
+    { name = "pytest", specifier = ">=7.2.1" },
+    { name = "pytest-cov", specifier = ">=2.8.1" },
+    { name = "types-python-dateutil", specifier = ">=2.8.19.14" },
+]
 
 [[package]]
 name = "mypy"

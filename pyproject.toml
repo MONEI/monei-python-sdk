@@ -44,7 +44,7 @@ classifiers = [
 [project.urls]
 Repository = "https://github.com/monei/monei-python-sdk"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
     "pytest >= 7.2.1",
     "pytest-cov >= 2.8.1",
