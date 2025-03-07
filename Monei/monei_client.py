@@ -3,6 +3,7 @@ import hmac
 import hashlib
 
 # Import specific modules instead of importing from Monei
+import Monei
 from Monei.api.payment_methods_api import PaymentMethodsApi
 from Monei.configuration import Configuration
 from Monei.api_client import ApiClient
@@ -13,8 +14,7 @@ from Monei.api.apple_pay_domain_api import ApplePayDomainApi
 from Monei.api.bizum_api import BizumApi
 
 
-SDK_VERSION = "2.0.2"
-DEFAULT_USER_AGENT = f"MONEI/Python/{SDK_VERSION}"
+DEFAULT_USER_AGENT = f"MONEI/Python/{Monei.__version__}"
 
 
 class MoneiClient(object):
@@ -53,7 +53,8 @@ class MoneiClient(object):
             # Similar to Node.js SDK implementation
             if self.account_id and self.user_agent == DEFAULT_USER_AGENT:
                 raise ApiException(
-                    status=400, reason="User-Agent must be provided when using Account ID"
+                    status=400,
+                    reason="User-Agent must be provided when using Account ID",
                 )
 
             # Add a request interceptor to validate user agent before each request
@@ -63,7 +64,8 @@ class MoneiClient(object):
                 # Validate that a custom user agent is set when using account ID
                 if self.account_id and self.user_agent == DEFAULT_USER_AGENT:
                     raise ApiException(
-                        status=400, reason="User-Agent must be provided when using Account ID"
+                        status=400,
+                        reason="User-Agent must be provided when using Account ID",
                     )
                 return original_call_api(*args, **kwargs)
 
@@ -101,7 +103,9 @@ class MoneiClient(object):
         """
         # If setting accountId and using default User-Agent
         if account_id and self.user_agent == DEFAULT_USER_AGENT:
-            raise ApiException(status=400, reason="User-Agent must be set before using Account ID")
+            raise ApiException(
+                status=400, reason="User-Agent must be set before using Account ID"
+            )
 
         self.account_id = account_id
 
