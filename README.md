@@ -6,7 +6,52 @@
 [![Python Versions](https://img.shields.io/pypi/pyversions/Monei.svg)](https://pypi.org/project/Monei/)
 [![License](https://img.shields.io/github/license/MONEI/monei-python-sdk.svg)](https://github.com/MONEI/monei-python-sdk/blob/main/LICENSE)
 
-The MONEI Python SDK provides convenient access to the MONEI API from applications written in server-side Python.
+The MONEI Python SDK provides convenient access to the [MONEI](https://monei.com/) API from applications written in server-side Python.
+
+For collecting customer and payment information in the browser, use [monei.js](https://docs.monei.com/docs/monei-js-overview).
+
+## Table of Contents
+
+- [MONEI PYTHON SDK](#monei-python-sdk)
+  - [Table of Contents](#table-of-contents)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+    - [Using uv (Recommended)](#using-uv-recommended)
+    - [pip install](#pip-install)
+  - [Basic Usage](#basic-usage)
+    - [API Keys](#api-keys)
+      - [Types of API Keys](#types-of-api-keys)
+      - [API Key Security](#api-key-security)
+    - [Test Mode](#test-mode)
+    - [Basic Client Usage](#basic-client-usage)
+  - [Payment Operations](#payment-operations)
+    - [Creating a Payment](#creating-a-payment)
+    - [Retrieving a Payment](#retrieving-a-payment)
+    - [Refunding a Payment](#refunding-a-payment)
+  - [Integration Methods](#integration-methods)
+    - [Using the Prebuilt Payment Page](#using-the-prebuilt-payment-page)
+      - [Features](#features)
+      - [Integration Flow](#integration-flow)
+  - [Webhooks](#webhooks)
+    - [Signature Verification](#signature-verification)
+    - [Handling Payment Callbacks](#handling-payment-callbacks)
+      - [Important Notes About Webhooks](#important-notes-about-webhooks)
+  - [MONEI Connect for Partners](#monei-connect-for-partners)
+    - [Account ID](#account-id)
+      - [Setting Account ID in the constructor](#setting-account-id-in-the-constructor)
+      - [Setting Account ID after initialization](#setting-account-id-after-initialization)
+    - [Custom User-Agent](#custom-user-agent)
+      - [Examples with Proper User-Agent Format](#examples-with-proper-user-agent-format)
+    - [Managing Multiple Merchant Accounts](#managing-multiple-merchant-accounts)
+  - [Development](#development)
+    - [Building the SDK](#building-the-sdk)
+  - [Tests](#tests)
+  - [Code Style](#code-style)
+  - [Documentation](#documentation)
+
+## Requirements
+
+- Python 3.7 or later
 
 ## Installation
 
@@ -37,7 +82,56 @@ Then import the package:
 import Monei
 ```
 
-## Quick Start
+## Basic Usage
+
+### API Keys
+
+The MONEI API uses API keys for authentication. You can obtain and manage your API keys in the [MONEI Dashboard](https://dashboard.monei.com/settings/api).
+
+#### Types of API Keys
+
+MONEI provides two types of API keys:
+
+- **Test API Keys**: Use these for development and testing. Transactions made with test API keys are not processed by real payment providers.
+- **Live API Keys**: Use these in production environments. Transactions made with live API keys are processed by real payment providers and will move actual money.
+
+Each API key has a distinct prefix that indicates its environment:
+
+- Test API keys start with `pk_test_` (e.g., `pk_test_12345abcdef`)
+- Live API keys start with `pk_live_` (e.g., `pk_live_12345abcdef`)
+
+By checking the prefix of an API key, you can quickly determine which environment you're working in. This is especially useful when you're managing multiple projects or environments.
+
+#### API Key Security
+
+Your API keys carry significant privileges, so be sure to keep them secure:
+
+- Keep your API keys confidential and never share them in publicly accessible areas such as GitHub, client-side code, or in your frontend application.
+- Use environment variables or a secure vault to store your API keys.
+- Restrict API key access to only the IP addresses that need them.
+- Regularly rotate your API keys, especially if you suspect they may have been compromised.
+
+```python
+# Example of loading API key from environment variable (recommended)
+import os
+import Monei
+
+api_key = os.getenv('MONEI_API_KEY')
+monei = Monei.MoneiClient(api_key)
+```
+
+### Test Mode
+
+To test your integration with MONEI, you need to switch to **test mode** using the toggle in the header of your MONEI Dashboard. When in test mode:
+
+1. Generate your test API key in [MONEI Dashboard → Settings → API Access](https://dashboard.monei.com/settings/api)
+2. Configure your payment methods in [MONEI Dashboard → Settings → Payment Methods](https://dashboard.monei.com/settings/payment-methods)
+
+**Important:** Account ID and API key generated in test mode are different from those in live (production) mode and can only be used for testing purposes.
+
+When using test mode, you can simulate various payment scenarios using test card numbers, Bizum phone numbers, and PayPal accounts provided in the [MONEI Testing documentation](https://docs.monei.com/docs/testing/).
+
+### Basic Client Usage
 
 ```python
 import Monei
@@ -73,7 +167,9 @@ except ApiException as e:
     print(f"Error: {e}")
 ```
 
-## Creating a Payment
+## Payment Operations
+
+### Creating a Payment
 
 To create a payment, you need to provide the amount, currency, and other details using request classes:
 
@@ -103,7 +199,56 @@ payment_request = CreatePaymentRequest(
 payment = monei.payments.create(payment_request)
 ```
 
-### Hosted Payment Page Flow
+### Retrieving a Payment
+
+Retrieve an existing payment by ID:
+
+```python
+try:
+    payment = monei.payments.get('pay_123456789')
+    print(f"Payment status: {payment.status}")
+except ApiException as e:
+    print(f"Error retrieving payment: {e}")
+```
+
+### Refunding a Payment
+
+Process a full or partial refund:
+
+```python
+from Monei.model.refund_payment_request import RefundPaymentRequest
+
+try:
+    refund_request = RefundPaymentRequest(
+        amount=500,  # Partial refund of 5.00€
+        refund_reason='Customer request'
+    )
+    
+    result = monei.payments.refund('pay_123456789', refund_request)
+    print(f"Refund created with ID: {result.id}")
+except ApiException as e:
+    print(f"Error refunding payment: {e}")
+```
+
+## Integration Methods
+
+### Using the Prebuilt Payment Page
+
+MONEI Hosted Payment Page is the simplest way to securely collect payments from your customers without building your own payment form.
+
+#### Features
+
+- **Designed to remove friction** — Real-time card validation with built-in error messaging
+- **Mobile-ready** — Fully responsive design
+- **International** — Supports 13 languages
+- **Multiple payment methods** — Supports multiple payment methods including Cards, PayPal, Bizum, GooglePay, Apple Pay & Click to Pay
+- **Customization and branding** — Customizable logo, buttons and background color
+- **3D Secure** — Supports 3D Secure - SCA verification process
+- **Fraud and compliance** — Simplified PCI compliance and SCA-ready
+
+You can customize the appearance in your MONEI Dashboard → Settings → Branding.
+
+#### Integration Flow
 
 1. **Create a payment**
 
@@ -132,18 +277,18 @@ After creating a payment, you'll receive a response with a `nextAction.redirectU
 The customer enters their payment information and completes any required verification steps (like 3D Secure).
 
 3. **Customer is redirected back to your website**
-   * If the customer completes the payment, they are redirected to the `completeUrl` with a `payment_id` query parameter
-   * If the customer cancels, they are redirected to the `cancelUrl`
+   * If the customer completes the payment, they are redirected to the `complete_url` with a `payment_id` query parameter
+   * If the customer cancels, they are redirected to the `cancel_url`
 
 4. **Receive asynchronous notification**
 
-MONEI sends an HTTP POST request to your `callbackUrl` with the payment result. This ensures you receive the payment status even if the customer closes their browser during the redirect.
+MONEI sends an HTTP POST request to your `callback_url` with the payment result. This ensures you receive the payment status even if the customer closes their browser during the redirect.
 
-For more information about the hosted payment page, visit the MONEI Hosted Payment Page documentation.
+For more information about the hosted payment page, visit the [MONEI Hosted Payment Page documentation](https://docs.monei.com/docs/integrations/use-prebuilt-payment-page).
 
 ## Webhooks
 
-Webhooks can be configured in the MONEI Dashboard → Settings → Webhooks.
+Webhooks can be configured in the [MONEI Dashboard → Settings → Webhooks](https://dashboard.monei.com/settings/webhooks).
 
 ### Signature Verification
 
@@ -198,7 +343,7 @@ if __name__ == '__main__':
 
 ### Handling Payment Callbacks
 
-MONEI sends an HTTP POST request to your `callbackUrl` with the payment result. This ensures you receive the payment status even if the customer closes their browser during the redirect.
+MONEI sends an HTTP POST request to your `callback_url` with the payment result. This ensures you receive the payment status even if the customer closes their browser during the redirect.
 
 Example of handling the callback in a Flask server:
 
@@ -246,18 +391,18 @@ def callback():
 4. Process webhooks asynchronously for time-consuming operations
 5. Implement idempotency to handle duplicate webhook events
 
-For more information about webhooks, visit the MONEI Webhooks documentation.
+For more information about webhooks, visit the [MONEI Webhooks documentation](https://docs.monei.com/docs/webhooks).
 
 ## MONEI Connect for Partners
 
-If you're a partner or platform integrating with MONEI, you can act on behalf of your merchants by providing their Account ID. This is part of MONEI Connect, which allows platforms to manage multiple merchant accounts.
+If you're a partner or platform integrating with MONEI, you can act on behalf of your merchants by providing their Account ID. This is part of [MONEI Connect](https://docs.monei.com/docs/monei-connect/), which allows platforms to manage multiple merchant accounts.
 
 **Important:** When using Account ID functionality, you must:
 
 1. Use a partner API key (not a regular merchant API key)
 2. Provide a custom User-Agent to identify your platform
 
-For more information about MONEI Connect and becoming a partner, visit the MONEI Connect documentation.
+For more information about MONEI Connect and becoming a partner, visit the [MONEI Connect documentation](https://docs.monei.com/docs/monei-connect/).
 
 ### Account ID
 
@@ -459,11 +604,28 @@ python -m pytest --cov=Monei
 
 The test configuration is defined in `pyproject.toml` under the `[tool.pytest.ini_options]` section and includes settings for test discovery, coverage reporting, and custom markers.
 
+## Code Style
+
+This project follows the [PEP 8](https://peps.python.org/pep-0008/) style guide for Python code. We use tools like flake8, black, and isort to enforce coding standards.
+
+To check code style:
+
+```sh
+# Check code style with flake8
+flake8 Monei
+
+# Format code with black
+black Monei
+
+# Sort imports with isort
+isort Monei
+```
+
 ## Documentation
 
 For the full documentation, check our [Documentation portal](https://docs.monei.com/api/).
 
-For a comprehensive overview of all MONEI features and integration options, visit our main documentation portal. There you can explore guides for:
+For a comprehensive overview of all MONEI features and integration options, visit our [main documentation portal](https://docs.monei.com/). There you can explore guides for:
 
 * Using a prebuilt payment page with MONEI Hosted payment page
 * Building a custom checkout with MONEI UI components
