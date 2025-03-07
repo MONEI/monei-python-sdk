@@ -13,7 +13,7 @@ from Monei.api.apple_pay_domain_api import ApplePayDomainApi
 from Monei.api.bizum_api import BizumApi
 
 
-SDK_VERSION = "2.0.1"
+SDK_VERSION = "2.0.2"
 DEFAULT_USER_AGENT = f"MONEI/Python/{SDK_VERSION}"
 
 
