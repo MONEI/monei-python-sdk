@@ -43,8 +43,7 @@
           {
             "file": "pyproject.toml",
             "path": [
-              "project",
-              "version"
+              "project.version"
             ]
           },
           "Monei/monei_client.py"
