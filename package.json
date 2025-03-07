@@ -45,8 +45,7 @@
             "path": [
               "project.version"
             ]
-          },
-          "Monei/monei_client.py"
+          }
         ]
       }
     }
