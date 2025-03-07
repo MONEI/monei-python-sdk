@@ -1,6 +1,6 @@
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling>=1.0.0"]
+build-backend = "hatchling.build"
 
 [project]
 name = "Monei"
@@ -41,57 +41,26 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 
-[tool.poetry]
-name = "Monei"
-version = "1.2.6"
-description = "MONEI PYTHON SDK"
-authors = ["MONEI <hi@monei.com>"]
-maintainers = ["MONEI <support@monei.com>"]
-license = "MIT"
-readme = "README.md"
-repository = "https://github.com/monei/monei-python-sdk"
-keywords = [
-    "monei",
-    "monei pay",
-    "pay",
-    "payments",
-    "payment gateway",
-    "python",
-    "sdk",
-    "rest",
-    "api",
-]
-include = ["Monei/py.typed"]
-packages = [{ include = "Monei" }]
+[project.urls]
+Repository = "https://github.com/monei/monei-python-sdk"
 
-[tool.poetry.dependencies]
-python = "^3.8"
-urllib3 = ">= 1.25.3, < 3.0.0"
-python-dateutil = ">= 2.8.2"
-pydantic = ">= 2"
-typing-extensions = ">= 4.7.1"
-certifi = "*"
-
-[tool.poetry.group.dev.dependencies]
-pytest = ">= 7.2.1"
-pytest-cov = ">= 2.8.1"
-types-python-dateutil = ">= 2.8.19.14"
-mypy = ">= 1.5"
-
-[dependency-groups]
-main = [
-    "urllib3 >= 1.25.3, < 3.0.0",
-    "python-dateutil >= 2.8.2",
-    "pydantic >= 2",
-    "typing-extensions >= 4.7.1",
-    "certifi",
-]
+[project.optional-dependencies]
 dev = [
     "pytest >= 7.2.1",
     "pytest-cov >= 2.8.1",
     "types-python-dateutil >= 2.8.19.14",
     "mypy >= 1.5",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["Monei"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"Monei/py.typed" = "Monei/py.typed"
+
+# UV-specific configuration (optional)
+[tool.uv]
+# Add any UV-specific configurations here if needed
 
 [tool.pytest.ini_options]
 testpaths = ["test"]

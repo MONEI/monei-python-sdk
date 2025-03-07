@@ -21,13 +21,13 @@ echo "🔄 Setting up virtual environment and syncing dependencies..."
 uv venv
 source .venv/bin/activate
 
-# Install runtime and test dependencies
-echo "📦 Installing dependencies..."
-uv pip sync requirements.txt test-requirements.txt
+# Install project with development dependencies from pyproject.toml
+echo "📦 Installing project with dependencies..."
+uv pip install -e ".[dev]"
 
 # Run tests
 echo "🧪 Running tests..."
-uv run -- pytest
+uv run pytest
 
 # Ask for confirmation to continue if tests pass
 read -p "✅ Tests passed. Continue with build and release? (y/n) " -n 1 -r
