@@ -6,9 +6,7 @@
 [![Python Versions](https://img.shields.io/pypi/pyversions/Monei.svg)](https://pypi.org/project/Monei/)
 [![License](https://img.shields.io/github/license/MONEI/monei-python-sdk.svg)](https://github.com/MONEI/monei-python-sdk/blob/main/LICENSE)
 
-The MONEI API is organized around [REST](https://en.wikipedia.org/wiki/Representational_State_Transfer). Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
-
-This library is intended to help you develop an integration around our API, by using the MONEI Python Client and it's methods.
+The MONEI Python SDK provides convenient access to the MONEI API from applications written in server-side Python.
 
 ## Installation
 
@@ -27,7 +25,7 @@ uv pip install --upgrade Monei
 
 ### pip install
 
-If the python package is hosted on a repository, you can install directly using:
+If the Python package is hosted on a repository, you can install directly using:
 
 ```sh
 pip install --upgrade Monei
@@ -44,23 +42,29 @@ import Monei
 ```python
 import Monei
 from Monei import ApiException
+from Monei.model.create_payment_request import CreatePaymentRequest
+from Monei.model.payment_customer import PaymentCustomer
 from pprint import pprint
 
 # Initialize the client with your API key
 monei = Monei.MoneiClient(api_key='YOUR_API_KEY')
 
 try:
-    # Create a payment
-    payment = monei.payments.create({
-        'amount': 1250,  # 12.50€
-        'currency': 'EUR',
-        'orderId': '123456',
-        'description': 'Order #123456',
-        'customer': {
-            'email': 'customer@example.com',
-            'name': 'John Doe'
-        }
-    })
+    # Create a payment using request classes
+    customer = PaymentCustomer(
+        email='customer@example.com',
+        name='John Doe'
+    )
+    
+    payment_request = CreatePaymentRequest(
+        amount=1250,  # 12.50€
+        currency='EUR',
+        order_id='123456',
+        description='Order #123456',
+        customer=customer
+    )
+    
+    payment = monei.payments.create(payment_request)
     
     print(f"Payment created with ID: {payment.id}")
     print(f"Redirect URL: {payment.nextAction.redirectUrl}")
@@ -71,22 +75,32 @@ except ApiException as e:
 
 ## Creating a Payment
 
-To create a payment, you need to provide the amount, currency, and other details:
+To create a payment, you need to provide the amount, currency, and other details using request classes:
 
 ```python
-payment = monei.payments.create({
-    'amount': 1250,  # Amount in cents (12.50€)
-    'currency': 'EUR',
-    'orderId': '123456',
-    'description': 'Order #123456',
-    'completeUrl': 'https://example.com/complete',
-    'cancelUrl': 'https://example.com/cancel',
-    'callbackUrl': 'https://example.com/webhook',
-    'customer': {
-        'email': 'customer@example.com',
-        'name': 'John Doe'
-    }
-})
+from Monei.model.create_payment_request import CreatePaymentRequest
+from Monei.model.payment_customer import PaymentCustomer
+
+# Create a customer object
+customer = PaymentCustomer(
+    email='customer@example.com',
+    name='John Doe'
+)
+
+# Create the payment request
+payment_request = CreatePaymentRequest(
+    amount=1250,  # Amount in cents (12.50€)
+    currency='EUR',
+    order_id='123456',
+    description='Order #123456',
+    complete_url='https://example.com/complete',
+    cancel_url='https://example.com/cancel',
+    callback_url='https://example.com/webhook',
+    customer=customer
+)
+
+# Create the payment
+payment = monei.payments.create(payment_request)
 ```
 
 ### Hosted Payment Page Flow
@@ -94,15 +108,21 @@ payment = monei.payments.create({
 1. **Create a payment**
 
 ```python
-payment = monei.payments.create({
-    'amount': 1250,
-    'currency': 'EUR',
-    'orderId': '123456',
-    'description': 'Order #123456',
-    'completeUrl': 'https://example.com/complete',
-    'cancelUrl': 'https://example.com/cancel',
-    'callbackUrl': 'https://example.com/webhook'
-})
+from Monei.model.create_payment_request import CreatePaymentRequest
+
+# Create the payment request
+payment_request = CreatePaymentRequest(
+    amount=1250,
+    currency='EUR',
+    order_id='123456',
+    description='Order #123456',
+    complete_url='https://example.com/complete',
+    cancel_url='https://example.com/cancel',
+    callback_url='https://example.com/webhook'
+)
+
+# Create the payment
+payment = monei.payments.create(payment_request)
 ```
 
 After creating a payment, you'll receive a response with a `nextAction.redirectUrl`. Redirect your customer to this URL to show them the MONEI Hosted payment page.
@@ -191,15 +211,24 @@ def callback():
     
     try:
         # Verify the signature
-        payment = monei.verify_signature(request.data.decode('utf-8'), signature)
+        payload = monei.verify_signature(request.data.decode('utf-8'), signature)
+        payment = payload['object']
         
         # Update your order status based on the payment status
-        # Could be PaymentStatus.AUTHORIZED for pre-authorization payments
         if payment['status'] == PaymentStatus.SUCCEEDED:
             # Payment successful - fulfill the order
+            # Update your database, send confirmation email, etc.
             pass
         elif payment['status'] == PaymentStatus.FAILED:
             # Payment failed - notify the customer
+            # Log the failure, update your database, etc.
+            pass
+        elif payment['status'] == PaymentStatus.AUTHORIZED:
+            # Payment is authorized but not yet captured
+            # You can capture it later
+            pass
+        elif payment['status'] == PaymentStatus.CANCELED:
+            # Payment was canceled
             pass
         
         # Acknowledge receipt of the webhook
@@ -237,6 +266,7 @@ For more information about MONEI Connect and becoming a partner, visit the MONEI
 ```python
 import Monei
 from Monei import ApiException
+from Monei.model.create_payment_request import CreatePaymentRequest
 
 # Initialize with Account ID and User-Agent using a partner API key
 monei = Monei.MoneiClient(
@@ -247,11 +277,12 @@ monei = Monei.MoneiClient(
 
 # Make API calls on behalf of the merchant
 try:
-    payment = monei.payments.create({
-        'orderId': '12345',
-        'amount': 1100,
-        'currency': 'EUR'
-    })
+    payment_request = CreatePaymentRequest(
+        order_id='12345',
+        amount=1100,
+        currency='EUR'
+    )
+    payment = monei.payments.create(payment_request)
     print(payment)
 except ApiException as e:
     print(f"Error: {e}")
@@ -262,6 +293,7 @@ except ApiException as e:
 ```python
 import Monei
 from Monei import ApiException
+from Monei.model.create_payment_request import CreatePaymentRequest
 
 # Initialize with a partner API key
 monei = Monei.MoneiClient(api_key='pk_partner_test_...')
@@ -274,11 +306,12 @@ monei.set_account_id('merchant_account_id')
 
 # Make API calls on behalf of the merchant
 try:
-    payment = monei.payments.create({
-        'orderId': '12345',
-        'amount': 1100,
-        'currency': 'EUR'
-    })
+    payment_request = CreatePaymentRequest(
+        order_id='12345',
+        amount=1100,
+        currency='EUR'
+    )
+    payment = monei.payments.create(payment_request)
     print(payment)
 except ApiException as e:
     print(f"Error: {e}")
@@ -288,8 +321,6 @@ monei.set_account_id(None)
 ```
 
 ### Custom User-Agent
-
-You can set a custom User-Agent to identify your application or platform. This is required when using Account ID.
 
 When integrating as a MONEI Connect partner, your User-Agent should follow this format:
 
@@ -332,11 +363,16 @@ monei = Monei.MoneiClient(
 monei.set_user_agent('MONEI/PaymentHub/3.0.1')
 ```
 
+> **Note:** When using Account ID, you must set a custom User-Agent before making any API calls. The User-Agent is validated when making API requests.
+> 
+> **Important:** To use this feature, you need to be registered as a MONEI partner and use your partner API key. Please contact connect@monei.com to register as a partner.
+
 ### Managing Multiple Merchant Accounts
 
 ```python
 import Monei
 from Monei import ApiException
+from Monei.model.create_payment_request import CreatePaymentRequest
 import time
 
 # Initialize with a partner API key
@@ -355,11 +391,12 @@ def process_payments_for_merchants(merchant_accounts):
         
         # Process payment for this merchant
         try:
-            payment = monei.payments.create({
-                'orderId': f'order-{merchant_id}-{int(time.time())}',
-                'amount': 1000,
-                'currency': 'EUR'
-            })
+            payment_request = CreatePaymentRequest(
+                order_id=f'order-{merchant_id}-{int(time.time())}',
+                amount=1000,
+                currency='EUR'
+            )
+            payment = monei.payments.create(payment_request)
             
             results[merchant_id] = {'success': True, 'payment': payment}
         except ApiException as e:
@@ -373,13 +410,11 @@ results = process_payments_for_merchants(merchant_accounts)
 print(results)
 ```
 
-## Documentation
-
-For the full documentation, check our [Documentation portal](https://docs.monei.com/api/).
-
 ## Development
 
-For development:
+### Building the SDK
+
+The SDK is built using OpenAPI Generator. To build the SDK from the OpenAPI specification:
 
 ```sh
 # Clone the repository
@@ -402,7 +437,7 @@ uv pip sync uv.lock  # For production dependencies
 uv pip sync uv-dev.lock  # For development dependencies
 ```
 
-## Testing
+## Tests
 
 This project uses pytest for testing. The tests are automatically generated by the OpenAPI Generator, with additional tests for the main functionality.
 
@@ -423,3 +458,14 @@ python -m pytest --cov=Monei
 ```
 
 The test configuration is defined in `pyproject.toml` under the `[tool.pytest.ini_options]` section and includes settings for test discovery, coverage reporting, and custom markers.
+
+## Documentation
+
+For the full documentation, check our [Documentation portal](https://docs.monei.com/api/).
+
+For a comprehensive overview of all MONEI features and integration options, visit our main documentation portal. There you can explore guides for:
+
+* Using a prebuilt payment page with MONEI Hosted payment page
+* Building a custom checkout with MONEI UI components
+* Integrating with multiple e-commerce platforms
+* Connecting with business platforms and marketplaces
