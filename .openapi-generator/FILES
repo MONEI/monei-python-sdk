@@ -13,12 +13,8 @@ Monei/model/__init__.py
 Monei/model/activate_subscription_request.py
 Monei/model/address.py
 Monei/model/apple_pay_domain_register200_response.py
-Monei/model/apple_pay_domain_register400_response.py
-Monei/model/apple_pay_domain_register401_response.py
-Monei/model/apple_pay_domain_register404_response.py
-Monei/model/apple_pay_domain_register422_response.py
-Monei/model/apple_pay_domain_register500_response.py
-Monei/model/apple_pay_domain_register503_response.py
+Monei/model/bad_request_error.py
+Monei/model/bad_request_error_all_of.py
 Monei/model/bizum_validate_phone200_response.py
 Monei/model/cancel_payment_request.py
 Monei/model/cancel_subscription_request.py
@@ -28,7 +24,11 @@ Monei/model/confirm_payment_request_payment_method.py
 Monei/model/confirm_payment_request_payment_method_card.py
 Monei/model/create_payment_request.py
 Monei/model/create_subscription_request.py
-Monei/model/error.py
+Monei/model/error_base.py
+Monei/model/internal_server_error.py
+Monei/model/internal_server_error_all_of.py
+Monei/model/not_found_error.py
+Monei/model/not_found_error_all_of.py
 Monei/model/pause_subscription_request.py
 Monei/model/payment.py
 Monei/model/payment_billing_details.py
@@ -90,6 +90,8 @@ Monei/model/send_payment_receipt_request.py
 Monei/model/send_payment_request_request.py
 Monei/model/send_subscription_link_request.py
 Monei/model/send_subscription_status_request.py
+Monei/model/service_unavailable_error.py
+Monei/model/service_unavailable_error_all_of.py
 Monei/model/subscription.py
 Monei/model/subscription_interval.py
 Monei/model/subscription_last_payment.py
@@ -98,6 +100,10 @@ Monei/model/subscription_payment_method_card.py
 Monei/model/subscription_retry_schedule.py
 Monei/model/subscription_retry_schedule_inner.py
 Monei/model/subscription_status.py
+Monei/model/unauthorized_error.py
+Monei/model/unauthorized_error_all_of.py
+Monei/model/unprocessable_entity_error.py
+Monei/model/unprocessable_entity_error_all_of.py
 Monei/model/update_subscription_request.py
 Monei/model/validate_bizum_phone_request.py
 Monei/model_utils.py

@@ -1,0 +1,37 @@
+{
+  "git": {
+    "tagName": "v${version}",
+    "commitMessage": "chore: release v${version}"
+  },
+  "github": {
+    "release": true
+  },
+  "npm": {
+    "publish": false
+  },
+  "hooks": {
+    "after:bump": "yarn build && yarn test && git add -A"
+  },
+  "plugins": {
+    "@release-it/bumper": {
+      "out": [
+        {
+          "file": "config.json",
+          "path": [
+            "version"
+          ]
+        },
+        {
+          "file": "pyproject.toml",
+          "path": [
+            "project.version"
+          ]
+        }
+      ]
+    },
+    "@release-it/conventional-changelog": {
+      "preset": "angular",
+      "infile": "CHANGELOG.md"
+    }
+  }
+} 

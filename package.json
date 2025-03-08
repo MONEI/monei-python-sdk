@@ -22,43 +22,5 @@
     "husky": "^9.0.11",
     "release-it": "^18.1.2"
   },
-  "release-it": {
-    "git": {
-      "tagName": "v${version}",
-      "commitMessage": "chore: release v${version}"
-    },
-    "github": {
-      "release": true
-    },
-    "npm": {
-      "publish": false
-    },
-    "hooks": {
-      "after:bump": "yarn build && yarn test && git add -A"
-    },
-    "plugins": {
-      "@release-it/bumper": {
-        "out": [
-          {
-            "file": "config.json",
-            "path": [
-              "packageVersion",
-              "version"
-            ]
-          },
-          {
-            "file": "pyproject.toml",
-            "path": [
-              "project.version"
-            ]
-          }
-        ]
-      },
-      "@release-it/conventional-changelog": {
-        "preset": "angular",
-        "infile": "CHANGELOG.md"
-      }
-    }
-  },
   "packageManager": "yarn@4.7.0"
 }

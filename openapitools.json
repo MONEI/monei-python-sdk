@@ -8,7 +8,6 @@
         "generatorName": "python",
         "inputSpec": "https://js.monei.com/api/v1/openapi.json",
         "output": "./",
-        "removeOperationIdPrefix": true,
         "additionalProperties": {
           "configFile": "./config.json"
         }
@@ -17,7 +16,6 @@
         "generatorName": "python",
         "inputSpec": "./openapi.json",
         "output": "./",
-        "removeOperationIdPrefix": true,
         "additionalProperties": {
           "configFile": "./config.json"
         }
