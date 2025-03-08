@@ -3,5 +3,6 @@
   "packageVersion": "2.0.2",
   "generatorName": "python",
   "outputDir": "./",
-  "removeOperationIdPrefix": true
+  "removeOperationIdPrefix": true,
+  "version": "2.1.0"
 }
