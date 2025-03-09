@@ -356,8 +356,7 @@ def callback():
     
     try:
         # Verify the signature
-        payload = monei.verify_signature(request.data.decode('utf-8'), signature)
-        payment = payload['object']
+        payment = monei.verify_signature(request.data.decode('utf-8'), signature)
         
         # Update your order status based on the payment status
         if payment['status'] == PaymentStatus.SUCCEEDED:
