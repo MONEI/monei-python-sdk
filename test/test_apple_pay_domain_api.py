@@ -10,8 +10,9 @@
 
 import unittest
 
-import Monei
+import Monei  # noqa: F401
 from Monei.api.apple_pay_domain_api import ApplePayDomainApi  # noqa: E501
+from Monei.model.register_apple_pay_domain_request import RegisterApplePayDomainRequest
 
 
 class TestApplePayDomainApi(unittest.TestCase):
@@ -19,6 +20,10 @@ class TestApplePayDomainApi(unittest.TestCase):
 
     def setUp(self):
         self.api = ApplePayDomainApi()  # noqa: E501
+        self.domain = "example.com"
+        self.register_domain_request = RegisterApplePayDomainRequest(
+            domain_name=self.domain
+        )
 
     def tearDown(self):
         pass
@@ -28,7 +33,12 @@ class TestApplePayDomainApi(unittest.TestCase):
 
         Register Domain  # noqa: E501
         """
-        pass
+        # Configuration and client setup would happen here in a real test
+        # This is a stub that would be implemented with actual API calls or mocks
+        # In integration tests, we mock the API call
+        # Here we're just testing the method exists
+        endpoint = self.api.register_endpoint
+        self.assertIsNotNone(endpoint)
 
 
 if __name__ == '__main__':
