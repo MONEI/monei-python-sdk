@@ -11,9 +11,9 @@ import unittest
 
 import Monei  # noqa: F401
 from Monei.api.payments_api import PaymentsApi  # noqa: E501
-from Monei.model.cancel_payment_request import CancelPaymentRequest  # noqa: F401
-from Monei.model.capture_payment_request import CapturePaymentRequest  # noqa: F401
 from Monei.model.confirm_payment_request import ConfirmPaymentRequest  # noqa: F401
+from Monei.model.capture_payment_request import CapturePaymentRequest  # noqa: F401
+from Monei.model.cancel_payment_request import CancelPaymentRequest  # noqa: F401
 from Monei.model.create_payment_request import CreatePaymentRequest  # noqa: F401
 from Monei.model.recurring_payment_request import RecurringPaymentRequest  # noqa: F401
 from Monei.model.refund_payment_request import RefundPaymentRequest  # noqa: F401

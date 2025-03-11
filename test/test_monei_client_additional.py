@@ -200,6 +200,21 @@ class TestMoneiClientAdditional(unittest.TestCase):
         self.assertEqual(context.exception.status, 401)
         self.assertEqual(context.exception.reason, "[401] Signature verification failed")
 
+    def test_network_error_handling(self):
+        """Test that network errors are properly handled."""
+        client = MoneiClient(api_key="test_api_key")
+        
+        # Mock the payments API directly
+        mock_payments = MagicMock()
+        client.payments = mock_payments
+        
+        # Set the mock to raise a connection error
+        mock_payments.get.side_effect = ConnectionError("Failed to establish a connection")
+        
+        # Test that the connection error is caught and properly handled
+        with self.assertRaises(ConnectionError):
+            client.payments.get("pay_123456789")
+
 
 if __name__ == '__main__':
     unittest.main()

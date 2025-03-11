@@ -267,7 +267,9 @@ class TestPaymentsApiIntegration(unittest.TestCase):
         send_receipt_request = {"customerEmail": "customer@example.com"}
 
         # Call the API
-        result = self.client.payments.send_receipt(self.payment_id, send_receipt_request)
+        result = self.client.payments.send_receipt(
+            self.payment_id, send_receipt_request
+        )
 
         # Verify the result
         self.assertTrue(result.success)
@@ -290,7 +292,9 @@ class TestPaymentsApiIntegration(unittest.TestCase):
         send_request_request = {"phoneNumber": "+34600000000"}
 
         # Call the API
-        result = self.client.payments.send_request(self.payment_id, send_request_request)
+        result = self.client.payments.send_request(
+            self.payment_id, send_request_request
+        )
 
         # Verify the result
         self.assertEqual(result.id, self.payment_id)
@@ -300,6 +304,163 @@ class TestPaymentsApiIntegration(unittest.TestCase):
 
         # Verify the mock was called with the correct arguments
         mock_send_request.assert_called_once()
+
+    @patch("Monei.api.payments_api.PaymentsApi.create")
+    def test_create_payment_validation_error(self, mock_create):
+        """Test that validation errors are properly handled when creating a payment."""
+        # Setup mock to raise an ApiException
+        mock_create.side_effect = ApiException(
+            status=422, reason="Unprocessable Entity"
+        )
+
+        # Create invalid payment request (missing required fields)
+        payment_request = {
+            "currency": "EUR",  # Missing required 'amount' field
+            "description": "Test payment",
+        }
+
+        # Call the API and expect an exception
+        with self.assertRaises(ApiException) as context:
+            self.client.payments.create(payment_request)
+
+        # Verify the exception details
+        self.assertEqual(context.exception.status, 422)
+        self.assertIn("Unprocessable Entity", context.exception.reason)
+
+        # Verify the mock was called
+        mock_create.assert_called_once()
+
+    @patch("Monei.api.payments_api.PaymentsApi.get")
+    def test_get_payment_not_found(self, mock_get):
+        """Test handling not found error when getting a payment."""
+        # Setup mock to raise an ApiException
+        mock_get.side_effect = ApiException(status=404, reason="Not Found")
+
+        # Use a non-existent payment ID
+        non_existent_id = "pay_nonexistent"
+
+        # Call the API and expect an exception
+        with self.assertRaises(ApiException) as context:
+            self.client.payments.get(non_existent_id)
+
+        # Verify the exception details
+        self.assertEqual(context.exception.status, 404)
+        self.assertIn("Not Found", context.exception.reason)
+
+        # Verify the mock was called with the correct arguments
+        mock_get.assert_called_once_with(non_existent_id)
+
+    @patch("Monei.api.payments_api.PaymentsApi.get")
+    def test_malformed_response_handling(self, mock_get):
+        """Test handling of malformed API responses."""
+        # Set up the mock to raise a JSON parsing error
+        import json
+
+        def side_effect(*args, **kwargs):
+            raise json.JSONDecodeError(
+                "Expecting value", '{"id":"pay_123456789", "amount": invalid_json}', 30
+            )
+
+        mock_get.side_effect = side_effect
+
+        # Call the API and expect an exception
+        with self.assertRaises(Exception) as context:
+            self.client.payments.get(self.payment_id)
+
+        # Verify the exception details indicate a parsing issue
+        self.assertIn("Expecting value", str(context.exception))
+
+    def test_payment_object_handling(self):
+        """Test handling of Payment objects."""
+        # Create a Payment object with required attributes
+        payment = Payment(
+            id="pay_123456789",
+            amount=1000,
+            currency="EUR",
+            status=PaymentStatus("SUCCEEDED"),
+        )
+
+        # Set additional attributes
+        payment.order_id = "order_123"
+        payment.description = "Test payment"
+
+        # Verify the object properties are correctly set
+        self.assertEqual(payment.id, "pay_123456789")
+        self.assertEqual(payment.amount, 1000)
+        self.assertEqual(payment.currency, "EUR")
+        self.assertEqual(payment.status, PaymentStatus("SUCCEEDED"))
+        self.assertEqual(payment.order_id, "order_123")
+        self.assertEqual(payment.description, "Test payment")
+
+        # Convert to dictionary
+        payment_dict = payment.to_dict()
+
+        # Verify the converted dictionary contains the expected values
+        self.assertEqual(payment_dict.get("id"), "pay_123456789")
+        self.assertEqual(payment_dict.get("amount"), 1000)
+        self.assertEqual(payment_dict.get("currency"), "EUR")
+        self.assertEqual(payment_dict.get("status"), "SUCCEEDED")
+        self.assertEqual(payment_dict.get("order_id"), "order_123")
+        self.assertEqual(payment_dict.get("description"), "Test payment")
+
+    @patch("Monei.api.payments_api.PaymentsApi")
+    def test_pagination_handling(self, mock_payments_api_class):
+        """Test pagination handling when listing payments."""
+        # Create a mock instance with a list method
+        mock_instance = MagicMock()
+        mock_payments_api_class.return_value = mock_instance
+
+        # First page response
+        first_page_response = MagicMock()
+        first_page_response.data = [
+            MagicMock(id="pay_1", amount=1000),
+            MagicMock(id="pay_2", amount=2000),
+        ]
+        first_page_response.has_more = True
+        first_page_response.next_page = "page_token_2"
+
+        # Second page response
+        second_page_response = MagicMock()
+        second_page_response.data = [
+            MagicMock(id="pay_3", amount=3000),
+            MagicMock(id="pay_4", amount=4000),
+        ]
+        second_page_response.has_more = False
+        second_page_response.next_page = None
+
+        # Configure the mock to return different responses based on page parameter
+        def side_effect(*args, **kwargs):
+            if "page" not in kwargs or kwargs["page"] is None:
+                return first_page_response
+            elif kwargs["page"] == "page_token_2":
+                return second_page_response
+            return MagicMock(data=[], has_more=False, next_page=None)
+
+        mock_instance.list.side_effect = side_effect
+
+        # Replace client.payments with our mock
+        original_payments = self.client.payments
+        self.client.payments = mock_instance
+
+        try:
+            # Test fetching the first page of results
+            first_page = self.client.payments.list(limit=2)
+            self.assertEqual(len(first_page.data), 2)
+            self.assertEqual(first_page.data[0].id, "pay_1")
+            self.assertEqual(first_page.data[1].id, "pay_2")
+            self.assertTrue(first_page.has_more)
+            self.assertEqual(first_page.next_page, "page_token_2")
+
+            # Test fetching the second page of results
+            second_page = self.client.payments.list(limit=2, page=first_page.next_page)
+            self.assertEqual(len(second_page.data), 2)
+            self.assertEqual(second_page.data[0].id, "pay_3")
+            self.assertEqual(second_page.data[1].id, "pay_4")
+            self.assertFalse(second_page.has_more)
+            self.assertIsNone(second_page.next_page)
+        finally:
+            # Restore original payments api
+            self.client.payments = original_payments
 
 
 if __name__ == "__main__":

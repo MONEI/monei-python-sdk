@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
 
-import Monei
 from Monei.monei_client import MoneiClient
 from Monei.exceptions import ApiException
 from Monei.model.register_apple_pay_domain_request import RegisterApplePayDomainRequest
