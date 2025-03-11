@@ -17,14 +17,14 @@ class TestConfiguration(unittest.TestCase):
         self.api_key_prefix = {"APIKey": "Bearer"}
         self.username = "test_username"
         self.password = "test_password"
-        
+
         # Create a default configuration for testing
         self.config = Configuration(
             host=self.host,
             api_key=self.api_key,
             api_key_prefix=self.api_key_prefix,
             username=self.username,
-            password=self.password
+            password=self.password,
         )
 
     def tearDown(self):
@@ -50,7 +50,7 @@ class TestConfiguration(unittest.TestCase):
         self.assertIsNone(config.ssl_ca_cert)
         self.assertIsNone(config.logger_file)
         self.assertFalse(config.debug)
-        self.assertEqual(config.logger_format, '%(asctime)s %(levelname)s %(message)s')
+        self.assertEqual(config.logger_format, "%(asctime)s %(levelname)s %(message)s")
 
     def test_init_with_custom_values(self):
         """Test initializing with custom values."""
@@ -65,12 +65,12 @@ class TestConfiguration(unittest.TestCase):
         # Test with API key and prefix
         result = self.config.get_api_key_with_prefix("APIKey")
         self.assertEqual(result, "Bearer test_api_key_12345")
-        
+
         # Test with API key but no prefix
         self.config.api_key_prefix = {}
         result = self.config.get_api_key_with_prefix("APIKey")
         self.assertEqual(result, "test_api_key_12345")
-        
+
         # Test with no API key
         self.config.api_key = {}
         # When API key is not found, it returns None, not an empty string
@@ -81,20 +81,20 @@ class TestConfiguration(unittest.TestCase):
         # Test with username and password
         token = self.config.get_basic_auth_token()
         self.assertEqual(token, "Basic dGVzdF91c2VybmFtZTp0ZXN0X3Bhc3N3b3Jk")
-        
+
         # Test with no username
         self.config.username = None
         # When username is None but password is not, it still returns a token with empty username
         token = self.config.get_basic_auth_token()
         self.assertEqual(token, "Basic OnRlc3RfcGFzc3dvcmQ=")
-        
+
         # Test with username but no password
         self.config.username = "test_username"
         self.config.password = None
         # When password is None but username is not, it still returns a token with empty password
         token = self.config.get_basic_auth_token()
         self.assertEqual(token, "Basic dGVzdF91c2VybmFtZTo=")
-        
+
         # Test with both None
         self.config.username = None
         self.config.password = None
@@ -126,11 +126,11 @@ class TestConfiguration(unittest.TestCase):
         # Test setting logger file
         with tempfile.NamedTemporaryFile(delete=False) as temp_file:
             temp_file_path = temp_file.name
-        
+
         try:
             self.config.logger_file = temp_file_path
             self.assertEqual(self.config.logger_file, temp_file_path)
-            
+
             # Check that the logger was configured
             # The logger is a dict with package_logger and urllib3_logger
             self.assertTrue(hasattr(self.config, "logger"))
@@ -139,19 +139,25 @@ class TestConfiguration(unittest.TestCase):
             self.assertIn("urllib3_logger", self.config.logger)
             self.assertIsInstance(self.config.logger["package_logger"], logging.Logger)
             self.assertIsInstance(self.config.logger["urllib3_logger"], logging.Logger)
-            
+
             # Test with debug=True
             self.config.debug = True
             self.assertTrue(self.config.debug)
             self.assertEqual(self.config.logger["package_logger"].level, logging.DEBUG)
             self.assertEqual(self.config.logger["urllib3_logger"].level, logging.DEBUG)
-            
+
             # Test with debug=False
             self.config.debug = False
             self.assertFalse(self.config.debug)
             # The actual level might be WARNING (30) instead of INFO (20)
-            self.assertIn(self.config.logger["package_logger"].level, [logging.INFO, logging.WARNING])
-            self.assertIn(self.config.logger["urllib3_logger"].level, [logging.INFO, logging.WARNING])
+            self.assertIn(
+                self.config.logger["package_logger"].level,
+                [logging.INFO, logging.WARNING],
+            )
+            self.assertIn(
+                self.config.logger["urllib3_logger"].level,
+                [logging.INFO, logging.WARNING],
+            )
         finally:
             # Clean up the temporary file
             if os.path.exists(temp_file_path):
@@ -160,10 +166,12 @@ class TestConfiguration(unittest.TestCase):
     def test_logger_format(self):
         """Test logger_format property."""
         # Test default format
-        self.assertEqual(self.config.logger_format, '%(asctime)s %(levelname)s %(message)s')
-        
+        self.assertEqual(
+            self.config.logger_format, "%(asctime)s %(levelname)s %(message)s"
+        )
+
         # Test setting a custom format
-        custom_format = '%(levelname)s: %(message)s'
+        custom_format = "%(levelname)s: %(message)s"
         self.config.logger_format = custom_format
         self.assertEqual(self.config.logger_format, custom_format)
 
@@ -172,12 +180,12 @@ class TestConfiguration(unittest.TestCase):
         # Set a default configuration
         original_config = self.config
         Configuration.set_default(self.config)
-        
+
         # The _default is set to a copy of the config, not the original
         self.assertIsNot(Configuration._default, original_config)
         self.assertEqual(Configuration._default.host, original_config.host)
         self.assertEqual(Configuration._default.api_key, original_config.api_key)
-        
+
         # Get the default configuration
         default_config = Configuration.get_default_copy()
         self.assertIsNot(default_config, Configuration._default)  # Should be a copy
@@ -188,7 +196,7 @@ class TestConfiguration(unittest.TestCase):
         """Test host property."""
         # Test getting host
         self.assertEqual(self.config.host, self.host)
-        
+
         # Test setting host
         new_host = "https://api.example.com/v2"
         self.config.host = new_host
@@ -201,7 +209,7 @@ class TestConfiguration(unittest.TestCase):
         self.assertEqual(config_copy.host, self.config.host)
         self.assertEqual(config_copy.api_key, self.config.api_key)
         self.assertEqual(config_copy.api_key_prefix, self.config.api_key_prefix)
-        
+
         # Modify the copy and check that the original is unchanged
         config_copy.host = "https://api.example.com/v2"
         self.assertNotEqual(config_copy.host, self.config.host)
@@ -210,12 +218,19 @@ class TestConfiguration(unittest.TestCase):
     def test_json_schema_validation_keywords(self):
         """Test JSON_SCHEMA_VALIDATION_KEYWORDS constant."""
         expected_keywords = {
-            'multipleOf', 'maximum', 'exclusiveMaximum',
-            'minimum', 'exclusiveMinimum', 'maxLength',
-            'minLength', 'pattern', 'maxItems', 'minItems'
+            "multipleOf",
+            "maximum",
+            "exclusiveMaximum",
+            "minimum",
+            "exclusiveMinimum",
+            "maxLength",
+            "minLength",
+            "pattern",
+            "maxItems",
+            "minItems",
         }
         self.assertEqual(JSON_SCHEMA_VALIDATION_KEYWORDS, expected_keywords)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

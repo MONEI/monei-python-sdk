@@ -9,8 +9,15 @@
     "build:local": "./scripts/build.sh local",
     "test": "uv run pytest",
     "release": "release-it",
-    "prepare": "yarn run build && yarn run test",
-    "commitlint": "commitlint --edit"
+    "prepare": "husky",
+    "lint": "black .",
+    "commitlint": "commitlint --edit",
+    "format": "black .",
+    "format:check": "black --check .",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.py": "black"
   },
   "license": "MIT",
   "devDependencies": {
@@ -20,6 +27,7 @@
     "@release-it/bumper": "^7.0.1",
     "@release-it/conventional-changelog": "^10.0.0",
     "husky": "^9.0.11",
+    "lint-staged": "^15.4.3",
     "release-it": "^18.1.2"
   },
   "packageManager": "yarn@4.7.0"

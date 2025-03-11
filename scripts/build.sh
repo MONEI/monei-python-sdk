@@ -11,4 +11,8 @@ else
 fi
 
 # Run post-build script
-./scripts/post-build.sh 
+./scripts/post-build.sh
+
+# Format generated Python files with Black
+echo "Formatting generated Python files with Black..."
+black Monei/

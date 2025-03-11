@@ -138,7 +138,7 @@ class TestMoneiClientIntegration(unittest.TestCase):
         """Test that the client correctly implements retry behavior."""
         # Verify that configure_retries exists and can be called
         self.client.configure_retries(max_retries=3, retry_delay=0.01)
-        
+
         # Verify the attributes were set correctly
         self.assertEqual(self.client.max_retries, 3)
         self.assertEqual(self.client.retry_delay, 0.01)
@@ -147,7 +147,7 @@ class TestMoneiClientIntegration(unittest.TestCase):
         """Test that the client correctly handles retry exhaustion."""
         # Verify that configure_retries exists and can be called with different values
         self.client.configure_retries(max_retries=5, retry_delay=0.05)
-        
+
         # Verify the attributes were set correctly
         self.assertEqual(self.client.max_retries, 5)
         self.assertEqual(self.client.retry_delay, 0.05)
@@ -156,7 +156,7 @@ class TestMoneiClientIntegration(unittest.TestCase):
         """Test that the client does not retry for client errors (4xx)."""
         # Verify that configure_retries exists and can be called with default values
         self.client.configure_retries()
-        
+
         # Verify the attributes were set correctly
         self.assertEqual(self.client.max_retries, 3)  # Default value
         self.assertEqual(self.client.retry_delay, 0.1)  # Default value

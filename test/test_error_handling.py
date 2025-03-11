@@ -60,7 +60,9 @@ class TestErrorHandling(unittest.TestCase):
 
         # Call the API with an invalid API key
         with self.assertRaises(ApiException) as context:
-            self.client.payments.confirm("payment_id", {"paymentMethod": {"type": "CARD"}})
+            self.client.payments.confirm(
+                "payment_id", {"paymentMethod": {"type": "CARD"}}
+            )
 
         # Verify the exception details
         self.assertEqual(context.exception.status, 401)
@@ -74,7 +76,9 @@ class TestErrorHandling(unittest.TestCase):
             client.set_account_id("account_id")
 
         self.assertEqual(context.exception.status, 400)
-        self.assertEqual(context.exception.reason, "User-Agent must be set before using Account ID")
+        self.assertEqual(
+            context.exception.reason, "User-Agent must be set before using Account ID"
+        )
 
 
 if __name__ == "__main__":

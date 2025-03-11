@@ -211,10 +211,15 @@ class TestSubscriptionsApiIntegration(unittest.TestCase):
         mock_activate.return_value = mock_subscription
 
         # Create activate request
-        activate_request = {"paymentToken": "tok_123456789", "sessionId": "sess_123456789"}
+        activate_request = {
+            "paymentToken": "tok_123456789",
+            "sessionId": "sess_123456789",
+        }
 
         # Call the API
-        result = self.client.subscriptions.activate(self.subscription_id, activate_request)
+        result = self.client.subscriptions.activate(
+            self.subscription_id, activate_request
+        )
 
         # Verify the result
         self.assertEqual(result.id, self.subscription_id)
@@ -241,7 +246,9 @@ class TestSubscriptionsApiIntegration(unittest.TestCase):
         }
 
         # Call the API
-        result = self.client.subscriptions.send_link(self.subscription_id, send_link_request)
+        result = self.client.subscriptions.send_link(
+            self.subscription_id, send_link_request
+        )
 
         # Verify the result
         self.assertTrue(result.success)
@@ -261,7 +268,9 @@ class TestSubscriptionsApiIntegration(unittest.TestCase):
         send_status_request = {"customerEmail": "customer@example.com"}
 
         # Call the API
-        result = self.client.subscriptions.send_status(self.subscription_id, send_status_request)
+        result = self.client.subscriptions.send_status(
+            self.subscription_id, send_status_request
+        )
 
         # Verify the result
         self.assertTrue(result.success)
@@ -274,15 +283,14 @@ class TestSubscriptionsApiIntegration(unittest.TestCase):
         """Test that validation errors are properly handled when creating a subscription."""
         # Setup mock to raise an ApiException
         mock_create.side_effect = ApiException(
-            status=422,
-            reason="Unprocessable Entity"
+            status=422, reason="Unprocessable Entity"
         )
 
         # Create invalid subscription request (missing required fields)
         subscription_request = {
             "currency": "EUR",  # Missing required 'amount' field
             "interval": "month",
-            "description": "Test subscription"
+            "description": "Test subscription",
         }
 
         # Call the API and expect an exception
@@ -292,7 +300,7 @@ class TestSubscriptionsApiIntegration(unittest.TestCase):
         # Verify the exception details
         self.assertEqual(context.exception.status, 422)
         self.assertIn("Unprocessable Entity", context.exception.reason)
-        
+
         # Verify the mock was called
         mock_create.assert_called_once()
 
@@ -300,10 +308,7 @@ class TestSubscriptionsApiIntegration(unittest.TestCase):
     def test_get_subscription_not_found(self, mock_get):
         """Test handling not found error when getting a subscription."""
         # Setup mock to raise an ApiException
-        mock_get.side_effect = ApiException(
-            status=404,
-            reason="Not Found"
-        )
+        mock_get.side_effect = ApiException(status=404, reason="Not Found")
 
         # Use a non-existent subscription ID
         non_existent_id = "sub_nonexistent"
@@ -315,7 +320,7 @@ class TestSubscriptionsApiIntegration(unittest.TestCase):
         # Verify the exception details
         self.assertEqual(context.exception.status, 404)
         self.assertIn("Not Found", context.exception.reason)
-        
+
         # Verify the mock was called with the correct arguments
         mock_get.assert_called_once_with(non_existent_id)
 
@@ -323,10 +328,7 @@ class TestSubscriptionsApiIntegration(unittest.TestCase):
     def test_cancel_subscription_unauthorized(self, mock_cancel):
         """Test handling unauthorized errors when canceling a subscription."""
         # Setup mock to raise an ApiException
-        mock_cancel.side_effect = ApiException(
-            status=401,
-            reason="Unauthorized"
-        )
+        mock_cancel.side_effect = ApiException(status=401, reason="Unauthorized")
 
         # Create cancel request
         cancel_request = CancelSubscriptionRequest(
@@ -340,7 +342,7 @@ class TestSubscriptionsApiIntegration(unittest.TestCase):
         # Verify the exception details
         self.assertEqual(context.exception.status, 401)
         self.assertIn("Unauthorized", context.exception.reason)
-        
+
         # Verify the mock was called
         mock_cancel.assert_called_once()
 

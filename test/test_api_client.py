@@ -31,10 +31,10 @@ class TestApiClientIdempotency(unittest.TestCase):
         config = Configuration()
         config.api_key["APIKey"] = "test_api_key_12345"
         client = ApiClient(config)
-        
+
         # Verify that the client has the correct API key
         self.assertEqual(client.configuration.api_key["APIKey"], "test_api_key_12345")
-        
+
         # Test that the client is properly initialized
         self.assertIsNotNone(client.rest_client)
 
@@ -44,10 +44,10 @@ class TestApiClientIdempotency(unittest.TestCase):
         config = Configuration()
         config.api_key["APIKey"] = "test_api_key_12345"
         client = ApiClient(config)
-        
+
         # Verify that the client has the correct API key
         self.assertEqual(client.configuration.api_key["APIKey"], "test_api_key_12345")
-        
+
         # Test that the client is properly initialized
         self.assertIsNotNone(client.rest_client)
 

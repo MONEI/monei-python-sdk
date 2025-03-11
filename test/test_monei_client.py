@@ -67,7 +67,8 @@ class TestMoneiClient(unittest.TestCase):
             MoneiClient(api_key=self.api_key, account_id=self.account_id)
         self.assertEqual(context.exception.status, 400)
         self.assertEqual(
-            context.exception.reason, "User-Agent must be provided when using Account ID"
+            context.exception.reason,
+            "User-Agent must be provided when using Account ID",
         )
 
     def test_set_account_id(self):
@@ -82,7 +83,9 @@ class TestMoneiClient(unittest.TestCase):
         with self.assertRaises(ApiException) as context:
             client.set_account_id(self.account_id)
         self.assertEqual(context.exception.status, 400)
-        self.assertEqual(context.exception.reason, "User-Agent must be set before using Account ID")
+        self.assertEqual(
+            context.exception.reason, "User-Agent must be set before using Account ID"
+        )
 
     def test_set_account_id_to_none(self):
         """Test setting account ID to None should remove the header."""
@@ -176,7 +179,8 @@ class TestMoneiClient(unittest.TestCase):
         # Check that the exception has the correct message
         self.assertEqual(context.exception.status, 400)
         self.assertEqual(
-            context.exception.reason, "User-Agent must be provided when using Account ID"
+            context.exception.reason,
+            "User-Agent must be provided when using Account ID",
         )
 
         # Now set a custom user agent and try again
@@ -197,7 +201,9 @@ class TestMoneiClient(unittest.TestCase):
                 )
             except ApiException as e:
                 if "User-Agent must be provided" in str(e):
-                    self.fail("User agent validation failed even with custom user agent")
+                    self.fail(
+                        "User agent validation failed even with custom user agent"
+                    )
 
     def test_verify_signature_valid(self):
         """Test verifying a valid signature."""
@@ -234,7 +240,9 @@ class TestMoneiClient(unittest.TestCase):
         with self.assertRaises(ApiException) as context:
             client.verify_signature(body, invalid_signature)
         self.assertEqual(context.exception.status, 401)
-        self.assertEqual(context.exception.reason, "[401] Signature verification failed")
+        self.assertEqual(
+            context.exception.reason, "[401] Signature verification failed"
+        )
 
     def test_verify_signature_malformed(self):
         """Test verifying a malformed signature should raise an exception."""

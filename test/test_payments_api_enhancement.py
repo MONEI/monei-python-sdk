@@ -21,8 +21,9 @@ class TestPaymentsApiEnhanced(unittest.TestCase):
     def test_api_methods_exist(self):
         """Test that all API methods are properly defined."""
         # Check for existence of some methods, not all, to reduce test fragility
-        self.assertTrue(hasattr(self.api, 'create'))
-        self.assertTrue(hasattr(self.api, 'get'))
+        self.assertTrue(hasattr(self.api, "create"))
+        self.assertTrue(hasattr(self.api, "get"))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

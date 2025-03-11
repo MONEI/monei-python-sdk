@@ -73,7 +73,7 @@ class TestModelSerialization(unittest.TestCase):
         payment_data = self.payment_json.copy()
         # Create a proper PaymentStatus instance for the test
         payment_data["status"] = PaymentStatus("SUCCEEDED")
-        
+
         # Remove timestamp fields if they're causing issues
         if "createdAt" in payment_data:
             payment_data["createdAt"] = int(datetime(2023, 1, 1, 12, 0, 0).timestamp())
