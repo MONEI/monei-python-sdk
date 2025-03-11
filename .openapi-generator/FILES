@@ -12,6 +12,7 @@ Monei/exceptions.py
 Monei/model/__init__.py
 Monei/model/activate_subscription_request.py
 Monei/model/address.py
+Monei/model/api_exception.py
 Monei/model/apple_pay_domain_register200_response.py
 Monei/model/bad_request_error.py
 Monei/model/bad_request_error_all_of.py
@@ -24,7 +25,6 @@ Monei/model/confirm_payment_request_payment_method.py
 Monei/model/confirm_payment_request_payment_method_card.py
 Monei/model/create_payment_request.py
 Monei/model/create_subscription_request.py
-Monei/model/error_base.py
 Monei/model/internal_server_error.py
 Monei/model/internal_server_error_all_of.py
 Monei/model/not_found_error.py
@@ -110,3 +110,4 @@ Monei/model_utils.py
 Monei/models/__init__.py
 Monei/rest.py
 test/__init__.py
+test/test_api_exception.py

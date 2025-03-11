@@ -1,5 +1,3 @@
-# flake8: noqa
-
 """
     MONEI API v1
 
@@ -10,20 +8,28 @@
 """
 
 
-__version__ = "2.0.2"
+import sys
+import unittest
 
-# import ApiClient
-from Monei.api_client import ApiClient
+import Monei
+from Monei.model.api_exception import ApiException
 
-# import Configuration
-from Monei.configuration import Configuration
 
-# import exceptions
-from Monei.exceptions import OpenApiException
-from Monei.exceptions import ApiAttributeError
-from Monei.exceptions import ApiTypeError
-from Monei.exceptions import ApiValueError
-from Monei.exceptions import ApiKeyError
-from Monei.exceptions import ApiException
-# import custom MoneiClient
-from Monei.monei_client import MoneiClient
+class TestApiException(unittest.TestCase):
+    """ApiException unit test stubs"""
+
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def testApiException(self):
+        """Test ApiException"""
+        # FIXME: construct object with mandatory attributes with example values
+        # model = ApiException()  # noqa: E501
+        pass
+
+
+if __name__ == '__main__':
+    unittest.main()

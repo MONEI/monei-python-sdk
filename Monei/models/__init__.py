@@ -11,6 +11,7 @@
 
 from Monei.model.activate_subscription_request import ActivateSubscriptionRequest
 from Monei.model.address import Address
+from Monei.model.api_exception import ApiException
 from Monei.model.apple_pay_domain_register200_response import ApplePayDomainRegister200Response
 from Monei.model.bad_request_error import BadRequestError
 from Monei.model.bad_request_error_all_of import BadRequestErrorAllOf
@@ -23,7 +24,6 @@ from Monei.model.confirm_payment_request_payment_method import ConfirmPaymentReq
 from Monei.model.confirm_payment_request_payment_method_card import ConfirmPaymentRequestPaymentMethodCard
 from Monei.model.create_payment_request import CreatePaymentRequest
 from Monei.model.create_subscription_request import CreateSubscriptionRequest
-from Monei.model.error_base import ErrorBase
 from Monei.model.internal_server_error import InternalServerError
 from Monei.model.internal_server_error_all_of import InternalServerErrorAllOf
 from Monei.model.not_found_error import NotFoundError
