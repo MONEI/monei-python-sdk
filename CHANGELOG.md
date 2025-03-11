@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.3.0 (2025-03-11)
+
+* feat: Add retry configuration method to MoneiClient ([0440265](https://github.com/MONEI/monei-python-sdk/commit/0440265))
+* test: Enhance test coverage for API methods and error handling ([67bbd50](https://github.com/MONEI/monei-python-sdk/commit/67bbd50))
+
 ## 2.2.0 (2025-03-11)
 
 * feat: Update SDK to OpenAPI specification version 1.5.8 ([35bd7e1](https://github.com/MONEI/monei-python-sdk/commit/35bd7e1))
