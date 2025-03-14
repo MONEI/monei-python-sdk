@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "Monei"
-version = "2.2.0"
+version = "2.3.1"
 description = "MONEI PYTHON SDK"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -54,7 +54,8 @@ dev = [
   "pytest >= 7.2.1",
   "pytest-cov >= 2.8.1",
   "types-python-dateutil >= 2.8.19.14",
-  "mypy >= 1.5"
+  "mypy >= 1.5",
+  "black >= 24.1.0"
 ]
 
 [tool]
@@ -135,3 +136,23 @@ extension-pkg-whitelist = "pydantic"
     disallow_untyped_defs = true
     no_implicit_reexport = true
     warn_return_any = true
+
+  [tool.black]
+  line-length = 88
+  target-version = [ "py38", "py39", "py310", "py311", "py312" ]
+  include = "\\.pyi?$"
+  exclude = """
+/(
+    \\.eggs
+  | \\.git
+  | \\.hg
+  | \\.mypy_cache
+  | \\.tox
+  | \\.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | node_modules
+)/
+"""

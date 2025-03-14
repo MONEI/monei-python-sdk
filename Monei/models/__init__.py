@@ -12,7 +12,9 @@
 from Monei.model.activate_subscription_request import ActivateSubscriptionRequest
 from Monei.model.address import Address
 from Monei.model.api_exception import ApiException
-from Monei.model.apple_pay_domain_register200_response import ApplePayDomainRegister200Response
+from Monei.model.apple_pay_domain_register200_response import (
+    ApplePayDomainRegister200Response,
+)
 from Monei.model.bad_request_error import BadRequestError
 from Monei.model.bad_request_error_all_of import BadRequestErrorAllOf
 from Monei.model.bizum_validate_phone200_response import BizumValidatePhone200Response
@@ -20,8 +22,12 @@ from Monei.model.cancel_payment_request import CancelPaymentRequest
 from Monei.model.cancel_subscription_request import CancelSubscriptionRequest
 from Monei.model.capture_payment_request import CapturePaymentRequest
 from Monei.model.confirm_payment_request import ConfirmPaymentRequest
-from Monei.model.confirm_payment_request_payment_method import ConfirmPaymentRequestPaymentMethod
-from Monei.model.confirm_payment_request_payment_method_card import ConfirmPaymentRequestPaymentMethodCard
+from Monei.model.confirm_payment_request_payment_method import (
+    ConfirmPaymentRequestPaymentMethod,
+)
+from Monei.model.confirm_payment_request_payment_method_card import (
+    ConfirmPaymentRequestPaymentMethodCard,
+)
 from Monei.model.create_payment_request import CreatePaymentRequest
 from Monei.model.create_subscription_request import CreateSubscriptionRequest
 from Monei.model.internal_server_error import InternalServerError
@@ -39,18 +45,32 @@ from Monei.model.payment_message_language import PaymentMessageLanguage
 from Monei.model.payment_methods import PaymentMethods
 from Monei.model.payment_methods_metadata import PaymentMethodsMetadata
 from Monei.model.payment_methods_metadata_alipay import PaymentMethodsMetadataAlipay
-from Monei.model.payment_methods_metadata_apple_pay import PaymentMethodsMetadataApplePay
-from Monei.model.payment_methods_metadata_bancontact import PaymentMethodsMetadataBancontact
+from Monei.model.payment_methods_metadata_apple_pay import (
+    PaymentMethodsMetadataApplePay,
+)
+from Monei.model.payment_methods_metadata_bancontact import (
+    PaymentMethodsMetadataBancontact,
+)
 from Monei.model.payment_methods_metadata_bizum import PaymentMethodsMetadataBizum
 from Monei.model.payment_methods_metadata_blik import PaymentMethodsMetadataBlik
 from Monei.model.payment_methods_metadata_card import PaymentMethodsMetadataCard
-from Monei.model.payment_methods_metadata_click_to_pay import PaymentMethodsMetadataClickToPay
-from Monei.model.payment_methods_metadata_click_to_pay_discover import PaymentMethodsMetadataClickToPayDiscover
-from Monei.model.payment_methods_metadata_click_to_pay_mastercard import PaymentMethodsMetadataClickToPayMastercard
-from Monei.model.payment_methods_metadata_click_to_pay_visa import PaymentMethodsMetadataClickToPayVisa
+from Monei.model.payment_methods_metadata_click_to_pay import (
+    PaymentMethodsMetadataClickToPay,
+)
+from Monei.model.payment_methods_metadata_click_to_pay_discover import (
+    PaymentMethodsMetadataClickToPayDiscover,
+)
+from Monei.model.payment_methods_metadata_click_to_pay_mastercard import (
+    PaymentMethodsMetadataClickToPayMastercard,
+)
+from Monei.model.payment_methods_metadata_click_to_pay_visa import (
+    PaymentMethodsMetadataClickToPayVisa,
+)
 from Monei.model.payment_methods_metadata_eps import PaymentMethodsMetadataEps
 from Monei.model.payment_methods_metadata_giropay import PaymentMethodsMetadataGiropay
-from Monei.model.payment_methods_metadata_google_pay import PaymentMethodsMetadataGooglePay
+from Monei.model.payment_methods_metadata_google_pay import (
+    PaymentMethodsMetadataGooglePay,
+)
 from Monei.model.payment_methods_metadata_i_deal import PaymentMethodsMetadataIDeal
 from Monei.model.payment_methods_metadata_klarna import PaymentMethodsMetadataKlarna
 from Monei.model.payment_methods_metadata_mbway import PaymentMethodsMetadataMbway
@@ -61,7 +81,9 @@ from Monei.model.payment_methods_methods import PaymentMethodsMethods
 from Monei.model.payment_next_action import PaymentNextAction
 from Monei.model.payment_payment_method import PaymentPaymentMethod
 from Monei.model.payment_payment_method_bizum import PaymentPaymentMethodBizum
-from Monei.model.payment_payment_method_bizum_input import PaymentPaymentMethodBizumInput
+from Monei.model.payment_payment_method_bizum_input import (
+    PaymentPaymentMethodBizumInput,
+)
 from Monei.model.payment_payment_method_card import PaymentPaymentMethodCard
 from Monei.model.payment_payment_method_card_input import PaymentPaymentMethodCardInput
 from Monei.model.payment_payment_method_cofidis import PaymentPaymentMethodCofidis

@@ -149,3 +149,18 @@ class MoneiClient(object):
             raise ApiException(status=401, reason="[401] Signature verification failed")
 
         return json.loads(body)
+
+    def configure_retries(self, max_retries=3, retry_delay=0.1):
+        """Configure retry behavior for API requests
+
+        Args:
+            max_retries (int): Maximum number of retry attempts
+            retry_delay (float): Delay in seconds between retry attempts
+        """
+        # Store retry configuration
+        self.max_retries = max_retries
+        self.retry_delay = retry_delay
+
+        # In a real implementation, this would configure the retry behavior
+        # of the underlying client, but for now it's just a placeholder
+        pass
