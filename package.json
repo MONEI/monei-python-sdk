@@ -10,14 +10,14 @@
     "test": "uv run pytest",
     "release": "release-it",
     "prepare": "husky",
-    "lint": "black .",
+    "lint": "uv run black .",
     "commitlint": "commitlint --edit",
-    "format": "black .",
-    "format:check": "black --check .",
+    "format": "uv run black .",
+    "format:check": "uv run black --check .",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "*.py": "black"
+    "*.py": "uv run black"
   },
   "license": "MIT",
   "devDependencies": {
