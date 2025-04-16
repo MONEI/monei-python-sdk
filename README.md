@@ -135,9 +135,7 @@ When using test mode, you can simulate various payment scenarios using test card
 
 ```python
 import Monei
-from Monei import ApiException
-from Monei.model.create_payment_request import CreatePaymentRequest
-from Monei.model.payment_customer import PaymentCustomer
+from Monei import ApiException, CreatePaymentRequest, PaymentCustomer
 from pprint import pprint
 
 # Initialize the client with your API key
@@ -216,7 +214,7 @@ except ApiException as e:
 Process a full or partial refund:
 
 ```python
-from Monei.model.refund_payment_request import RefundPaymentRequest
+from Monei import RefundPaymentRequest
 
 try:
     refund_request = RefundPaymentRequest(
@@ -253,7 +251,7 @@ You can customize the appearance in your MONEI Dashboard → Settings → Brandi
 1. **Create a payment**
 
 ```python
-from Monei.model.create_payment_request import CreatePaymentRequest
+from Monei import CreatePaymentRequest
 
 # Create the payment request
 payment_request = CreatePaymentRequest(
@@ -348,8 +346,6 @@ MONEI sends an HTTP POST request to your `callback_url` with the payment result.
 Example of handling the callback in a Flask server:
 
 ```python
-from Monei.model.payment_status import PaymentStatus
-
 @app.route('/checkout/callback', methods=['POST'])
 def callback():
     signature = request.headers.get('monei-signature')
@@ -359,19 +355,19 @@ def callback():
         payment = monei.verify_signature(request.data.decode('utf-8'), signature)
         
         # Update your order status based on the payment status
-        if payment['status'] == PaymentStatus.SUCCEEDED:
+        if payment['status'] == 'SUCCEEDED':
             # Payment successful - fulfill the order
             # Update your database, send confirmation email, etc.
             pass
-        elif payment['status'] == PaymentStatus.FAILED:
+        elif payment['status'] == 'FAILED':
             # Payment failed - notify the customer
             # Log the failure, update your database, etc.
             pass
-        elif payment['status'] == PaymentStatus.AUTHORIZED:
+        elif payment['status'] == 'AUTHORIZED':
             # Payment is authorized but not yet captured
             # You can capture it later
             pass
-        elif payment['status'] == PaymentStatus.CANCELED:
+        elif payment['status'] == 'CANCELED':
             # Payment was canceled
             pass
         
@@ -407,8 +403,7 @@ For more information about MONEI Connect and becoming a partner, visit the [MONE
 
 ```python
 import Monei
-from Monei import ApiException
-from Monei.model.create_payment_request import CreatePaymentRequest
+from Monei import ApiException, CreatePaymentRequest
 
 # Initialize with Account ID and User-Agent using a partner API key
 monei = Monei.MoneiClient(
@@ -434,8 +429,7 @@ except ApiException as e:
 
 ```python
 import Monei
-from Monei import ApiException
-from Monei.model.create_payment_request import CreatePaymentRequest
+from Monei import ApiException, CreatePaymentRequest
 
 # Initialize with a partner API key
 monei = Monei.MoneiClient(api_key='pk_partner_test_...')
@@ -513,8 +507,7 @@ monei.set_user_agent('MONEI/PaymentHub/3.0.1')
 
 ```python
 import Monei
-from Monei import ApiException
-from Monei.model.create_payment_request import CreatePaymentRequest
+from Monei import ApiException, CreatePaymentRequest
 import time
 
 # Initialize with a partner API key
