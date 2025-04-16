@@ -4,14 +4,16 @@ import hashlib
 
 # Import specific modules instead of importing from Monei
 import Monei
-from Monei.api.payment_methods_api import PaymentMethodsApi
+from Monei.apis import (
+    PaymentsApi,
+    PaymentMethodsApi,
+    SubscriptionsApi,
+    ApplePayDomainApi,
+    BizumApi,
+)
 from Monei.configuration import Configuration
 from Monei.api_client import ApiClient
 from Monei.exceptions import ApiException
-from Monei.api.payments_api import PaymentsApi
-from Monei.api.subscriptions_api import SubscriptionsApi
-from Monei.api.apple_pay_domain_api import ApplePayDomainApi
-from Monei.api.bizum_api import BizumApi
 
 
 DEFAULT_USER_AGENT = f"MONEI/Python/{Monei.__version__}"
