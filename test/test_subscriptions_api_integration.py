@@ -14,6 +14,8 @@ from Monei.model.send_subscription_status_request import SendSubscriptionStatusR
 from Monei.model.subscription import Subscription
 from Monei.model.subscription_status import SubscriptionStatus
 from Monei.model.subscription_interval import SubscriptionInterval
+from Monei.model.payment import Payment
+from Monei.model.payment_status import PaymentStatus
 
 
 class TestSubscriptionsApiIntegration(unittest.TestCase):
@@ -201,14 +203,15 @@ class TestSubscriptionsApiIntegration(unittest.TestCase):
     @patch("Monei.api.subscriptions_api.SubscriptionsApi.activate")
     def test_activate_subscription(self, mock_activate):
         """Test activating a subscription."""
-        # Setup mock response
-        mock_subscription = MagicMock()
-        mock_subscription.id = self.subscription_id
-        mock_subscription.amount = 1000
-        mock_subscription.currency = "EUR"
-        mock_subscription.interval = SubscriptionInterval("month")
-        mock_subscription.status = SubscriptionStatus("ACTIVE")
-        mock_activate.return_value = mock_subscription
+        # Setup mock response - activate should return a Payment object, not Subscription
+        mock_payment = MagicMock()
+        mock_payment.id = "pay_123456789"
+        mock_payment.amount = 1000
+        mock_payment.currency = "EUR"
+        mock_payment.account_id = "acc_123456789"
+        mock_payment.livemode = False
+        mock_payment.status = PaymentStatus("SUCCEEDED")
+        mock_activate.return_value = mock_payment
 
         # Create activate request
         activate_request = {
@@ -221,12 +224,13 @@ class TestSubscriptionsApiIntegration(unittest.TestCase):
             self.subscription_id, activate_request
         )
 
-        # Verify the result
-        self.assertEqual(result.id, self.subscription_id)
+        # Verify the result - should be a Payment object
+        self.assertEqual(result.id, "pay_123456789")
         self.assertEqual(result.amount, 1000)
         self.assertEqual(result.currency, "EUR")
-        self.assertEqual(result.interval, SubscriptionInterval("month"))
-        self.assertEqual(result.status, SubscriptionStatus("ACTIVE"))
+        self.assertEqual(result.account_id, "acc_123456789")
+        self.assertEqual(result.livemode, False)
+        self.assertEqual(result.status, PaymentStatus("SUCCEEDED"))
 
         # Verify the mock was called with the correct arguments
         mock_activate.assert_called_once()

@@ -377,6 +377,8 @@ class TestPaymentsApiIntegration(unittest.TestCase):
             id="pay_123456789",
             amount=1000,
             currency="EUR",
+            account_id="acc_123456789",
+            livemode=False,
             status=PaymentStatus("SUCCEEDED"),
         )
 
@@ -388,6 +390,8 @@ class TestPaymentsApiIntegration(unittest.TestCase):
         self.assertEqual(payment.id, "pay_123456789")
         self.assertEqual(payment.amount, 1000)
         self.assertEqual(payment.currency, "EUR")
+        self.assertEqual(payment.account_id, "acc_123456789")
+        self.assertEqual(payment.livemode, False)
         self.assertEqual(payment.status, PaymentStatus("SUCCEEDED"))
         self.assertEqual(payment.order_id, "order_123")
         self.assertEqual(payment.description, "Test payment")
@@ -399,6 +403,8 @@ class TestPaymentsApiIntegration(unittest.TestCase):
         self.assertEqual(payment_dict.get("id"), "pay_123456789")
         self.assertEqual(payment_dict.get("amount"), 1000)
         self.assertEqual(payment_dict.get("currency"), "EUR")
+        self.assertEqual(payment_dict.get("account_id"), "acc_123456789")
+        self.assertEqual(payment_dict.get("livemode"), False)
         self.assertEqual(payment_dict.get("status"), "SUCCEEDED")
         self.assertEqual(payment_dict.get("order_id"), "order_123")
         self.assertEqual(payment_dict.get("description"), "Test payment")

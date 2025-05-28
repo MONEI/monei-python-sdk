@@ -65,7 +65,6 @@ Monei/model/payment_payment_method_bizum.py
 Monei/model/payment_payment_method_bizum_input.py
 Monei/model/payment_payment_method_card.py
 Monei/model/payment_payment_method_card_input.py
-Monei/model/payment_payment_method_cofidis.py
 Monei/model/payment_payment_method_input.py
 Monei/model/payment_payment_method_klarna.py
 Monei/model/payment_payment_method_mbway.py

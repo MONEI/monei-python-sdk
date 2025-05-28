@@ -1,5 +1,4 @@
 import unittest
-from datetime import datetime
 
 from Monei.model.payment import Payment
 from Monei.model.payment_status import PaymentStatus
@@ -24,6 +23,8 @@ class TestModelSerializationEnhancement(unittest.TestCase):
             id="pay_123456789",
             amount=1000,
             currency="EUR",
+            account_id="acc_123456789",
+            livemode=False,
             status=PaymentStatus("SUCCEEDED"),
             description="Test payment",
         )
@@ -53,6 +54,8 @@ class TestModelSerializationEnhancement(unittest.TestCase):
         self.assertEqual(serialized["id"], "pay_123456789")
         self.assertEqual(serialized["amount"], 1000)
         self.assertEqual(serialized["currency"], "EUR")
+        self.assertEqual(serialized["account_id"], "acc_123456789")
+        self.assertEqual(serialized["livemode"], False)
         self.assertEqual(serialized["status"], "SUCCEEDED")
 
         # Verify nested objects
@@ -98,20 +101,26 @@ class TestModelSerializationEnhancement(unittest.TestCase):
         # Create a subscription with active status
         sub_active = Subscription(
             id="sub_123",
-            status=SubscriptionStatus("ACTIVE"),
             amount=1000,
-            currency="EUR",
+            account_id="acc_123456789",
+            livemode=False,
+            status=SubscriptionStatus("ACTIVE"),
             interval=SubscriptionInterval("month"),
+            interval_count=1,
+            currency="EUR",
             description="Active subscription",
         )
 
         # Create a subscription with paused status
         sub_paused = Subscription(
             id="sub_456",
-            status=SubscriptionStatus("PAUSED"),
             amount=2000,
-            currency="USD",
+            account_id="acc_987654321",
+            livemode=True,
+            status=SubscriptionStatus("PAUSED"),
             interval=SubscriptionInterval("year"),
+            interval_count=1,
+            currency="USD",
             description="Paused subscription",
         )
 
@@ -122,8 +131,12 @@ class TestModelSerializationEnhancement(unittest.TestCase):
         # Test serialized data
         self.assertEqual(serialized_active["status"], "ACTIVE")
         self.assertEqual(serialized_active["interval"], "month")
+        self.assertEqual(serialized_active["account_id"], "acc_123456789")
+        self.assertEqual(serialized_active["livemode"], False)
         self.assertEqual(serialized_paused["status"], "PAUSED")
         self.assertEqual(serialized_paused["interval"], "year")
+        self.assertEqual(serialized_paused["account_id"], "acc_987654321")
+        self.assertEqual(serialized_paused["livemode"], True)
 
     def test_model_inheritance(self):
         """Test model inheritance and polymorphism."""

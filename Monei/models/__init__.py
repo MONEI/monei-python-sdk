@@ -86,7 +86,6 @@ from Monei.model.payment_payment_method_bizum_input import (
 )
 from Monei.model.payment_payment_method_card import PaymentPaymentMethodCard
 from Monei.model.payment_payment_method_card_input import PaymentPaymentMethodCardInput
-from Monei.model.payment_payment_method_cofidis import PaymentPaymentMethodCofidis
 from Monei.model.payment_payment_method_input import PaymentPaymentMethodInput
 from Monei.model.payment_payment_method_klarna import PaymentPaymentMethodKlarna
 from Monei.model.payment_payment_method_mbway import PaymentPaymentMethodMbway

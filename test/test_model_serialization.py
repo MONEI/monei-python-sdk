@@ -28,6 +28,8 @@ class TestModelSerialization(unittest.TestCase):
             "id": "pay_123456789",
             "amount": 1000,
             "currency": "EUR",
+            "accountId": "acc_123456789",
+            "livemode": False,
             "description": "Test payment",
             "status": {
                 "value": "SUCCEEDED"
@@ -87,6 +89,8 @@ class TestModelSerialization(unittest.TestCase):
         self.assertEqual(payment.id, "pay_123456789")
         self.assertEqual(payment.amount, 1000)
         self.assertEqual(payment.currency, "EUR")
+        self.assertEqual(payment.account_id, "acc_123456789")
+        self.assertEqual(payment.livemode, False)
         self.assertEqual(payment.description, "Test payment")
         self.assertEqual(payment.status.value, "SUCCEEDED")
         self.assertEqual(payment.order_id, "order_123")
@@ -121,6 +125,8 @@ class TestModelSerialization(unittest.TestCase):
             id="pay_987654321",
             amount=2000,
             currency="USD",
+            account_id="acc_987654321",
+            livemode=True,
             description="Test serialization",
             status=PaymentStatus("PENDING"),
             order_id="order_456",
@@ -150,6 +156,8 @@ class TestModelSerialization(unittest.TestCase):
         self.assertEqual(serialized["id"], "pay_987654321")
         self.assertEqual(serialized["amount"], 2000)
         self.assertEqual(serialized["currency"], "USD")
+        self.assertEqual(serialized["account_id"], "acc_987654321")
+        self.assertEqual(serialized["livemode"], True)
         self.assertEqual(serialized["description"], "Test serialization")
         self.assertEqual(serialized["status"], "PENDING")
         self.assertEqual(serialized["order_id"], "order_456")
