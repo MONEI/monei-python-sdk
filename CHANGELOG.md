@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>2.3.5 (2025-08-26)</small>
+
+* chore: update SDK to OpenAPI specification version 1.7.2 ([d5a2a22](https://github.com/MONEI/monei-python-sdk/commit/d5a2a22))
+
 ## <small>2.3.4 (2025-05-29)</small>
 
 * chore: update SDK to OpenAPI specification version 1.7.0 ([f8a3180](https://github.com/MONEI/monei-python-sdk/commit/f8a3180))
