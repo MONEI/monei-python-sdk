@@ -1,5 +1,10 @@
 # Changelog
 
+## <small>2.3.7 (2025-09-15)</small>
+
+* chore: format user agent string for improved readability ([3ca548b](https://github.com/MONEI/monei-python-sdk/commit/3ca548b))
+* chore: update package manager to yarn@4.9.4 and enhance user agent format to include Python version ([da1ddea](https://github.com/MONEI/monei-python-sdk/commit/da1ddea))
+
 ## <small>2.3.6 (2025-08-27)</small>
 
 * chore: update SDK to OpenAPI specification version 1.7.3 ([9ae0a7e](https://github.com/MONEI/monei-python-sdk/commit/9ae0a7e))
