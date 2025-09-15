@@ -1,6 +1,7 @@
 import json
 import hmac
 import hashlib
+import sys
 
 # Import specific modules instead of importing from Monei
 import Monei
@@ -16,7 +17,7 @@ from Monei.api_client import ApiClient
 from Monei.exceptions import ApiException
 
 
-DEFAULT_USER_AGENT = f"MONEI/Python/{Monei.__version__}"
+DEFAULT_USER_AGENT = f"MONEI/Python/{Monei.__version__} (Python v{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro})"
 
 
 class MoneiClient(object):

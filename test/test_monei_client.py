@@ -267,6 +267,23 @@ class TestMoneiClient(unittest.TestCase):
         # Check that the user agent is set in the API client
         self.assertEqual(client._api_client.user_agent, DEFAULT_USER_AGENT)
 
+    def test_default_user_agent_format_includes_python_version(self):
+        """Test that DEFAULT_USER_AGENT includes Python version in the correct format."""
+        import sys
+        import Monei
+
+        # Check that the user agent follows the expected format: MONEI/Python/2.0.2 (Python v3.12.9)
+        expected_format = f"MONEI/Python/{Monei.__version__} (Python v{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro})"
+        self.assertEqual(DEFAULT_USER_AGENT, expected_format)
+
+        # Verify the format components
+        self.assertTrue(DEFAULT_USER_AGENT.startswith("MONEI/Python/"))
+        self.assertIn(
+            f"(Python v{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro})",
+            DEFAULT_USER_AGENT,
+        )
+        self.assertIn(Monei.__version__, DEFAULT_USER_AGENT)
+
 
 if __name__ == "__main__":
     unittest.main()
