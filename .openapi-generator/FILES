@@ -110,4 +110,3 @@ Monei/model_utils.py
 Monei/models/__init__.py
 Monei/rest.py
 test/__init__.py
-test/test_subscription_payment_methods.py

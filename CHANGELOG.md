@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>2.3.8 (2025-11-11)</small>
+
+* chore: update subscription API to include allowed payment methods in requests and responses ([e401c30](https://github.com/MONEI/monei-python-sdk/commit/e401c30))
+
 ## <small>2.3.7 (2025-09-15)</small>
 
 * chore: format user agent string for improved readability ([3ca548b](https://github.com/MONEI/monei-python-sdk/commit/3ca548b))
