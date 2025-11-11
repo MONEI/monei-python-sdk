@@ -33,12 +33,14 @@ def lazy_import():
     from Monei.model.payment_customer import PaymentCustomer
     from Monei.model.payment_shipping_details import PaymentShippingDetails
     from Monei.model.subscription_interval import SubscriptionInterval
+    from Monei.model.subscription_payment_methods import SubscriptionPaymentMethods
     from Monei.model.subscription_retry_schedule import SubscriptionRetrySchedule
 
     globals()["PaymentBillingDetails"] = PaymentBillingDetails
     globals()["PaymentCustomer"] = PaymentCustomer
     globals()["PaymentShippingDetails"] = PaymentShippingDetails
     globals()["SubscriptionInterval"] = SubscriptionInterval
+    globals()["SubscriptionPaymentMethods"] = SubscriptionPaymentMethods
     globals()["SubscriptionRetrySchedule"] = SubscriptionRetrySchedule
 
 
@@ -107,6 +109,7 @@ class CreateSubscriptionRequest(ModelNormal):
             "currency": (str,),  # noqa: E501
             "interval": (SubscriptionInterval,),  # noqa: E501
             "interval_count": (int,),  # noqa: E501
+            "allowed_payment_methods": (SubscriptionPaymentMethods,),  # noqa: E501
             "description": (str,),  # noqa: E501
             "customer": (PaymentCustomer,),  # noqa: E501
             "billing_details": (PaymentBillingDetails,),  # noqa: E501
@@ -130,6 +133,7 @@ class CreateSubscriptionRequest(ModelNormal):
         "currency": "currency",  # noqa: E501
         "interval": "interval",  # noqa: E501
         "interval_count": "intervalCount",  # noqa: E501
+        "allowed_payment_methods": "allowedPaymentMethods",  # noqa: E501
         "description": "description",  # noqa: E501
         "customer": "customer",  # noqa: E501
         "billing_details": "billingDetails",  # noqa: E501
@@ -190,6 +194,7 @@ class CreateSubscriptionRequest(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             interval_count (int): Number of intervals between subscription payments.. [optional]  # noqa: E501
+            allowed_payment_methods (SubscriptionPaymentMethods): [optional]  # noqa: E501
             description (str): An arbitrary string attached to the subscription. Often useful for displaying to users. . [optional]  # noqa: E501
             customer (PaymentCustomer): [optional]  # noqa: E501
             billing_details (PaymentBillingDetails): [optional]  # noqa: E501
@@ -299,6 +304,7 @@ class CreateSubscriptionRequest(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             interval_count (int): Number of intervals between subscription payments.. [optional]  # noqa: E501
+            allowed_payment_methods (SubscriptionPaymentMethods): [optional]  # noqa: E501
             description (str): An arbitrary string attached to the subscription. Often useful for displaying to users. . [optional]  # noqa: E501
             customer (PaymentCustomer): [optional]  # noqa: E501
             billing_details (PaymentBillingDetails): [optional]  # noqa: E501

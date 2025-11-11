@@ -117,6 +117,7 @@ from Monei.model.subscription_interval import SubscriptionInterval
 from Monei.model.subscription_last_payment import SubscriptionLastPayment
 from Monei.model.subscription_payment_method import SubscriptionPaymentMethod
 from Monei.model.subscription_payment_method_card import SubscriptionPaymentMethodCard
+from Monei.model.subscription_payment_methods import SubscriptionPaymentMethods
 from Monei.model.subscription_retry_schedule import SubscriptionRetrySchedule
 from Monei.model.subscription_retry_schedule_inner import SubscriptionRetryScheduleInner
 from Monei.model.subscription_status import SubscriptionStatus

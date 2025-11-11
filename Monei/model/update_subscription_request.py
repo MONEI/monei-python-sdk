@@ -33,12 +33,14 @@ def lazy_import():
     from Monei.model.payment_customer import PaymentCustomer
     from Monei.model.payment_shipping_details import PaymentShippingDetails
     from Monei.model.subscription_interval import SubscriptionInterval
+    from Monei.model.subscription_payment_methods import SubscriptionPaymentMethods
     from Monei.model.subscription_retry_schedule import SubscriptionRetrySchedule
 
     globals()["PaymentBillingDetails"] = PaymentBillingDetails
     globals()["PaymentCustomer"] = PaymentCustomer
     globals()["PaymentShippingDetails"] = PaymentShippingDetails
     globals()["SubscriptionInterval"] = SubscriptionInterval
+    globals()["SubscriptionPaymentMethods"] = SubscriptionPaymentMethods
     globals()["SubscriptionRetrySchedule"] = SubscriptionRetrySchedule
 
 
@@ -106,6 +108,7 @@ class UpdateSubscriptionRequest(ModelNormal):
             "amount": (int,),  # noqa: E501
             "interval": (SubscriptionInterval,),  # noqa: E501
             "interval_count": (int,),  # noqa: E501
+            "allowed_payment_methods": (SubscriptionPaymentMethods,),  # noqa: E501
             "description": (str,),  # noqa: E501
             "customer": (PaymentCustomer,),  # noqa: E501
             "billing_details": (PaymentBillingDetails,),  # noqa: E501
@@ -131,6 +134,7 @@ class UpdateSubscriptionRequest(ModelNormal):
         "amount": "amount",  # noqa: E501
         "interval": "interval",  # noqa: E501
         "interval_count": "intervalCount",  # noqa: E501
+        "allowed_payment_methods": "allowedPaymentMethods",  # noqa: E501
         "description": "description",  # noqa: E501
         "customer": "customer",  # noqa: E501
         "billing_details": "billingDetails",  # noqa: E501
@@ -189,6 +193,7 @@ class UpdateSubscriptionRequest(ModelNormal):
             amount (int): Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD). . [optional]  # noqa: E501
             interval (SubscriptionInterval): [optional]  # noqa: E501
             interval_count (int): Number of intervals between subscription payments.. [optional]  # noqa: E501
+            allowed_payment_methods (SubscriptionPaymentMethods): [optional]  # noqa: E501
             description (str): An arbitrary string attached to the subscription. Often useful for displaying to users. . [optional]  # noqa: E501
             customer (PaymentCustomer): [optional]  # noqa: E501
             billing_details (PaymentBillingDetails): [optional]  # noqa: E501
@@ -295,6 +300,7 @@ class UpdateSubscriptionRequest(ModelNormal):
             amount (int): Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD). . [optional]  # noqa: E501
             interval (SubscriptionInterval): [optional]  # noqa: E501
             interval_count (int): Number of intervals between subscription payments.. [optional]  # noqa: E501
+            allowed_payment_methods (SubscriptionPaymentMethods): [optional]  # noqa: E501
             description (str): An arbitrary string attached to the subscription. Often useful for displaying to users. . [optional]  # noqa: E501
             customer (PaymentCustomer): [optional]  # noqa: E501
             billing_details (PaymentBillingDetails): [optional]  # noqa: E501
