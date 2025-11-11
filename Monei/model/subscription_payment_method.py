@@ -29,8 +29,10 @@ from Monei.exceptions import ApiAttributeError
 
 
 def lazy_import():
+    from Monei.model.payment_payment_method_bizum import PaymentPaymentMethodBizum
     from Monei.model.payment_payment_method_card import PaymentPaymentMethodCard
 
+    globals()["PaymentPaymentMethodBizum"] = PaymentPaymentMethodBizum
     globals()["PaymentPaymentMethodCard"] = PaymentPaymentMethodCard
 
 
@@ -61,6 +63,7 @@ class SubscriptionPaymentMethod(ModelNormal):
     allowed_values = {
         ("method",): {
             "CARD": "card",
+            "BIZUM": "bizum",
         },
     }
 
@@ -101,6 +104,7 @@ class SubscriptionPaymentMethod(ModelNormal):
         return {
             "method": (str,),  # noqa: E501
             "card": (PaymentPaymentMethodCard,),  # noqa: E501
+            "bizum": (PaymentPaymentMethodBizum,),  # noqa: E501
         }
 
     @cached_property
@@ -110,6 +114,7 @@ class SubscriptionPaymentMethod(ModelNormal):
     attribute_map = {
         "method": "method",  # noqa: E501
         "card": "card",  # noqa: E501
+        "bizum": "bizum",  # noqa: E501
     }
 
     read_only_vars = {}
@@ -152,8 +157,9 @@ class SubscriptionPaymentMethod(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            method (str): Subscription method type.. [optional] if omitted the server will use the default value of "card"  # noqa: E501
+            method (str): Subscription method type.. [optional]  # noqa: E501
             card (PaymentPaymentMethodCard): [optional]  # noqa: E501
+            bizum (PaymentPaymentMethodBizum): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop("_check_type", True)
@@ -244,8 +250,9 @@ class SubscriptionPaymentMethod(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            method (str): Subscription method type.. [optional] if omitted the server will use the default value of "card"  # noqa: E501
+            method (str): Subscription method type.. [optional]  # noqa: E501
             card (PaymentPaymentMethodCard): [optional]  # noqa: E501
+            bizum (PaymentPaymentMethodBizum): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop("_check_type", True)
