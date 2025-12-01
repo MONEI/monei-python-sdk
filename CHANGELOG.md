@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.5.0 (2025-12-01)
+
+* chore: downgrade @release-it/conventional-changelog and update dependencies ([ddef383](https://github.com/MONEI/monei-python-sdk/commit/ddef383))
+* chore: update dependencies and package manager ([e9608e4](https://github.com/MONEI/monei-python-sdk/commit/e9608e4))
+* feat: add Apple Pay Certificate API and tests ([2d4b715](https://github.com/MONEI/monei-python-sdk/commit/2d4b715))
+
 ## 2.4.0 (2025-11-11)
 
 * feat: add Bizum as a payment method to SubscriptionPaymentMethod interface ([767ee36](https://github.com/MONEI/monei-python-sdk/commit/767ee36))
