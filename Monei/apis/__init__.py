@@ -5,7 +5,7 @@
 # raise a `RecursionError`.
 # In order to avoid this, import only the API that you directly need like:
 #
-#   from Monei.api.apple_pay_domain_api import ApplePayDomainApi
+#   from Monei.api.apple_pay_certificate_api import ApplePayCertificateApi
 #
 # or import this package, but before doing it, use:
 #
@@ -13,6 +13,7 @@
 #   sys.setrecursionlimit(n)
 
 # Import APIs into API package:
+from Monei.api.apple_pay_certificate_api import ApplePayCertificateApi
 from Monei.api.apple_pay_domain_api import ApplePayDomainApi
 from Monei.api.bizum_api import BizumApi
 from Monei.api.payment_methods_api import PaymentMethodsApi

@@ -1,5 +1,6 @@
 Monei/__init__.py
 Monei/api/__init__.py
+Monei/api/apple_pay_certificate_api.py
 Monei/api/apple_pay_domain_api.py
 Monei/api/bizum_api.py
 Monei/api/payment_methods_api.py
@@ -10,10 +11,12 @@ Monei/apis/__init__.py
 Monei/configuration.py
 Monei/exceptions.py
 Monei/model/__init__.py
+Monei/model/activate_apple_pay_certificate_request.py
 Monei/model/activate_subscription_request.py
 Monei/model/address.py
 Monei/model/api_exception.py
-Monei/model/apple_pay_domain_register200_response.py
+Monei/model/apple_pay_certificate.py
+Monei/model/apple_pay_certificate_delete200_response.py
 Monei/model/bad_request_error.py
 Monei/model/bad_request_error_all_of.py
 Monei/model/bizum_validate_phone200_response.py
@@ -104,6 +107,7 @@ Monei/model/unauthorized_error.py
 Monei/model/unauthorized_error_all_of.py
 Monei/model/unprocessable_entity_error.py
 Monei/model/unprocessable_entity_error_all_of.py
+Monei/model/update_apple_pay_certificate_request.py
 Monei/model/update_subscription_request.py
 Monei/model/validate_bizum_phone_request.py
 Monei/model_utils.py

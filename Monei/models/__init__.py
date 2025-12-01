@@ -9,11 +9,15 @@
 # import sys
 # sys.setrecursionlimit(n)
 
+from Monei.model.activate_apple_pay_certificate_request import (
+    ActivateApplePayCertificateRequest,
+)
 from Monei.model.activate_subscription_request import ActivateSubscriptionRequest
 from Monei.model.address import Address
 from Monei.model.api_exception import ApiException
-from Monei.model.apple_pay_domain_register200_response import (
-    ApplePayDomainRegister200Response,
+from Monei.model.apple_pay_certificate import ApplePayCertificate
+from Monei.model.apple_pay_certificate_delete200_response import (
+    ApplePayCertificateDelete200Response,
 )
 from Monei.model.bad_request_error import BadRequestError
 from Monei.model.bad_request_error_all_of import BadRequestErrorAllOf
@@ -125,5 +129,8 @@ from Monei.model.unauthorized_error import UnauthorizedError
 from Monei.model.unauthorized_error_all_of import UnauthorizedErrorAllOf
 from Monei.model.unprocessable_entity_error import UnprocessableEntityError
 from Monei.model.unprocessable_entity_error_all_of import UnprocessableEntityErrorAllOf
+from Monei.model.update_apple_pay_certificate_request import (
+    UpdateApplePayCertificateRequest,
+)
 from Monei.model.update_subscription_request import UpdateSubscriptionRequest
 from Monei.model.validate_bizum_phone_request import ValidateBizumPhoneRequest
