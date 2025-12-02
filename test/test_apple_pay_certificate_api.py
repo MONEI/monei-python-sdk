@@ -45,12 +45,12 @@ class TestApplePayCertificateApi(unittest.TestCase):
         endpoint = self.api.create_endpoint
         self.assertIsNotNone(endpoint)
 
-    def test_delete(self):
-        """Test case for delete
+    def test_remove(self):
+        """Test case for remove
 
         Delete Certificate  # noqa: E501
         """
-        endpoint = self.api.delete_endpoint
+        endpoint = self.api.remove_endpoint
         self.assertIsNotNone(endpoint)
 
     def test_get(self):
@@ -61,12 +61,12 @@ class TestApplePayCertificateApi(unittest.TestCase):
         endpoint = self.api.get_endpoint
         self.assertIsNotNone(endpoint)
 
-    def test_list(self):
-        """Test case for list
+    def test_get_all(self):
+        """Test case for get_all
 
         List Certificates  # noqa: E501
         """
-        endpoint = self.api.list_endpoint
+        endpoint = self.api.get_all_endpoint
         self.assertIsNotNone(endpoint)
 
     def test_update(self):

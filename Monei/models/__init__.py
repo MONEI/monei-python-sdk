@@ -16,8 +16,8 @@ from Monei.model.activate_subscription_request import ActivateSubscriptionReques
 from Monei.model.address import Address
 from Monei.model.api_exception import ApiException
 from Monei.model.apple_pay_certificate import ApplePayCertificate
-from Monei.model.apple_pay_certificate_delete200_response import (
-    ApplePayCertificateDelete200Response,
+from Monei.model.apple_pay_certificates_remove200_response import (
+    ApplePayCertificatesRemove200Response,
 )
 from Monei.model.bad_request_error import BadRequestError
 from Monei.model.bad_request_error_all_of import BadRequestErrorAllOf

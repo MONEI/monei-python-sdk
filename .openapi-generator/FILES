@@ -16,7 +16,7 @@ Monei/model/activate_subscription_request.py
 Monei/model/address.py
 Monei/model/api_exception.py
 Monei/model/apple_pay_certificate.py
-Monei/model/apple_pay_certificate_delete200_response.py
+Monei/model/apple_pay_certificates_remove200_response.py
 Monei/model/bad_request_error.py
 Monei/model/bad_request_error_all_of.py
 Monei/model/bizum_validate_phone200_response.py
@@ -114,3 +114,4 @@ Monei/model_utils.py
 Monei/models/__init__.py
 Monei/rest.py
 test/__init__.py
+test/test_apple_pay_certificates_remove200_response.py
