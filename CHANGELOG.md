@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>2.5.2 (2026-01-21)</small>
+
+* chore: update OpenAPI document version to 1.8.3 ([dfc2c93](https://github.com/MONEI/monei-python-sdk/commit/dfc2c93))
+
 ## <small>2.5.1 (2025-12-02)</small>
 
 * chore: update OpenAPI document version to 1.8.1 and add new test for Apple Pay certificates response ([1cf7ee3](https://github.com/MONEI/monei-python-sdk/commit/1cf7ee3))
