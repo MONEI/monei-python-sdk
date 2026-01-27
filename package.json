@@ -25,7 +25,7 @@
     "@commitlint/config-conventional": "^20.0.0",
     "@openapitools/openapi-generator-cli": "2.25.2",
     "@release-it/bumper": "^7.0.5",
-    "@release-it/conventional-changelog": "10.0.1",
+    "@release-it/conventional-changelog": "10.0.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "release-it": "^19.0.6"
