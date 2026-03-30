@@ -12,6 +12,7 @@ from Monei.apis import (
     ApplePayDomainApi,
     ApplePayCertificateApi,
     BizumApi,
+    POSAuthTokenApi,
 )
 from Monei.configuration import Configuration
 from Monei.api_client import ApiClient
@@ -88,6 +89,7 @@ class MoneiClient(object):
             self.ApplePayDomain = ApplePayDomainApi(api_client)
             self.Bizum = BizumApi(api_client)
             self.ApplePayCertificate = ApplePayCertificateApi(api_client)
+            self.POSAuthToken = POSAuthTokenApi(api_client)
             # Store the api_client for later use
             self._api_client = api_client
 
@@ -98,6 +100,7 @@ class MoneiClient(object):
             self.apple_pay_domain = self.ApplePayDomain
             self.apple_pay_certificate = self.ApplePayCertificate
             self.bizum = self.Bizum
+            self.pos_auth_token = self.POSAuthToken
 
     def set_account_id(self, account_id):
         """Set the account ID to act on behalf of a merchant
