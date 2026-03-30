@@ -10,7 +10,7 @@
     "publish": false
   },
   "hooks": {
-    "after:bump": "yarn build && yarn test && git add -A"
+    "after:bump": "pnpm build && pnpm test && git add -A"
   },
   "plugins": {
     "@release-it/bumper": {
