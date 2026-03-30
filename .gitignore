@@ -76,13 +76,13 @@ test.py
 
 .idea
 
-# Yarn
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+# Yarn (legacy)
+yarn.lock
+.yarn/
+.pnp.*
+
+# pnpm
+.pnpm-store/
 
 ##### UV specific
 .uv/.cache/
