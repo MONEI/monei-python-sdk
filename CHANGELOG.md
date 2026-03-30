@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.4](https://github.com/MONEI/monei-python-sdk/compare/v2.5.3...v2.5.4) (2026-03-30)
+
+
+### Features
+
+* expose POSAuthTokenApi on MoneiClient ([d822593](https://github.com/MONEI/monei-python-sdk/commit/d822593d310aec337a929a68f93d93297b60c058))
+
 ## [2.5.3](https://github.com/MONEI/monei-python-sdk/compare/v2.5.2...v2.5.3) (2026-03-30)
 
 ## <small>2.5.2 (2026-01-21)</small>
