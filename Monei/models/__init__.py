@@ -33,6 +33,7 @@ from Monei.model.confirm_payment_request_payment_method_card import (
     ConfirmPaymentRequestPaymentMethodCard,
 )
 from Monei.model.create_payment_request import CreatePaymentRequest
+from Monei.model.create_pos_auth_token_request import CreatePosAuthTokenRequest
 from Monei.model.create_subscription_request import CreateSubscriptionRequest
 from Monei.model.internal_server_error import InternalServerError
 from Monei.model.internal_server_error_all_of import InternalServerErrorAllOf
@@ -106,6 +107,7 @@ from Monei.model.payment_shop import PaymentShop
 from Monei.model.payment_status import PaymentStatus
 from Monei.model.payment_trace_details import PaymentTraceDetails
 from Monei.model.payment_transaction_type import PaymentTransactionType
+from Monei.model.pos_auth_token_create200_response import PosAuthTokenCreate200Response
 from Monei.model.recurring_payment_request import RecurringPaymentRequest
 from Monei.model.refund_payment_request import RefundPaymentRequest
 from Monei.model.register_apple_pay_domain_request import RegisterApplePayDomainRequest

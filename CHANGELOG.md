@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.5.3](https://github.com/MONEI/monei-python-sdk/compare/v2.5.2...v2.5.3) (2026-03-30)
+
 ## <small>2.5.2 (2026-01-21)</small>
 
 * chore: update OpenAPI document version to 1.8.3 ([dfc2c93](https://github.com/MONEI/monei-python-sdk/commit/dfc2c93))

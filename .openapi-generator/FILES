@@ -5,6 +5,7 @@ Monei/api/apple_pay_domain_api.py
 Monei/api/bizum_api.py
 Monei/api/payment_methods_api.py
 Monei/api/payments_api.py
+Monei/api/pos_auth_token_api.py
 Monei/api/subscriptions_api.py
 Monei/api_client.py
 Monei/apis/__init__.py
@@ -27,6 +28,7 @@ Monei/model/confirm_payment_request.py
 Monei/model/confirm_payment_request_payment_method.py
 Monei/model/confirm_payment_request_payment_method_card.py
 Monei/model/create_payment_request.py
+Monei/model/create_pos_auth_token_request.py
 Monei/model/create_subscription_request.py
 Monei/model/internal_server_error.py
 Monei/model/internal_server_error_all_of.py
@@ -84,6 +86,7 @@ Monei/model/payment_shop.py
 Monei/model/payment_status.py
 Monei/model/payment_trace_details.py
 Monei/model/payment_transaction_type.py
+Monei/model/pos_auth_token_create200_response.py
 Monei/model/recurring_payment_request.py
 Monei/model/refund_payment_request.py
 Monei/model/register_apple_pay_domain_request.py
