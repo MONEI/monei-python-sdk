@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.5](https://github.com/MONEI/monei-python-sdk/compare/v2.5.4...v2.5.5) (2026-05-26)
+
+
+### Bug Fixes
+
+* regenerate from openapi v1.9.0 ([3a7eea1](https://github.com/MONEI/monei-python-sdk/commit/3a7eea125633cdc29503079b35745e527a456ff6))
+
 ## [2.5.4](https://github.com/MONEI/monei-python-sdk/compare/v2.5.3...v2.5.4) (2026-03-30)
 
 
