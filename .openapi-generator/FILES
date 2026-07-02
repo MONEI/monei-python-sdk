@@ -119,5 +119,3 @@ Monei/model_utils.py
 Monei/models/__init__.py
 Monei/rest.py
 test/__init__.py
-test/test_subscription_trial_amount.py
-test/test_subscription_trial_interval_count.py

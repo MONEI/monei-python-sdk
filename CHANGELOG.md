@@ -1,5 +1,12 @@
 # Changelog
 
+# [2.6.0](https://github.com/MONEI/monei-python-sdk/compare/v2.5.5...v2.6.0) (2026-07-02)
+
+
+### Features
+
+* add trialAmount and trialIntervalCount to subscriptions ([9a4165b](https://github.com/MONEI/monei-python-sdk/commit/9a4165be6c3faf4c588026e71fee0adaf8db2869))
+
 ## [2.5.5](https://github.com/MONEI/monei-python-sdk/compare/v2.5.4...v2.5.5) (2026-05-26)
 
 
