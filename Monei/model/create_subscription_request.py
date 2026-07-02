@@ -35,6 +35,10 @@ def lazy_import():
     from Monei.model.subscription_interval import SubscriptionInterval
     from Monei.model.subscription_payment_methods import SubscriptionPaymentMethods
     from Monei.model.subscription_retry_schedule import SubscriptionRetrySchedule
+    from Monei.model.subscription_trial_amount import SubscriptionTrialAmount
+    from Monei.model.subscription_trial_interval_count import (
+        SubscriptionTrialIntervalCount,
+    )
 
     globals()["PaymentBillingDetails"] = PaymentBillingDetails
     globals()["PaymentCustomer"] = PaymentCustomer
@@ -42,6 +46,8 @@ def lazy_import():
     globals()["SubscriptionInterval"] = SubscriptionInterval
     globals()["SubscriptionPaymentMethods"] = SubscriptionPaymentMethods
     globals()["SubscriptionRetrySchedule"] = SubscriptionRetrySchedule
+    globals()["SubscriptionTrialAmount"] = SubscriptionTrialAmount
+    globals()["SubscriptionTrialIntervalCount"] = SubscriptionTrialIntervalCount
 
 
 class CreateSubscriptionRequest(ModelNormal):
@@ -116,6 +122,8 @@ class CreateSubscriptionRequest(ModelNormal):
             "shipping_details": (PaymentShippingDetails,),  # noqa: E501
             "trial_period_end": (float,),  # noqa: E501
             "trial_period_days": (int,),  # noqa: E501
+            "trial_amount": (SubscriptionTrialAmount,),  # noqa: E501
+            "trial_interval_count": (SubscriptionTrialIntervalCount,),  # noqa: E501
             "retry_schedule": (SubscriptionRetrySchedule,),  # noqa: E501
             "callback_url": (str,),  # noqa: E501
             "payment_callback_url": (str,),  # noqa: E501
@@ -140,6 +148,8 @@ class CreateSubscriptionRequest(ModelNormal):
         "shipping_details": "shippingDetails",  # noqa: E501
         "trial_period_end": "trialPeriodEnd",  # noqa: E501
         "trial_period_days": "trialPeriodDays",  # noqa: E501
+        "trial_amount": "trialAmount",  # noqa: E501
+        "trial_interval_count": "trialIntervalCount",  # noqa: E501
         "retry_schedule": "retrySchedule",  # noqa: E501
         "callback_url": "callbackUrl",  # noqa: E501
         "payment_callback_url": "paymentCallbackUrl",  # noqa: E501
@@ -201,6 +211,8 @@ class CreateSubscriptionRequest(ModelNormal):
             shipping_details (PaymentShippingDetails): [optional]  # noqa: E501
             trial_period_end (float): The end date of the trial period. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501
             trial_period_days (int): Number of days the trial period lasts.. [optional]  # noqa: E501
+            trial_amount (SubscriptionTrialAmount): [optional]  # noqa: E501
+            trial_interval_count (SubscriptionTrialIntervalCount): [optional]  # noqa: E501
             retry_schedule (SubscriptionRetrySchedule): [optional]  # noqa: E501
             callback_url (str): The URL will be called each time subscription status changes. You will receive a subscription object in the body of the request. . [optional]  # noqa: E501
             payment_callback_url (str): The URL will be called each time subscription creates a new payments. You will receive the payment object in the body of the request. . [optional]  # noqa: E501
@@ -311,6 +323,8 @@ class CreateSubscriptionRequest(ModelNormal):
             shipping_details (PaymentShippingDetails): [optional]  # noqa: E501
             trial_period_end (float): The end date of the trial period. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501
             trial_period_days (int): Number of days the trial period lasts.. [optional]  # noqa: E501
+            trial_amount (SubscriptionTrialAmount): [optional]  # noqa: E501
+            trial_interval_count (SubscriptionTrialIntervalCount): [optional]  # noqa: E501
             retry_schedule (SubscriptionRetrySchedule): [optional]  # noqa: E501
             callback_url (str): The URL will be called each time subscription status changes. You will receive a subscription object in the body of the request. . [optional]  # noqa: E501
             payment_callback_url (str): The URL will be called each time subscription creates a new payments. You will receive the payment object in the body of the request. . [optional]  # noqa: E501

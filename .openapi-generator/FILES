@@ -106,6 +106,8 @@ Monei/model/subscription_payment_methods.py
 Monei/model/subscription_retry_schedule.py
 Monei/model/subscription_retry_schedule_inner.py
 Monei/model/subscription_status.py
+Monei/model/subscription_trial_amount.py
+Monei/model/subscription_trial_interval_count.py
 Monei/model/unauthorized_error.py
 Monei/model/unauthorized_error_all_of.py
 Monei/model/unprocessable_entity_error.py
@@ -117,3 +119,5 @@ Monei/model_utils.py
 Monei/models/__init__.py
 Monei/rest.py
 test/__init__.py
+test/test_subscription_trial_amount.py
+test/test_subscription_trial_interval_count.py

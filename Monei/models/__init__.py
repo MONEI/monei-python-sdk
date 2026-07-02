@@ -127,6 +127,8 @@ from Monei.model.subscription_payment_methods import SubscriptionPaymentMethods
 from Monei.model.subscription_retry_schedule import SubscriptionRetrySchedule
 from Monei.model.subscription_retry_schedule_inner import SubscriptionRetryScheduleInner
 from Monei.model.subscription_status import SubscriptionStatus
+from Monei.model.subscription_trial_amount import SubscriptionTrialAmount
+from Monei.model.subscription_trial_interval_count import SubscriptionTrialIntervalCount
 from Monei.model.unauthorized_error import UnauthorizedError
 from Monei.model.unauthorized_error_all_of import UnauthorizedErrorAllOf
 from Monei.model.unprocessable_entity_error import UnprocessableEntityError

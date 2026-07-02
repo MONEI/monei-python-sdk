@@ -39,6 +39,10 @@ def lazy_import():
     from Monei.model.subscription_payment_methods import SubscriptionPaymentMethods
     from Monei.model.subscription_retry_schedule import SubscriptionRetrySchedule
     from Monei.model.subscription_status import SubscriptionStatus
+    from Monei.model.subscription_trial_amount import SubscriptionTrialAmount
+    from Monei.model.subscription_trial_interval_count import (
+        SubscriptionTrialIntervalCount,
+    )
 
     globals()["PaymentBillingDetails"] = PaymentBillingDetails
     globals()["PaymentCustomer"] = PaymentCustomer
@@ -50,6 +54,8 @@ def lazy_import():
     globals()["SubscriptionPaymentMethods"] = SubscriptionPaymentMethods
     globals()["SubscriptionRetrySchedule"] = SubscriptionRetrySchedule
     globals()["SubscriptionStatus"] = SubscriptionStatus
+    globals()["SubscriptionTrialAmount"] = SubscriptionTrialAmount
+    globals()["SubscriptionTrialIntervalCount"] = SubscriptionTrialIntervalCount
 
 
 class Subscription(ModelNormal):
@@ -134,6 +140,8 @@ class Subscription(ModelNormal):
             "current_period_start": (float,),  # noqa: E501
             "current_period_end": (float,),  # noqa: E501
             "trial_period_end": (float,),  # noqa: E501
+            "trial_amount": (SubscriptionTrialAmount,),  # noqa: E501
+            "trial_interval_count": (SubscriptionTrialIntervalCount,),  # noqa: E501
             "next_payment_at": (int,),  # noqa: E501
             "retry_count": (int,),  # noqa: E501
             "retry_schedule": (SubscriptionRetrySchedule,),  # noqa: E501
@@ -176,6 +184,8 @@ class Subscription(ModelNormal):
         "current_period_start": "currentPeriodStart",  # noqa: E501
         "current_period_end": "currentPeriodEnd",  # noqa: E501
         "trial_period_end": "trialPeriodEnd",  # noqa: E501
+        "trial_amount": "trialAmount",  # noqa: E501
+        "trial_interval_count": "trialIntervalCount",  # noqa: E501
         "next_payment_at": "nextPaymentAt",  # noqa: E501
         "retry_count": "retryCount",  # noqa: E501
         "retry_schedule": "retrySchedule",  # noqa: E501
@@ -264,6 +274,8 @@ class Subscription(ModelNormal):
             current_period_start (float): The start date of the current subscription period. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501
             current_period_end (float): The end date of the current subscription period. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501
             trial_period_end (float): The end date of the trial period. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501
+            trial_amount (SubscriptionTrialAmount): [optional]  # noqa: E501
+            trial_interval_count (SubscriptionTrialIntervalCount): [optional]  # noqa: E501
             next_payment_at (int): The date when the next payment will be made.. [optional]  # noqa: E501
             retry_count (int): Number of retries left for the subscription.. [optional]  # noqa: E501
             retry_schedule (SubscriptionRetrySchedule): [optional]  # noqa: E501
@@ -407,6 +419,8 @@ class Subscription(ModelNormal):
             current_period_start (float): The start date of the current subscription period. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501
             current_period_end (float): The end date of the current subscription period. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501
             trial_period_end (float): The end date of the trial period. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501
+            trial_amount (SubscriptionTrialAmount): [optional]  # noqa: E501
+            trial_interval_count (SubscriptionTrialIntervalCount): [optional]  # noqa: E501
             next_payment_at (int): The date when the next payment will be made.. [optional]  # noqa: E501
             retry_count (int): Number of retries left for the subscription.. [optional]  # noqa: E501
             retry_schedule (SubscriptionRetrySchedule): [optional]  # noqa: E501
