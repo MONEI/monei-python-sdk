@@ -108,6 +108,9 @@ from Monei.model.payment_status import PaymentStatus
 from Monei.model.payment_trace_details import PaymentTraceDetails
 from Monei.model.payment_transaction_type import PaymentTransactionType
 from Monei.model.pos_auth_token_create200_response import PosAuthTokenCreate200Response
+from Monei.model.preview_subscription_update_request import (
+    PreviewSubscriptionUpdateRequest,
+)
 from Monei.model.recurring_payment_request import RecurringPaymentRequest
 from Monei.model.refund_payment_request import RefundPaymentRequest
 from Monei.model.register_apple_pay_domain_request import RegisterApplePayDomainRequest
@@ -121,6 +124,7 @@ from Monei.model.service_unavailable_error_all_of import ServiceUnavailableError
 from Monei.model.subscription import Subscription
 from Monei.model.subscription_interval import SubscriptionInterval
 from Monei.model.subscription_last_payment import SubscriptionLastPayment
+from Monei.model.subscription_last_proration import SubscriptionLastProration
 from Monei.model.subscription_payment_method import SubscriptionPaymentMethod
 from Monei.model.subscription_payment_method_card import SubscriptionPaymentMethodCard
 from Monei.model.subscription_payment_methods import SubscriptionPaymentMethods
@@ -129,6 +133,7 @@ from Monei.model.subscription_retry_schedule_inner import SubscriptionRetrySched
 from Monei.model.subscription_status import SubscriptionStatus
 from Monei.model.subscription_trial_amount import SubscriptionTrialAmount
 from Monei.model.subscription_trial_interval_count import SubscriptionTrialIntervalCount
+from Monei.model.subscription_update_preview import SubscriptionUpdatePreview
 from Monei.model.unauthorized_error import UnauthorizedError
 from Monei.model.unauthorized_error_all_of import UnauthorizedErrorAllOf
 from Monei.model.unprocessable_entity_error import UnprocessableEntityError
