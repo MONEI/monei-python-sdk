@@ -1,5 +1,13 @@
 # Changelog
 
+# [2.7.0](https://github.com/MONEI/monei-python-sdk/compare/v2.6.0...v2.7.0) (2026-09-21)
+
+
+### Features
+
+* add subscription proration and the preview endpoint ([02bd9ee](https://github.com/MONEI/monei-python-sdk/commit/02bd9ee99d4a911e3811f4e9ae62c9b3accb7502))
+* regenerate from OpenAPI v1.12.2 ([8045e35](https://github.com/MONEI/monei-python-sdk/commit/8045e35bffa462a705ef5b9acd71bee1965b6564))
+
 # [2.6.0](https://github.com/MONEI/monei-python-sdk/compare/v2.5.5...v2.6.0) (2026-07-02)
 
 
