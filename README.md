@@ -214,16 +214,16 @@ except ApiException as e:
 Process a full or partial refund:
 
 ```python
-from Monei import RefundPaymentRequest
+from Monei import PaymentRefundReason, RefundPaymentRequest
 
 try:
     refund_request = RefundPaymentRequest(
         amount=500,  # Partial refund of 5.00€
-        refund_reason='Customer request'
+        refund_reason=PaymentRefundReason('requested_by_customer')
     )
     
-    result = monei.payments.refund('pay_123456789', refund_request)
-    print(f"Refund created with ID: {result.id}")
+    result = monei.payments.refund('pay_123456789', refund_payment_request=refund_request)
+    print(f"Payment status after refund: {result.status}")
 except ApiException as e:
     print(f"Error refunding payment: {e}")
 ```
