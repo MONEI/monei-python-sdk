@@ -87,6 +87,7 @@ Monei/model/payment_status.py
 Monei/model/payment_trace_details.py
 Monei/model/payment_transaction_type.py
 Monei/model/pos_auth_token_create200_response.py
+Monei/model/preview_subscription_update_request.py
 Monei/model/recurring_payment_request.py
 Monei/model/refund_payment_request.py
 Monei/model/register_apple_pay_domain_request.py
@@ -100,6 +101,7 @@ Monei/model/service_unavailable_error_all_of.py
 Monei/model/subscription.py
 Monei/model/subscription_interval.py
 Monei/model/subscription_last_payment.py
+Monei/model/subscription_last_proration.py
 Monei/model/subscription_payment_method.py
 Monei/model/subscription_payment_method_card.py
 Monei/model/subscription_payment_methods.py
@@ -108,6 +110,7 @@ Monei/model/subscription_retry_schedule_inner.py
 Monei/model/subscription_status.py
 Monei/model/subscription_trial_amount.py
 Monei/model/subscription_trial_interval_count.py
+Monei/model/subscription_update_preview.py
 Monei/model/unauthorized_error.py
 Monei/model/unauthorized_error_all_of.py
 Monei/model/unprocessable_entity_error.py
@@ -119,3 +122,6 @@ Monei/model_utils.py
 Monei/models/__init__.py
 Monei/rest.py
 test/__init__.py
+test/test_preview_subscription_update_request.py
+test/test_subscription_last_proration.py
+test/test_subscription_update_preview.py
