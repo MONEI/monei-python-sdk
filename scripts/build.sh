@@ -15,4 +15,4 @@ fi
 
 # Format generated Python files with Black
 echo "Formatting generated Python files with Black..."
-black Monei/
+uv run black Monei/
