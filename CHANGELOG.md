@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.1](https://github.com/MONEI/monei-python-sdk/compare/v2.7.0...v2.7.1) (2026-09-29)
+
+
+### Bug Fixes
+
+* accept the INSTALLMENT_SELECT next action type ([#14](https://github.com/MONEI/monei-python-sdk/issues/14)) ([c54ae67](https://github.com/MONEI/monei-python-sdk/commit/c54ae67e066cf8a53753c6b5d10e337db727d366))
+
 # [2.7.0](https://github.com/MONEI/monei-python-sdk/compare/v2.6.0...v2.7.0) (2026-09-21)
 
 
