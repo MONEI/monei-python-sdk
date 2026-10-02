@@ -110,6 +110,7 @@ class UpdateSubscriptionRequest(ModelNormal):
             "interval_count": (int,),  # noqa: E501
             "allowed_payment_methods": (SubscriptionPaymentMethods,),  # noqa: E501
             "description": (str,),  # noqa: E501
+            "customer_id": (str,),  # noqa: E501
             "customer": (PaymentCustomer,),  # noqa: E501
             "billing_details": (PaymentBillingDetails,),  # noqa: E501
             "shipping_details": (PaymentShippingDetails,),  # noqa: E501
@@ -138,6 +139,7 @@ class UpdateSubscriptionRequest(ModelNormal):
         "interval_count": "intervalCount",  # noqa: E501
         "allowed_payment_methods": "allowedPaymentMethods",  # noqa: E501
         "description": "description",  # noqa: E501
+        "customer_id": "customerId",  # noqa: E501
         "customer": "customer",  # noqa: E501
         "billing_details": "billingDetails",  # noqa: E501
         "shipping_details": "shippingDetails",  # noqa: E501
@@ -199,6 +201,7 @@ class UpdateSubscriptionRequest(ModelNormal):
             interval_count (int): Number of intervals between subscription payments.. [optional]  # noqa: E501
             allowed_payment_methods (SubscriptionPaymentMethods): [optional]  # noqa: E501
             description (str): An arbitrary string attached to the subscription. Often useful for displaying to users. . [optional]  # noqa: E501
+            customer_id (str): The [customer](https://docs.monei.com/apis/rest/customers-create/) this subscription belongs to.  Linking a subscription to a customer turns on **renewal failover**: when a renewal is declined by the issuing bank, MONEI retries it against up to two of the customer's other saved payment methods within the same attempt, before the subscription goes `PAST_DUE`. One declined renewal can therefore produce up to three charge attempts on different cards. If one succeeds the subscription continues and moves to that payment method. . [optional]  # noqa: E501
             customer (PaymentCustomer): [optional]  # noqa: E501
             billing_details (PaymentBillingDetails): [optional]  # noqa: E501
             shipping_details (PaymentShippingDetails): [optional]  # noqa: E501
@@ -308,6 +311,7 @@ class UpdateSubscriptionRequest(ModelNormal):
             interval_count (int): Number of intervals between subscription payments.. [optional]  # noqa: E501
             allowed_payment_methods (SubscriptionPaymentMethods): [optional]  # noqa: E501
             description (str): An arbitrary string attached to the subscription. Often useful for displaying to users. . [optional]  # noqa: E501
+            customer_id (str): The [customer](https://docs.monei.com/apis/rest/customers-create/) this subscription belongs to.  Linking a subscription to a customer turns on **renewal failover**: when a renewal is declined by the issuing bank, MONEI retries it against up to two of the customer's other saved payment methods within the same attempt, before the subscription goes `PAST_DUE`. One declined renewal can therefore produce up to three charge attempts on different cards. If one succeeds the subscription continues and moves to that payment method. . [optional]  # noqa: E501
             customer (PaymentCustomer): [optional]  # noqa: E501
             billing_details (PaymentBillingDetails): [optional]  # noqa: E501
             shipping_details (PaymentShippingDetails): [optional]  # noqa: E501
