@@ -130,11 +130,3 @@ Monei/model_utils.py
 Monei/models/__init__.py
 Monei/rest.py
 test/__init__.py
-test/test_conflict_error.py
-test/test_conflict_error_all_of.py
-test/test_create_customer_request.py
-test/test_customer.py
-test/test_customer_payment_method.py
-test/test_customers_api.py
-test/test_deleted_resource.py
-test/test_update_customer_request.py

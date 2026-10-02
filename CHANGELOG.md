@@ -1,5 +1,12 @@
 # Changelog
 
+# [2.8.0](https://github.com/MONEI/monei-python-sdk/compare/v2.7.1...v2.8.0) (2026-10-02)
+
+
+### Features
+
+* add the Customers API and customerId fields ([a9e7026](https://github.com/MONEI/monei-python-sdk/commit/a9e7026b4fcc1084f549635a68345cfd4ba06837))
+
 ## [2.7.1](https://github.com/MONEI/monei-python-sdk/compare/v2.7.0...v2.7.1) (2026-09-29)
 
 
