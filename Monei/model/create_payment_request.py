@@ -138,6 +138,8 @@ class CreatePaymentRequest(ModelNormal):
             "subscription_id": (str,),  # noqa: E501
             "auto_recover": (bool,),  # noqa: E501
             "description": (str,),  # noqa: E501
+            "use_default_payment_method": (bool,),  # noqa: E501
+            "customer_id": (str,),  # noqa: E501
             "customer": (PaymentCustomer,),  # noqa: E501
             "billing_details": (PaymentBillingDetails,),  # noqa: E501
             "shipping_details": (PaymentShippingDetails,),  # noqa: E501
@@ -172,6 +174,8 @@ class CreatePaymentRequest(ModelNormal):
         "subscription_id": "subscriptionId",  # noqa: E501
         "auto_recover": "autoRecover",  # noqa: E501
         "description": "description",  # noqa: E501
+        "use_default_payment_method": "useDefaultPaymentMethod",  # noqa: E501
+        "customer_id": "customerId",  # noqa: E501
         "customer": "customer",  # noqa: E501
         "billing_details": "billingDetails",  # noqa: E501
         "shipping_details": "shippingDetails",  # noqa: E501
@@ -243,6 +247,8 @@ class CreatePaymentRequest(ModelNormal):
             subscription_id (str): A unique identifier of the Subscription. If specified the payment is attached to this Subscription. . [optional]  # noqa: E501
             auto_recover (bool): If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. Is automatically set to `true` if `completeUrl` is not provided.(set this value to `true` to create \"Pay By Link\" payments).. [optional]  # noqa: E501
             description (str): An arbitrary string attached to the payment. Often useful for displaying to users. . [optional]  # noqa: E501
+            use_default_payment_method (bool): Charge the customer's default payment method, so you do not have to look its token up first.  Requires `customerId`, and cannot be combined with `paymentToken` or `paymentMethod` — naming a payment method as well leaves no way to tell which one you meant. The payment is rejected when the customer has no default. . [optional]  # noqa: E501
+            customer_id (str): The [customer](https://docs.monei.com/apis/rest/customers-create/) this payment belongs to. Linking a payment to a customer saves its payment method under that customer and groups the buyer's payments together.  Not to be confused with `paymentMethod.trustly.customerId`, which is an identifier Trustly returns for its own account holder and is unrelated. . [optional]  # noqa: E501
             customer (PaymentCustomer): [optional]  # noqa: E501
             billing_details (PaymentBillingDetails): [optional]  # noqa: E501
             shipping_details (PaymentShippingDetails): [optional]  # noqa: E501
@@ -363,6 +369,8 @@ class CreatePaymentRequest(ModelNormal):
             subscription_id (str): A unique identifier of the Subscription. If specified the payment is attached to this Subscription. . [optional]  # noqa: E501
             auto_recover (bool): If set to `true`, the new payment will be automatically created when customer visits the payment link of the previously failed payment. Is automatically set to `true` if `completeUrl` is not provided.(set this value to `true` to create \"Pay By Link\" payments).. [optional]  # noqa: E501
             description (str): An arbitrary string attached to the payment. Often useful for displaying to users. . [optional]  # noqa: E501
+            use_default_payment_method (bool): Charge the customer's default payment method, so you do not have to look its token up first.  Requires `customerId`, and cannot be combined with `paymentToken` or `paymentMethod` — naming a payment method as well leaves no way to tell which one you meant. The payment is rejected when the customer has no default. . [optional]  # noqa: E501
+            customer_id (str): The [customer](https://docs.monei.com/apis/rest/customers-create/) this payment belongs to. Linking a payment to a customer saves its payment method under that customer and groups the buyer's payments together.  Not to be confused with `paymentMethod.trustly.customerId`, which is an identifier Trustly returns for its own account holder and is unrelated. . [optional]  # noqa: E501
             customer (PaymentCustomer): [optional]  # noqa: E501
             billing_details (PaymentBillingDetails): [optional]  # noqa: E501
             shipping_details (PaymentShippingDetails): [optional]  # noqa: E501

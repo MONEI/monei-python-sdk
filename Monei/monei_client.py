@@ -9,6 +9,7 @@ from Monei.apis import (
     PaymentsApi,
     PaymentMethodsApi,
     SubscriptionsApi,
+    CustomersApi,
     ApplePayDomainApi,
     ApplePayCertificateApi,
     BizumApi,
@@ -86,6 +87,7 @@ class MoneiClient(object):
             self.Payments = PaymentsApi(api_client)
             self.PaymentMethods = PaymentMethodsApi(api_client)
             self.Subscriptions = SubscriptionsApi(api_client)
+            self.Customers = CustomersApi(api_client)
             self.ApplePayDomain = ApplePayDomainApi(api_client)
             self.Bizum = BizumApi(api_client)
             self.ApplePayCertificate = ApplePayCertificateApi(api_client)
@@ -97,6 +99,7 @@ class MoneiClient(object):
             self.payments = self.Payments
             self.payment_methods = self.PaymentMethods
             self.subscriptions = self.Subscriptions
+            self.customers = self.Customers
             self.apple_pay_domain = self.ApplePayDomain
             self.apple_pay_certificate = self.ApplePayCertificate
             self.bizum = self.Bizum

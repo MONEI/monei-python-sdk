@@ -32,9 +32,15 @@ from Monei.model.confirm_payment_request_payment_method import (
 from Monei.model.confirm_payment_request_payment_method_card import (
     ConfirmPaymentRequestPaymentMethodCard,
 )
+from Monei.model.conflict_error import ConflictError
+from Monei.model.conflict_error_all_of import ConflictErrorAllOf
+from Monei.model.create_customer_request import CreateCustomerRequest
 from Monei.model.create_payment_request import CreatePaymentRequest
 from Monei.model.create_pos_auth_token_request import CreatePosAuthTokenRequest
 from Monei.model.create_subscription_request import CreateSubscriptionRequest
+from Monei.model.customer import Customer
+from Monei.model.customer_payment_method import CustomerPaymentMethod
+from Monei.model.deleted_resource import DeletedResource
 from Monei.model.internal_server_error import InternalServerError
 from Monei.model.internal_server_error_all_of import InternalServerErrorAllOf
 from Monei.model.not_found_error import NotFoundError
@@ -141,5 +147,6 @@ from Monei.model.unprocessable_entity_error_all_of import UnprocessableEntityErr
 from Monei.model.update_apple_pay_certificate_request import (
     UpdateApplePayCertificateRequest,
 )
+from Monei.model.update_customer_request import UpdateCustomerRequest
 from Monei.model.update_subscription_request import UpdateSubscriptionRequest
 from Monei.model.validate_bizum_phone_request import ValidateBizumPhoneRequest

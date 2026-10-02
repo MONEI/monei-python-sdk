@@ -28,6 +28,10 @@ For collecting customer and payment information in the browser, use [monei.js](h
     - [Creating a Payment](#creating-a-payment)
     - [Retrieving a Payment](#retrieving-a-payment)
     - [Refunding a Payment](#refunding-a-payment)
+  - [Customer Operations](#customer-operations)
+    - [Creating a Customer](#creating-a-customer)
+    - [Charging a Saved Payment Method](#charging-a-saved-payment-method)
+    - [Managing Payment Methods](#managing-payment-methods)
   - [Integration Methods](#integration-methods)
     - [Using the Prebuilt Payment Page](#using-the-prebuilt-payment-page)
       - [Features](#features)
@@ -226,6 +230,53 @@ try:
     print(f"Payment status after refund: {result.status}")
 except ApiException as e:
     print(f"Error refunding payment: {e}")
+```
+
+## Customer Operations
+
+### Creating a Customer
+
+```python
+from Monei import CreateCustomerRequest
+
+customer = monei.customers.create(
+    CreateCustomerRequest(email='john.doe@example.com', name='John Doe')
+)
+```
+
+Pass `customer_id` to `CreatePaymentRequest` or `CreateSubscriptionRequest` to link the payment or subscription to the customer. Its payment method is then saved under the customer.
+
+### Charging a Saved Payment Method
+
+Set `use_default_payment_method` to charge the customer's default payment method:
+
+```python
+payment = monei.payments.create(
+    CreatePaymentRequest(
+        amount=1250,
+        currency='EUR',
+        order_id='123457',
+        customer_id=customer.id,
+        use_default_payment_method=True,
+    )
+)
+```
+
+### Managing Payment Methods
+
+```python
+from Monei import UpdateCustomerRequest
+
+payment_methods = monei.customers.list_payment_methods(customer.id)
+
+# Change the default payment method
+monei.customers.update(
+    customer.id,
+    UpdateCustomerRequest(default_token_id=payment_methods[0].id),
+)
+
+# Remove a saved payment method
+monei.customers.delete_payment_method(customer.id, payment_methods[0].id)
 ```
 
 ## Integration Methods
