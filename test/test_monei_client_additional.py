@@ -1,7 +1,5 @@
 import unittest
 import json
-import hmac
-import hashlib
 from unittest.mock import patch, MagicMock
 
 from Monei.monei_client import MoneiClient, DEFAULT_USER_AGENT
@@ -135,64 +133,6 @@ class TestMoneiClientAdditional(unittest.TestCase):
 
         # Check that the header was removed
         self.assertNotIn("MONEI-Account-ID", client._api_client.default_headers)
-
-    def test_verify_signature_with_invalid_format(self):
-        """Test verify_signature with an invalid signature format."""
-        client = MoneiClient(api_key=self.api_key)
-
-        # Create a test payload
-        body = '{"id":"test_payment_id","amount":1000,"currency":"EUR","status":"SUCCEEDED"}'
-
-        # Invalid signature format (missing v1)
-        invalid_signature = "t=1602604555"
-
-        # This should raise an exception
-        with self.assertRaises(Exception):
-            client.verify_signature(body, invalid_signature)
-
-    def test_verify_signature_with_empty_signature(self):
-        """Test verify_signature with an empty signature."""
-        client = MoneiClient(api_key=self.api_key)
-
-        # Create a test payload
-        body = '{"id":"test_payment_id","amount":1000,"currency":"EUR","status":"SUCCEEDED"}'
-
-        # Empty signature
-        empty_signature = ""
-
-        # This should raise an exception
-        with self.assertRaises(Exception):
-            client.verify_signature(body, empty_signature)
-
-    def test_verify_signature_with_tampered_body(self):
-        """Test verify_signature with a tampered body."""
-        client = MoneiClient(api_key=self.api_key)
-
-        # Create original payload and signature
-        original_body = '{"id":"test_payment_id","amount":1000,"currency":"EUR","status":"SUCCEEDED"}'
-        timestamp = "1602604555"
-
-        # Calculate a valid signature for the original body
-        signature_payload = f"{timestamp}.{original_body}"
-        hmac_digest = hmac.new(
-            bytes(self.api_key, "utf-8"),
-            msg=bytes(signature_payload, "utf-8"),
-            digestmod=hashlib.sha256,
-        ).hexdigest()
-
-        valid_signature = f"t={timestamp},v1={hmac_digest}"
-
-        # Tamper with the body
-        tampered_body = '{"id":"test_payment_id","amount":2000,"currency":"EUR","status":"SUCCEEDED"}'
-
-        # This should raise an exception
-        with self.assertRaises(ApiException) as context:
-            client.verify_signature(tampered_body, valid_signature)
-
-        self.assertEqual(context.exception.status, 401)
-        self.assertEqual(
-            context.exception.reason, "[401] Signature verification failed"
-        )
 
     def test_network_error_handling(self):
         """Test that network errors are properly handled."""

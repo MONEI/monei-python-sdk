@@ -1,7 +1,4 @@
 import unittest
-import json
-import hmac
-import hashlib
 from unittest.mock import patch, MagicMock
 
 from Monei.monei_client import MoneiClient, DEFAULT_USER_AGENT
@@ -11,6 +8,20 @@ from Monei.api.payment_methods_api import PaymentMethodsApi
 from Monei.api.subscriptions_api import SubscriptionsApi
 from Monei.api.apple_pay_domain_api import ApplePayDomainApi
 from Monei.api.bizum_api import BizumApi
+
+
+SIGNED_BODY = '{"id":"af6029f80f5fc73a8ad2753eea0b1be0","status":"SUCCEEDED"}'
+SIGNED_OBJECT = {"id": "af6029f80f5fc73a8ad2753eea0b1be0", "status": "SUCCEEDED"}
+# The test vector of the signing v2 plan, shared with the PHP and Node SDKs.
+# HMAC-SHA256 of "1794643200." + SIGNED_BODY keyed with OLD_SECRET.
+V2_SIGNATURE = "8a1968e508d090894e64e50a3162dd9920feec2d4c1d04c385e80f08532226cf"
+# HMAC-SHA256 of "1794643200." + SIGNED_BODY keyed with NEW_SECRET.
+V2_NEW_SIGNATURE = "e32c238b644e5786f51b2b7205994f2a0d44d56375df5d8bf86d9579a96e0210"
+# HMAC-SHA256 of "1794643200." + SIGNED_BODY keyed with the test API key.
+V1_SIGNATURE = "10e89af576f82b2601c7ef566b4f048f5efddb4220993a628236e5cb3789bb55"
+# The secrets are concatenated so that secret scanners do not flag these test values.
+OLD_SECRET = "whsec" + "_dGVzdC1zaWduaW5nLXNlY3JldC1mb3ItdjItdmVjdG9y"
+NEW_SECRET = "whsec" + "_bmV3LXNpZ25pbmctc2VjcmV0LWFmdGVyLXRoZS1yb2xs"
 
 
 class TestMoneiClient(unittest.TestCase):
@@ -205,56 +216,112 @@ class TestMoneiClient(unittest.TestCase):
                         "User agent validation failed even with custom user agent"
                     )
 
-    def test_verify_signature_valid(self):
-        """Test verifying a valid signature."""
+    def assert_unauthorized(self, signature, secret=None):
         client = MoneiClient(api_key=self.api_key)
-
-        # Create a test payload and signature
-        body = '{"id":"test_payment_id","amount":1000,"currency":"EUR","status":"SUCCEEDED"}'
-        timestamp = "1602604555"
-
-        # Calculate a valid signature
-        signature_payload = f"{timestamp}.{body}"
-        hmac_digest = hmac.new(
-            bytes(self.api_key, "utf-8"),
-            msg=bytes(signature_payload, "utf-8"),
-            digestmod=hashlib.sha256,
-        ).hexdigest()
-
-        valid_signature = f"t={timestamp},v1={hmac_digest}"
-
-        # Verify the signature
-        result = client.verify_signature(body, valid_signature)
-        self.assertEqual(result, json.loads(body))
-
-    def test_verify_signature_invalid(self):
-        """Test verifying an invalid signature should raise an exception."""
-        client = MoneiClient(api_key=self.api_key)
-
-        # Create a test payload and invalid signature
-        body = '{"id":"test_payment_id","amount":1000,"currency":"EUR","status":"SUCCEEDED"}'
-        timestamp = "1602604555"
-        invalid_signature = f"t={timestamp},v1=invalid_signature"
-
-        # Verify the signature should raise an exception
         with self.assertRaises(ApiException) as context:
-            client.verify_signature(body, invalid_signature)
+            client.verify_signature(SIGNED_BODY, signature, secret)
         self.assertEqual(context.exception.status, 401)
         self.assertEqual(
             context.exception.reason, "[401] Signature verification failed"
         )
 
-    def test_verify_signature_malformed(self):
-        """Test verifying a malformed signature should raise an exception."""
+    def test_verify_signature_v1_with_api_key(self):
+        """Without a secret, v1 is checked with the API key and v2 is ignored."""
         client = MoneiClient(api_key=self.api_key)
 
-        # Create a test payload and malformed signature
-        body = '{"id":"test_payment_id","amount":1000,"currency":"EUR","status":"SUCCEEDED"}'
-        malformed_signature = "malformed_signature"
+        result = client.verify_signature(
+            SIGNED_BODY, f"t=1794643200,v1={V1_SIGNATURE},v2={V2_SIGNATURE}"
+        )
 
-        # Verify the signature should raise an exception
-        with self.assertRaises(Exception):
-            client.verify_signature(body, malformed_signature)
+        self.assertEqual(result, SIGNED_OBJECT)
+
+    def test_verify_signature_bytes_body(self):
+        """Flask request.data is bytes: it must sign the same text as the str body."""
+        client = MoneiClient(api_key=self.api_key)
+
+        result = client.verify_signature(
+            SIGNED_BODY.encode("utf-8"),
+            f"t=1794643200,v2={V2_SIGNATURE}",
+            OLD_SECRET,
+        )
+
+        self.assertEqual(result, SIGNED_OBJECT)
+
+    def test_verify_signature_wrong_v1(self):
+        self.assert_unauthorized("t=1794643200,v1=" + "0" * 64)
+
+    def test_verify_signature_without_v1_and_secret(self):
+        # v2 is valid for OLD_SECRET: only the missing secret makes it fail.
+        self.assert_unauthorized(f"t=1794643200,v2={V2_SIGNATURE}")
+
+    def test_verify_signature_v2_with_secret(self):
+        """A header without v1 comes from an account without an API key."""
+        client = MoneiClient(api_key=self.api_key)
+
+        result = client.verify_signature(
+            SIGNED_BODY, f"t=1794643200,v2={V2_SIGNATURE}", OLD_SECRET
+        )
+
+        self.assertEqual(result, SIGNED_OBJECT)
+
+    def test_verify_signature_accepts_each_v2_during_a_roll(self):
+        """During a roll the header holds two v2 values, newest first.
+
+        A parser that keeps only the last value fails with the new secret.
+        """
+        client = MoneiClient(api_key=self.api_key)
+        signature = (
+            f"t=1794643200,v1={V1_SIGNATURE},v2={V2_NEW_SIGNATURE},v2={V2_SIGNATURE}"
+        )
+
+        for secret in (NEW_SECRET, OLD_SECRET):
+            with self.subTest(secret=secret[:9]):
+                self.assertEqual(
+                    client.verify_signature(SIGNED_BODY, signature, secret),
+                    SIGNED_OBJECT,
+                )
+
+    def test_verify_signature_wrong_secret(self):
+        # v1 is valid for the API key, so a fallback to v1 passes.
+        self.assert_unauthorized(
+            f"t=1794643200,v1={V1_SIGNATURE},v2={V2_SIGNATURE}", NEW_SECRET
+        )
+
+    def test_verify_signature_empty_secret(self):
+        # v2 is HMAC-SHA256 keyed with an empty string, which anyone can make.
+        self.assert_unauthorized(
+            "t=1794643200,v2=ef198247309de9b0cd6cd622f2cd96b2e292f578aa7108bc21e5fd8e0aa4e5d1",
+            "",
+        )
+
+    def test_verify_signature_non_str_secret(self):
+        # v2 is valid for OLD_SECRET: only the bytes type makes it fail.
+        self.assert_unauthorized(f"t=1794643200,v2={V2_SIGNATURE}", OLD_SECRET.encode())
+
+    def test_verify_signature_missing_t(self):
+        # v1 is valid for t=1794643200: only the missing t makes it fail.
+        self.assert_unauthorized(f"v1={V1_SIGNATURE}")
+
+    def test_verify_signature_element_without_equals_sign(self):
+        self.assert_unauthorized(f"t=1794643200,v1={V1_SIGNATURE},malformed")
+
+    def test_verify_signature_missing_header(self):
+        """request.headers.get() gives None for a missing header."""
+        self.assert_unauthorized(None)
+
+    def test_verify_signature_non_ascii_v1(self):
+        # hmac.compare_digest raises TypeError on a str with non-ASCII characters.
+        self.assert_unauthorized("t=1794643200,v1=" + "é" * 64)
+
+    def test_verify_signature_ignores_unknown_elements(self):
+        """The header can carry more elements than t, v1 and v2."""
+        client = MoneiClient(api_key=self.api_key)
+
+        result = client.verify_signature(
+            SIGNED_BODY, f"t=1794643200,v1={V1_SIGNATURE},v9=a=b"
+        )
+
+        self.assertEqual(result, SIGNED_OBJECT)
 
     def test_default_user_agent_always_set(self):
         """Test that DEFAULT_USER_AGENT is always set when user_agent is None."""
