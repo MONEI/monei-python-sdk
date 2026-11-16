@@ -37,7 +37,10 @@ from Monei.model.conflict_error_all_of import ConflictErrorAllOf
 from Monei.model.create_customer_request import CreateCustomerRequest
 from Monei.model.create_payment_request import CreatePaymentRequest
 from Monei.model.create_pos_auth_token_request import CreatePosAuthTokenRequest
+from Monei.model.create_price_request import CreatePriceRequest
+from Monei.model.create_product_request import CreateProductRequest
 from Monei.model.create_subscription_request import CreateSubscriptionRequest
+from Monei.model.create_tax_rate_request import CreateTaxRateRequest
 from Monei.model.customer import Customer
 from Monei.model.customer_payment_method import CustomerPaymentMethod
 from Monei.model.deleted_resource import DeletedResource
@@ -117,6 +120,22 @@ from Monei.model.pos_auth_token_create200_response import PosAuthTokenCreate200R
 from Monei.model.preview_subscription_update_request import (
     PreviewSubscriptionUpdateRequest,
 )
+from Monei.model.price import Price
+from Monei.model.price_interval import PriceInterval
+from Monei.model.price_interval_count import PriceIntervalCount
+from Monei.model.price_list import PriceList
+from Monei.model.price_nickname import PriceNickname
+from Monei.model.price_recurring import PriceRecurring
+from Monei.model.price_trial_period_days import PriceTrialPeriodDays
+from Monei.model.price_unit_amount import PriceUnitAmount
+from Monei.model.product import Product
+from Monei.model.product_description import ProductDescription
+from Monei.model.product_descriptor import ProductDescriptor
+from Monei.model.product_images import ProductImages
+from Monei.model.product_list import ProductList
+from Monei.model.product_name import ProductName
+from Monei.model.product_slug import ProductSlug
+from Monei.model.product_unit_label import ProductUnitLabel
 from Monei.model.recurring_payment_request import RecurringPaymentRequest
 from Monei.model.refund_payment_request import RefundPaymentRequest
 from Monei.model.register_apple_pay_domain_request import RegisterApplePayDomainRequest
@@ -140,6 +159,11 @@ from Monei.model.subscription_status import SubscriptionStatus
 from Monei.model.subscription_trial_amount import SubscriptionTrialAmount
 from Monei.model.subscription_trial_interval_count import SubscriptionTrialIntervalCount
 from Monei.model.subscription_update_preview import SubscriptionUpdatePreview
+from Monei.model.tax_details import TaxDetails
+from Monei.model.tax_rate import TaxRate
+from Monei.model.tax_rate_display_name import TaxRateDisplayName
+from Monei.model.tax_rate_list import TaxRateList
+from Monei.model.tax_rate_percentage import TaxRatePercentage
 from Monei.model.unauthorized_error import UnauthorizedError
 from Monei.model.unauthorized_error_all_of import UnauthorizedErrorAllOf
 from Monei.model.unprocessable_entity_error import UnprocessableEntityError
@@ -148,5 +172,8 @@ from Monei.model.update_apple_pay_certificate_request import (
     UpdateApplePayCertificateRequest,
 )
 from Monei.model.update_customer_request import UpdateCustomerRequest
+from Monei.model.update_price_request import UpdatePriceRequest
+from Monei.model.update_product_request import UpdateProductRequest
 from Monei.model.update_subscription_request import UpdateSubscriptionRequest
+from Monei.model.update_tax_rate_request import UpdateTaxRateRequest
 from Monei.model.validate_bizum_phone_request import ValidateBizumPhoneRequest

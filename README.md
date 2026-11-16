@@ -32,6 +32,10 @@ For collecting customer and payment information in the browser, use [monei.js](h
     - [Creating a Customer](#creating-a-customer)
     - [Charging a Saved Payment Method](#charging-a-saved-payment-method)
     - [Managing Payment Methods](#managing-payment-methods)
+  - [Product Catalog](#product-catalog)
+    - [Creating a Product and a Price](#creating-a-product-and-a-price)
+    - [Subscribing to a Price](#subscribing-to-a-price)
+    - [Tax Rates](#tax-rates)
   - [Integration Methods](#integration-methods)
     - [Using the Prebuilt Payment Page](#using-the-prebuilt-payment-page)
       - [Features](#features)
@@ -278,6 +282,63 @@ monei.customers.update(
 
 # Remove a saved payment method
 monei.customers.delete_payment_method(customer.id, payment_methods[0].id)
+```
+
+## Product Catalog
+
+### Creating a Product and a Price
+
+Fields with constraints in the API schema take a wrapper type, such as `ProductName` or `PriceInterval`.
+
+```python
+from Monei import (
+    CreatePriceRequest,
+    CreateProductRequest,
+    PriceInterval,
+    PriceIntervalCount,
+    PriceRecurring,
+    PriceUnitAmount,
+    ProductName,
+)
+
+product = monei.products.create(CreateProductRequest(name=ProductName('Gold plan')))
+
+price = monei.prices.create(
+    CreatePriceRequest(
+        product_id=product.id,
+        unit_amount=PriceUnitAmount(1990),
+        currency='EUR',
+        recurring=PriceRecurring(
+            interval=PriceInterval('month'),
+            interval_count=PriceIntervalCount(1),
+        ),
+    )
+)
+
+prices = monei.prices.list(product_id=product.id)
+```
+
+### Subscribing to a Price
+
+Send `price_id` instead of `amount`, `currency` and `interval`. The subscription copies the price's values.
+
+```python
+from Monei import CreateSubscriptionRequest
+
+subscription = monei.subscriptions.create(CreateSubscriptionRequest(price_id=price.id))
+```
+
+### Tax Rates
+
+```python
+from Monei import CreateTaxRateRequest, TaxRateDisplayName, TaxRatePercentage
+
+tax_rate = monei.tax_rates.create(
+    CreateTaxRateRequest(
+        display_name=TaxRateDisplayName('IVA'),
+        percentage=TaxRatePercentage(21.0),
+    )
+)
 ```
 
 ## Integration Methods
