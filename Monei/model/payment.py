@@ -34,7 +34,6 @@ def lazy_import():
     from Monei.model.payment_customer import PaymentCustomer
     from Monei.model.payment_last_refund_reason import PaymentLastRefundReason
     from Monei.model.payment_next_action import PaymentNextAction
-    from Monei.model.payment_order_id import PaymentOrderId
     from Monei.model.payment_payment_method import PaymentPaymentMethod
     from Monei.model.payment_sequence import PaymentSequence
     from Monei.model.payment_session_details import PaymentSessionDetails
@@ -48,7 +47,6 @@ def lazy_import():
     globals()["PaymentCustomer"] = PaymentCustomer
     globals()["PaymentLastRefundReason"] = PaymentLastRefundReason
     globals()["PaymentNextAction"] = PaymentNextAction
-    globals()["PaymentOrderId"] = PaymentOrderId
     globals()["PaymentPaymentMethod"] = PaymentPaymentMethod
     globals()["PaymentSequence"] = PaymentSequence
     globals()["PaymentSessionDetails"] = PaymentSessionDetails
@@ -125,7 +123,7 @@ class Payment(ModelNormal):
             "account_id": (str,),  # noqa: E501
             "livemode": (bool,),  # noqa: E501
             "status": (PaymentStatus,),  # noqa: E501
-            "order_id": (PaymentOrderId,),  # noqa: E501
+            "order_id": (str,),  # noqa: E501
             "description": (str,),  # noqa: E501
             "authorization_code": (str,),  # noqa: E501
             "status_code": (str,),  # noqa: E501
@@ -244,7 +242,7 @@ class Payment(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            order_id (PaymentOrderId): [optional]  # noqa: E501
+            order_id (str): An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system. Up to 40 characters: ASCII letters, digits and `_ @ . / # & + -` (no spaces). . [optional]  # noqa: E501
             description (str): An arbitrary string attached to the payment. Often useful for displaying to users. . [optional]  # noqa: E501
             authorization_code (str): Unique identifier provided by the bank performing transaction. . [optional]  # noqa: E501
             status_code (str): Payment status code. . [optional]  # noqa: E501
@@ -376,7 +374,7 @@ class Payment(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            order_id (PaymentOrderId): [optional]  # noqa: E501
+            order_id (str): An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system. Up to 40 characters: ASCII letters, digits and `_ @ . / # & + -` (no spaces). . [optional]  # noqa: E501
             description (str): An arbitrary string attached to the payment. Often useful for displaying to users. . [optional]  # noqa: E501
             authorization_code (str): Unique identifier provided by the bank performing transaction. . [optional]  # noqa: E501
             status_code (str): Payment status code. . [optional]  # noqa: E501

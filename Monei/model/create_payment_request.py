@@ -31,7 +31,6 @@ from Monei.exceptions import ApiAttributeError
 def lazy_import():
     from Monei.model.payment_billing_details import PaymentBillingDetails
     from Monei.model.payment_customer import PaymentCustomer
-    from Monei.model.payment_order_id import PaymentOrderId
     from Monei.model.payment_payment_method_input import PaymentPaymentMethodInput
     from Monei.model.payment_payment_methods import PaymentPaymentMethods
     from Monei.model.payment_sequence import PaymentSequence
@@ -41,7 +40,6 @@ def lazy_import():
 
     globals()["PaymentBillingDetails"] = PaymentBillingDetails
     globals()["PaymentCustomer"] = PaymentCustomer
-    globals()["PaymentOrderId"] = PaymentOrderId
     globals()["PaymentPaymentMethodInput"] = PaymentPaymentMethodInput
     globals()["PaymentPaymentMethods"] = PaymentPaymentMethods
     globals()["PaymentSequence"] = PaymentSequence
@@ -113,7 +111,7 @@ class CreatePaymentRequest(ModelNormal):
         return {
             "amount": (int,),  # noqa: E501
             "currency": (str,),  # noqa: E501
-            "order_id": (PaymentOrderId,),  # noqa: E501
+            "order_id": (str,),  # noqa: E501
             "callback_url": (str,),  # noqa: E501
             "complete_url": (str,),  # noqa: E501
             "fail_url": (str,),  # noqa: E501
@@ -200,7 +198,7 @@ class CreatePaymentRequest(ModelNormal):
         Args:
             amount (int): Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD).
             currency (str): Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
-            order_id (PaymentOrderId):
+            order_id (str): An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system. Up to 40 characters: ASCII letters, digits and `_ @ . / # & + -` (no spaces).
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -322,7 +320,7 @@ class CreatePaymentRequest(ModelNormal):
         Args:
             amount (int): Amount intended to be collected by this payment. A positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge 1.00 USD).
             currency (str): Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
-            order_id (PaymentOrderId):
+            order_id (str): An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system. Up to 40 characters: ASCII letters, digits and `_ @ . / # & + -` (no spaces).
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types

@@ -141,7 +141,7 @@ class Price(ModelNormal):
     @classmethod
     @convert_js_args_to_python_args
     def _from_openapi_data(
-        cls, id, product_id, currency, unit_amount, created_at, *args, **kwargs
+        cls, id, product_id, currency, unit_amount, active, created_at, *args, **kwargs
     ):  # noqa: E501
         """Price - a model defined in OpenAPI
 
@@ -150,11 +150,11 @@ class Price(ModelNormal):
             product_id (str): The [product](https://docs.monei.com/apis/rest/products-create/) of the price. It cannot change after the price is created.
             currency (str): Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
             unit_amount (PriceUnitAmount):
+            active (bool): Whether the price is active. An inactive price cannot start a subscription, and a subscription cannot switch to it. Prices are never deleted: set `active` to `false` to archive one. Subscriptions that already use it keep their copy of its values. A new price is active unless created with `active: false`.
             created_at (int): Time at which the resource was created. Measured in seconds since the Unix epoch.
 
         Keyword Args:
             type (str): How the price bills: `RECURRING` (the default) or `ONE_TIME`. Only a `RECURRING` price can start or switch a subscription. Treat the set as open: more values can be added later. . defaults to "RECURRING"  # noqa: E501
-            active (bool): Whether the price is active. An inactive price cannot start a subscription, and a subscription cannot switch to it. Prices are never deleted: set `active` to `false` to archive one. Subscriptions that already use it keep their copy of its values. . defaults to True  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -193,7 +193,6 @@ class Price(ModelNormal):
         """
 
         type = kwargs.get("type", "RECURRING")
-        active = kwargs.get("active", True)
         _check_type = kwargs.pop("_check_type", True)
         _spec_property_naming = kwargs.pop("_spec_property_naming", True)
         _path_to_item = kwargs.pop("_path_to_item", ())
@@ -256,7 +255,7 @@ class Price(ModelNormal):
 
     @convert_js_args_to_python_args
     def __init__(
-        self, id, product_id, currency, unit_amount, created_at, *args, **kwargs
+        self, id, product_id, currency, unit_amount, active, created_at, *args, **kwargs
     ):  # noqa: E501
         """Price - a model defined in OpenAPI
 
@@ -265,11 +264,11 @@ class Price(ModelNormal):
             product_id (str): The [product](https://docs.monei.com/apis/rest/products-create/) of the price. It cannot change after the price is created.
             currency (str): Three-letter [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217), in uppercase. Must be a supported currency.
             unit_amount (PriceUnitAmount):
+            active (bool): Whether the price is active. An inactive price cannot start a subscription, and a subscription cannot switch to it. Prices are never deleted: set `active` to `false` to archive one. Subscriptions that already use it keep their copy of its values. A new price is active unless created with `active: false`.
             created_at (int): Time at which the resource was created. Measured in seconds since the Unix epoch.
 
         Keyword Args:
             type (str): How the price bills: `RECURRING` (the default) or `ONE_TIME`. Only a `RECURRING` price can start or switch a subscription. Treat the set as open: more values can be added later. . defaults to "RECURRING"  # noqa: E501
-            active (bool): Whether the price is active. An inactive price cannot start a subscription, and a subscription cannot switch to it. Prices are never deleted: set `active` to `false` to archive one. Subscriptions that already use it keep their copy of its values. . defaults to True  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -308,7 +307,6 @@ class Price(ModelNormal):
         """
 
         type = kwargs.get("type", "RECURRING")
-        active = kwargs.get("active", True)
         _check_type = kwargs.pop("_check_type", True)
         _spec_property_naming = kwargs.pop("_spec_property_naming", False)
         _path_to_item = kwargs.pop("_path_to_item", ())

@@ -150,16 +150,18 @@ class Product(ModelNormal):
 
     @classmethod
     @convert_js_args_to_python_args
-    def _from_openapi_data(cls, id, name, created_at, *args, **kwargs):  # noqa: E501
+    def _from_openapi_data(
+        cls, id, name, active, created_at, *args, **kwargs
+    ):  # noqa: E501
         """Product - a model defined in OpenAPI
 
         Args:
             id (str): Unique identifier for the product.
             name (ProductName):
+            active (bool): Whether the product is active. Products are never deleted: set `active` to `false` to archive one. Archiving a product does not archive its prices, and its prices can still start subscriptions. A new product is active unless created with `active: false`.
             created_at (int): Time at which the resource was created. Measured in seconds since the Unix epoch.
 
         Keyword Args:
-            active (bool): Whether the product is active. Products are never deleted: set `active` to `false` to archive one. Archiving a product does not archive its prices, and its prices can still start subscriptions. . defaults to True  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -202,7 +204,6 @@ class Product(ModelNormal):
             updated_at (int): Time at which the resource updated last time. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501
         """
 
-        active = kwargs.get("active", True)
         _check_type = kwargs.pop("_check_type", True)
         _spec_property_naming = kwargs.pop("_spec_property_naming", True)
         _path_to_item = kwargs.pop("_path_to_item", ())
@@ -261,16 +262,16 @@ class Product(ModelNormal):
     )
 
     @convert_js_args_to_python_args
-    def __init__(self, id, name, created_at, *args, **kwargs):  # noqa: E501
+    def __init__(self, id, name, active, created_at, *args, **kwargs):  # noqa: E501
         """Product - a model defined in OpenAPI
 
         Args:
             id (str): Unique identifier for the product.
             name (ProductName):
+            active (bool): Whether the product is active. Products are never deleted: set `active` to `false` to archive one. Archiving a product does not archive its prices, and its prices can still start subscriptions. A new product is active unless created with `active: false`.
             created_at (int): Time at which the resource was created. Measured in seconds since the Unix epoch.
 
         Keyword Args:
-            active (bool): Whether the product is active. Products are never deleted: set `active` to `false` to archive one. Archiving a product does not archive its prices, and its prices can still start subscriptions. . defaults to True  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -313,7 +314,6 @@ class Product(ModelNormal):
             updated_at (int): Time at which the resource updated last time. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501
         """
 
-        active = kwargs.get("active", True)
         _check_type = kwargs.pop("_check_type", True)
         _spec_property_naming = kwargs.pop("_spec_property_naming", False)
         _path_to_item = kwargs.pop("_path_to_item", ())

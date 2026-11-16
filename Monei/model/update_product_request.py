@@ -201,7 +201,7 @@ class UpdateProductRequest(ModelNormal):
             descriptor (ProductDescriptor): [optional]  # noqa: E501
             default_price_id (str, none_type): The ID of an active price of this product. Send `null` to remove the default price. . [optional]  # noqa: E501
             tax_rate_id (str, none_type): The ID of an active tax rate of your account. Send `null` to remove the tax rate. A change applies to new subscriptions and price switches only. . [optional]  # noqa: E501
-            active (bool): Whether the product is active. Products are never deleted: set `active` to `false` to archive one. Archiving a product does not archive its prices, and its prices can still start subscriptions. . [optional] if omitted the server will use the default value of True  # noqa: E501
+            active (bool): Whether the product is active. Products are never deleted: set `active` to `false` to archive one. Archiving a product does not archive its prices, and its prices can still start subscriptions. A new product is active unless created with `active: false`. . [optional]  # noqa: E501
             metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.. [optional]  # noqa: E501
         """
 
@@ -302,7 +302,7 @@ class UpdateProductRequest(ModelNormal):
             descriptor (ProductDescriptor): [optional]  # noqa: E501
             default_price_id (str, none_type): The ID of an active price of this product. Send `null` to remove the default price. . [optional]  # noqa: E501
             tax_rate_id (str, none_type): The ID of an active tax rate of your account. Send `null` to remove the tax rate. A change applies to new subscriptions and price switches only. . [optional]  # noqa: E501
-            active (bool): Whether the product is active. Products are never deleted: set `active` to `false` to archive one. Archiving a product does not archive its prices, and its prices can still start subscriptions. . [optional] if omitted the server will use the default value of True  # noqa: E501
+            active (bool): Whether the product is active. Products are never deleted: set `active` to `false` to archive one. Archiving a product does not archive its prices, and its prices can still start subscriptions. A new product is active unless created with `active: false`. . [optional]  # noqa: E501
             metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.. [optional]  # noqa: E501
         """
 

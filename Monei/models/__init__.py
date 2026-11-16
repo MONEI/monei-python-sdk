@@ -93,7 +93,6 @@ from Monei.model.payment_methods_metadata_sofort import PaymentMethodsMetadataSo
 from Monei.model.payment_methods_metadata_trustly import PaymentMethodsMetadataTrustly
 from Monei.model.payment_methods_methods import PaymentMethodsMethods
 from Monei.model.payment_next_action import PaymentNextAction
-from Monei.model.payment_order_id import PaymentOrderId
 from Monei.model.payment_payment_method import PaymentPaymentMethod
 from Monei.model.payment_payment_method_bizum import PaymentPaymentMethodBizum
 from Monei.model.payment_payment_method_bizum_input import (

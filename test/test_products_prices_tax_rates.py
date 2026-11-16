@@ -23,6 +23,7 @@ class TestProductsPricesTaxRates(unittest.TestCase):
             {
                 "id": "prod_1",
                 "name": "Gold plan",
+                "active": True,
                 "createdAt": 1,
                 "defaultPriceId": "price_1",
             }
@@ -58,7 +59,13 @@ class TestProductsPricesTaxRates(unittest.TestCase):
     @patch.object(ApiClient, "request")
     def test_create_tax_rate_posts_to_the_hyphenated_path(self, request):
         request.return_value = _response(
-            {"id": "txr_1", "displayName": "IVA", "percentage": 21, "createdAt": 1}
+            {
+                "id": "txr_1",
+                "displayName": "IVA",
+                "percentage": 21,
+                "active": True,
+                "createdAt": 1,
+            }
         )
         monei = MoneiClient(api_key="test_api_key")
 

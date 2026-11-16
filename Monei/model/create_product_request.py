@@ -186,7 +186,7 @@ class CreateProductRequest(ModelNormal):
             unit_label (ProductUnitLabel): [optional]  # noqa: E501
             descriptor (ProductDescriptor): [optional]  # noqa: E501
             tax_rate_id (str): The [tax rate](https://docs.monei.com/apis/rest/tax-rates-create/) the prices of the product charge. Absent when the product has no tax. It must be an active tax rate of your account when you set it.  A change of the tax rate changes the amount of the product's `EXCLUSIVE` prices for new subscriptions and price switches. Existing subscriptions keep their tax until they switch price. . [optional]  # noqa: E501
-            active (bool): Whether the product is active. Products are never deleted: set `active` to `false` to archive one. Archiving a product does not archive its prices, and its prices can still start subscriptions. . [optional] if omitted the server will use the default value of True  # noqa: E501
+            active (bool): Whether the product is active. Products are never deleted: set `active` to `false` to archive one. Archiving a product does not archive its prices, and its prices can still start subscriptions. A new product is active unless created with `active: false`. . [optional]  # noqa: E501
             metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.. [optional]  # noqa: E501
         """
 
@@ -289,7 +289,7 @@ class CreateProductRequest(ModelNormal):
             unit_label (ProductUnitLabel): [optional]  # noqa: E501
             descriptor (ProductDescriptor): [optional]  # noqa: E501
             tax_rate_id (str): The [tax rate](https://docs.monei.com/apis/rest/tax-rates-create/) the prices of the product charge. Absent when the product has no tax. It must be an active tax rate of your account when you set it.  A change of the tax rate changes the amount of the product's `EXCLUSIVE` prices for new subscriptions and price switches. Existing subscriptions keep their tax until they switch price. . [optional]  # noqa: E501
-            active (bool): Whether the product is active. Products are never deleted: set `active` to `false` to archive one. Archiving a product does not archive its prices, and its prices can still start subscriptions. . [optional] if omitted the server will use the default value of True  # noqa: E501
+            active (bool): Whether the product is active. Products are never deleted: set `active` to `false` to archive one. Archiving a product does not archive its prices, and its prices can still start subscriptions. A new product is active unless created with `active: false`. . [optional]  # noqa: E501
             metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.. [optional]  # noqa: E501
         """
 

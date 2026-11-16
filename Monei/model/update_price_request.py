@@ -152,7 +152,7 @@ class UpdatePriceRequest(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            active (bool): Whether the price is active. An inactive price cannot start a subscription, and a subscription cannot switch to it. Prices are never deleted: set `active` to `false` to archive one. Subscriptions that already use it keep their copy of its values. . [optional] if omitted the server will use the default value of True  # noqa: E501
+            active (bool): Whether the price is active. An inactive price cannot start a subscription, and a subscription cannot switch to it. Prices are never deleted: set `active` to `false` to archive one. Subscriptions that already use it keep their copy of its values. A new price is active unless created with `active: false`. . [optional]  # noqa: E501
             nickname (PriceNickname): [optional]  # noqa: E501
             metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.. [optional]  # noqa: E501
         """
@@ -245,7 +245,7 @@ class UpdatePriceRequest(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            active (bool): Whether the price is active. An inactive price cannot start a subscription, and a subscription cannot switch to it. Prices are never deleted: set `active` to `false` to archive one. Subscriptions that already use it keep their copy of its values. . [optional] if omitted the server will use the default value of True  # noqa: E501
+            active (bool): Whether the price is active. An inactive price cannot start a subscription, and a subscription cannot switch to it. Prices are never deleted: set `active` to `false` to archive one. Subscriptions that already use it keep their copy of its values. A new price is active unless created with `active: false`. . [optional]  # noqa: E501
             nickname (PriceNickname): [optional]  # noqa: E501
             metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.. [optional]  # noqa: E501
         """

@@ -31,7 +31,6 @@ from Monei.exceptions import ApiAttributeError
 def lazy_import():
     from Monei.model.payment_billing_details import PaymentBillingDetails
     from Monei.model.payment_customer import PaymentCustomer
-    from Monei.model.payment_order_id import PaymentOrderId
     from Monei.model.payment_shipping_details import PaymentShippingDetails
     from Monei.model.payment_trace_details import PaymentTraceDetails
     from Monei.model.subscription_interval import SubscriptionInterval
@@ -49,7 +48,6 @@ def lazy_import():
 
     globals()["PaymentBillingDetails"] = PaymentBillingDetails
     globals()["PaymentCustomer"] = PaymentCustomer
-    globals()["PaymentOrderId"] = PaymentOrderId
     globals()["PaymentShippingDetails"] = PaymentShippingDetails
     globals()["PaymentTraceDetails"] = PaymentTraceDetails
     globals()["SubscriptionInterval"] = SubscriptionInterval
@@ -144,7 +142,7 @@ class Subscription(ModelNormal):
             "shipping_details": (PaymentShippingDetails,),  # noqa: E501
             "pause_interval_count": (int,),  # noqa: E501
             "skip_interval_count": (int,),  # noqa: E501
-            "last_order_id": (PaymentOrderId,),  # noqa: E501
+            "last_order_id": (str,),  # noqa: E501
             "last_payment": (SubscriptionLastPayment,),  # noqa: E501
             "payment_method": (SubscriptionPaymentMethod,),  # noqa: E501
             "current_period_start": (float,),  # noqa: E501
@@ -290,7 +288,7 @@ class Subscription(ModelNormal):
             shipping_details (PaymentShippingDetails): [optional]  # noqa: E501
             pause_interval_count (int): Number of intervals when subscription will be paused before it activates again.. [optional]  # noqa: E501
             skip_interval_count (int): The number of intervals during which the subscription billing cycle will be skipped without altering the subscription status. This is useful when payment for a specific period is received through different methods. . [optional]  # noqa: E501
-            last_order_id (PaymentOrderId): [optional]  # noqa: E501
+            last_order_id (str): An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system. Up to 40 characters: ASCII letters, digits and `_ @ . / # & + -` (no spaces). . [optional]  # noqa: E501
             last_payment (SubscriptionLastPayment): [optional]  # noqa: E501
             payment_method (SubscriptionPaymentMethod): [optional]  # noqa: E501
             current_period_start (float): The start date of the current subscription period. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501
@@ -441,7 +439,7 @@ class Subscription(ModelNormal):
             shipping_details (PaymentShippingDetails): [optional]  # noqa: E501
             pause_interval_count (int): Number of intervals when subscription will be paused before it activates again.. [optional]  # noqa: E501
             skip_interval_count (int): The number of intervals during which the subscription billing cycle will be skipped without altering the subscription status. This is useful when payment for a specific period is received through different methods. . [optional]  # noqa: E501
-            last_order_id (PaymentOrderId): [optional]  # noqa: E501
+            last_order_id (str): An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system. Up to 40 characters: ASCII letters, digits and `_ @ . / # & + -` (no spaces). . [optional]  # noqa: E501
             last_payment (SubscriptionLastPayment): [optional]  # noqa: E501
             payment_method (SubscriptionPaymentMethod): [optional]  # noqa: E501
             current_period_start (float): The start date of the current subscription period. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501

@@ -186,7 +186,7 @@ class CreatePriceRequest(ModelNormal):
             type (str): How the price bills: `RECURRING` (the default) or `ONE_TIME`. Only a `RECURRING` price can start or switch a subscription. Treat the set as open: more values can be added later. . [optional] if omitted the server will use the default value of "RECURRING"  # noqa: E501
             recurring (PriceRecurring): [optional]  # noqa: E501
             tax_behavior (str): How the tax of the product's tax rate applies to `unitAmount`:  - `INCLUSIVE`: `unitAmount` holds the tax. - `EXCLUSIVE`: the tax is added to `unitAmount`.  No value means `INCLUSIVE`. Treat the set as open: more values can be added later. . [optional]  # noqa: E501
-            active (bool): Whether the price is active. An inactive price cannot start a subscription, and a subscription cannot switch to it. Prices are never deleted: set `active` to `false` to archive one. Subscriptions that already use it keep their copy of its values. . [optional] if omitted the server will use the default value of True  # noqa: E501
+            active (bool): Whether the price is active. An inactive price cannot start a subscription, and a subscription cannot switch to it. Prices are never deleted: set `active` to `false` to archive one. Subscriptions that already use it keep their copy of its values. A new price is active unless created with `active: false`. . [optional]  # noqa: E501
             nickname (PriceNickname): [optional]  # noqa: E501
             metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.. [optional]  # noqa: E501
         """
@@ -289,7 +289,7 @@ class CreatePriceRequest(ModelNormal):
             type (str): How the price bills: `RECURRING` (the default) or `ONE_TIME`. Only a `RECURRING` price can start or switch a subscription. Treat the set as open: more values can be added later. . [optional] if omitted the server will use the default value of "RECURRING"  # noqa: E501
             recurring (PriceRecurring): [optional]  # noqa: E501
             tax_behavior (str): How the tax of the product's tax rate applies to `unitAmount`:  - `INCLUSIVE`: `unitAmount` holds the tax. - `EXCLUSIVE`: the tax is added to `unitAmount`.  No value means `INCLUSIVE`. Treat the set as open: more values can be added later. . [optional]  # noqa: E501
-            active (bool): Whether the price is active. An inactive price cannot start a subscription, and a subscription cannot switch to it. Prices are never deleted: set `active` to `false` to archive one. Subscriptions that already use it keep their copy of its values. . [optional] if omitted the server will use the default value of True  # noqa: E501
+            active (bool): Whether the price is active. An inactive price cannot start a subscription, and a subscription cannot switch to it. Prices are never deleted: set `active` to `false` to archive one. Subscriptions that already use it keep their copy of its values. A new price is active unless created with `active: false`. . [optional]  # noqa: E501
             nickname (PriceNickname): [optional]  # noqa: E501
             metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.. [optional]  # noqa: E501
         """

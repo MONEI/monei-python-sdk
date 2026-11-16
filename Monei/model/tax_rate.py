@@ -127,7 +127,7 @@ class TaxRate(ModelNormal):
     @classmethod
     @convert_js_args_to_python_args
     def _from_openapi_data(
-        cls, id, display_name, percentage, created_at, *args, **kwargs
+        cls, id, display_name, percentage, active, created_at, *args, **kwargs
     ):  # noqa: E501
         """TaxRate - a model defined in OpenAPI
 
@@ -135,11 +135,11 @@ class TaxRate(ModelNormal):
             id (str): Unique identifier for the tax rate.
             display_name (TaxRateDisplayName):
             percentage (TaxRatePercentage):
+            active (bool): Whether the tax rate is active. Tax rates are never deleted: set `active` to `false` to archive one. An archived rate cannot be set on a product. While a product still has it, the product cannot get new prices and its prices cannot start or switch a subscription. Subscriptions that already use it keep their copy. A new tax rate is active unless created with `active: false`.
             created_at (int): Time at which the resource was created. Measured in seconds since the Unix epoch.
 
         Keyword Args:
             tax_type (str): The kind of tax: `VAT`, `IGIC` (Canary Islands) or `IPSI` (Ceuta and Melilla). It cannot change after the tax rate is created. Treat the set as open: more values can be added later. . defaults to "VAT"  # noqa: E501
-            active (bool): Whether the tax rate is active. Tax rates are never deleted: set `active` to `false` to archive one. An archived rate cannot be set on a product. While a product still has it, the product cannot get new prices and its prices cannot start or switch a subscription. Subscriptions that already use it keep their copy. . defaults to True  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -174,7 +174,6 @@ class TaxRate(ModelNormal):
         """
 
         tax_type = kwargs.get("tax_type", "VAT")
-        active = kwargs.get("active", True)
         _check_type = kwargs.pop("_check_type", True)
         _spec_property_naming = kwargs.pop("_spec_property_naming", True)
         _path_to_item = kwargs.pop("_path_to_item", ())
@@ -236,7 +235,7 @@ class TaxRate(ModelNormal):
 
     @convert_js_args_to_python_args
     def __init__(
-        self, id, display_name, percentage, created_at, *args, **kwargs
+        self, id, display_name, percentage, active, created_at, *args, **kwargs
     ):  # noqa: E501
         """TaxRate - a model defined in OpenAPI
 
@@ -244,11 +243,11 @@ class TaxRate(ModelNormal):
             id (str): Unique identifier for the tax rate.
             display_name (TaxRateDisplayName):
             percentage (TaxRatePercentage):
+            active (bool): Whether the tax rate is active. Tax rates are never deleted: set `active` to `false` to archive one. An archived rate cannot be set on a product. While a product still has it, the product cannot get new prices and its prices cannot start or switch a subscription. Subscriptions that already use it keep their copy. A new tax rate is active unless created with `active: false`.
             created_at (int): Time at which the resource was created. Measured in seconds since the Unix epoch.
 
         Keyword Args:
             tax_type (str): The kind of tax: `VAT`, `IGIC` (Canary Islands) or `IPSI` (Ceuta and Melilla). It cannot change after the tax rate is created. Treat the set as open: more values can be added later. . defaults to "VAT"  # noqa: E501
-            active (bool): Whether the tax rate is active. Tax rates are never deleted: set `active` to `false` to archive one. An archived rate cannot be set on a product. While a product still has it, the product cannot get new prices and its prices cannot start or switch a subscription. Subscriptions that already use it keep their copy. . defaults to True  # noqa: E501
             _check_type (bool): if True, values for parameters in openapi_types
                                 will be type checked and a TypeError will be
                                 raised if the wrong type is input.
@@ -283,7 +282,6 @@ class TaxRate(ModelNormal):
         """
 
         tax_type = kwargs.get("tax_type", "VAT")
-        active = kwargs.get("active", True)
         _check_type = kwargs.pop("_check_type", True)
         _spec_property_naming = kwargs.pop("_spec_property_naming", False)
         _path_to_item = kwargs.pop("_path_to_item", ())

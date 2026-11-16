@@ -31,13 +31,11 @@ from Monei.exceptions import ApiAttributeError
 def lazy_import():
     from Monei.model.payment_billing_details import PaymentBillingDetails
     from Monei.model.payment_customer import PaymentCustomer
-    from Monei.model.payment_order_id import PaymentOrderId
     from Monei.model.payment_shipping_details import PaymentShippingDetails
     from Monei.model.payment_transaction_type import PaymentTransactionType
 
     globals()["PaymentBillingDetails"] = PaymentBillingDetails
     globals()["PaymentCustomer"] = PaymentCustomer
-    globals()["PaymentOrderId"] = PaymentOrderId
     globals()["PaymentShippingDetails"] = PaymentShippingDetails
     globals()["PaymentTransactionType"] = PaymentTransactionType
 
@@ -103,7 +101,7 @@ class RecurringPaymentRequest(ModelNormal):
         """
         lazy_import()
         return {
-            "order_id": (PaymentOrderId,),  # noqa: E501
+            "order_id": (str,),  # noqa: E501
             "amount": (
                 bool,
                 date,
@@ -162,7 +160,7 @@ class RecurringPaymentRequest(ModelNormal):
         """RecurringPaymentRequest - a model defined in OpenAPI
 
         Args:
-            order_id (PaymentOrderId):
+            order_id (str): An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system. Up to 40 characters: ASCII letters, digits and `_ @ . / # & + -` (no spaces).
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
@@ -264,7 +262,7 @@ class RecurringPaymentRequest(ModelNormal):
         """RecurringPaymentRequest - a model defined in OpenAPI
 
         Args:
-            order_id (PaymentOrderId):
+            order_id (str): An order ID from your system. A unique identifier that can be used to reconcile the payment with your internal system. Up to 40 characters: ASCII letters, digits and `_ @ . / # & + -` (no spaces).
 
         Keyword Args:
             _check_type (bool): if True, values for parameters in openapi_types
