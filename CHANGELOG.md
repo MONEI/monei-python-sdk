@@ -1,5 +1,17 @@
 # Changelog
 
+# [2.9.0](https://github.com/MONEI/monei-python-sdk/compare/v2.8.0...v2.9.0) (2026-11-16)
+
+
+### Bug Fixes
+
+* verify a bytes body as its text ([6f39a45](https://github.com/MONEI/monei-python-sdk/commit/6f39a453708249da3cf4b0de385499adc4ccbcbf))
+
+
+### Features
+
+* verify v2 webhook and callback signatures with a signing secret ([fff95c7](https://github.com/MONEI/monei-python-sdk/commit/fff95c7c9ed03aeee8d4b32e6201012cef112cdf))
+
 # [2.8.0](https://github.com/MONEI/monei-python-sdk/compare/v2.7.1...v2.8.0) (2026-10-02)
 
 
