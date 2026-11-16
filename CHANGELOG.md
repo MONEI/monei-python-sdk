@@ -1,5 +1,17 @@
 # Changelog
 
+# [2.10.0](https://github.com/MONEI/monei-python-sdk/compare/v2.9.0...v2.10.0) (2026-11-16)
+
+
+### Bug Fixes
+
+* keep order_id a plain string ([a126aee](https://github.com/MONEI/monei-python-sdk/commit/a126aee3aae5b1b4c910f2c856bef878f3c6c1bc))
+
+
+### Features
+
+* add the Products, Prices and Tax rates APIs ([74dd627](https://github.com/MONEI/monei-python-sdk/commit/74dd6272a875b658404b78f92b0c8438f570023e))
+
 # [2.9.0](https://github.com/MONEI/monei-python-sdk/compare/v2.8.0...v2.9.0) (2026-11-16)
 
 
