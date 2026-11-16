@@ -38,6 +38,7 @@ For collecting customer and payment information in the browser, use [monei.js](h
       - [Integration Flow](#integration-flow)
   - [Webhooks](#webhooks)
     - [Signature Verification](#signature-verification)
+    - [Signing Secrets](#signing-secrets)
     - [Handling Payment Callbacks](#handling-payment-callbacks)
       - [Important Notes About Webhooks](#important-notes-about-webhooks)
   - [MONEI Connect for Partners](#monei-connect-for-partners)
@@ -388,6 +389,52 @@ def webhook():
 
 if __name__ == '__main__':
     app.run(port=3000)
+```
+
+### Signing Secrets
+
+The `MONEI-Signature` header has the form `t=<timestamp>[,v1=<hex>][,v2=<hex>...]`. Each element except `t` can be absent, and the header can contain more elements. Do not parse it with a strict pattern.
+
+- `v1` is signed with your API key. `monei.verify_signature(raw_body, signature)` checks `v1`.
+- `v2` is signed with a signing secret. Each new webhook endpoint has its own secret (`whsec_...`). An older endpoint gets a secret when you roll it for the first time. A callback of a payment or a subscription that you create with a scoped API key (`mk_...`) is signed with the signing secret of that key (`mksec_...`).
+
+To check `v2`, give the secret as the third argument. When you give a secret, the SDK does not use `v1`:
+
+```python
+import os
+
+# The whsec_ or mksec_ secret from your configuration
+signing_secret = os.environ['MONEI_SIGNING_SECRET']
+
+payload = monei.verify_signature(request.data.decode('utf-8'), signature, signing_secret)
+```
+
+When the secret is `None`, the SDK checks `v1` with your API key. `os.environ.get('NAME')` gives `None` for an unset variable, so use `os.environ['NAME']`, which raises `KeyError` when the secret is not set. An empty string, or a value that is not a string, fails the check.
+
+When you roll the secret of a webhook endpoint, MONEI signs each request with the new and the old secret for 24 hours. The header then has two `v2` values. The signature is valid when one of them matches the secret that you give, so you can change to the new secret during this period. If you roll the secret again in these 24 hours, the oldest secret stops at once. Roll again only after a leak.
+
+When you create a webhook endpoint, MONEI sends a `webhook.test` request before you can see the secret of the endpoint. Your handler must answer `webhook.test` with a 2xx status, also when it cannot verify the signature yet. Do not process this request:
+
+```python
+import json
+from Monei import ApiException
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    raw_body = request.data.decode('utf-8')
+    signature = request.headers.get('monei-signature')
+    try:
+        payload = monei.verify_signature(raw_body, signature, signing_secret)
+    except ApiException:
+        try:
+            event = json.loads(raw_body)
+        except ValueError:
+            event = None
+        # Acknowledge the test request, but do not process it
+        is_test = isinstance(event, dict) and event.get('type') == 'webhook.test'
+        return '', 200 if is_test else 401
+    # Process the payload
+    return jsonify({'received': True}), 200
 ```
 
 ### Handling Payment Callbacks

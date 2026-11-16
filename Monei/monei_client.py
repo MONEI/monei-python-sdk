@@ -139,29 +139,54 @@ class MoneiClient(object):
         self.user_agent = user_agent
         self._api_client.user_agent = user_agent
 
-    def verify_signature(self, body, signature):
-        """Verifies response signature
-        :param body: string JSON content to be verified
-        :param signature: string signature to verify against
+    def verify_signature(self, body, signature, secret=None):
+        """Verifies the MONEI-Signature header of a webhook or callback
+
+        Without a secret, ``v1`` is checked with the API key of the client.
+        With a secret, the ``v2`` values are checked with that secret, and ``v1`` is not used.
+
+        :param body: string raw request body
+        :param signature: string value of the MONEI-Signature header
+        :param secret: string signing secret for v2 (``whsec_...`` or ``mksec_...``)
         :return: parsed object of the body
+        :raises ApiException: with status 401 when the signature is missing, malformed or invalid
         """
+        failure = ApiException(status=401, reason="[401] Signature verification failed")
 
-        parts_dict = {}
-        signature_parts = signature.split(",")
-        for part in signature_parts:
-            parts = part.split("=")
-            parts_dict[parts[0]] = parts[1]
+        # An empty key gives an HMAC that anyone can make, for example from an empty variable.
+        if secret is not None and (not isinstance(secret, str) or secret == ""):
+            raise failure
+        if not isinstance(signature, str):
+            raise failure
 
-        calculated_hmac = hmac.new(
-            bytes(self.api_key, "utf-8"),
-            msg=bytes("{}.{}".format(parts_dict["t"], body), "utf-8"),
-            digestmod=hashlib.sha256,
+        parts = {"v2": []}
+        for element in signature.split(","):
+            name, separator, value = element.partition("=")
+            if not separator:
+                raise failure
+            if name == "v2":
+                parts["v2"].append(value)
+            else:
+                parts[name] = value
+        if not parts.get("t"):
+            raise failure
+
+        payload = "{}.{}".format(parts["t"], body).encode("utf-8")
+        if secret is None:
+            key = self.api_key
+            candidates = [parts["v1"]] if "v1" in parts else []
+        else:
+            key = secret
+            candidates = parts["v2"]
+        expected = hmac.new(
+            key.encode("utf-8"), msg=payload, digestmod=hashlib.sha256
         ).hexdigest()
 
-        if calculated_hmac != parts_dict["v1"]:
-            raise ApiException(status=401, reason="[401] Signature verification failed")
-
-        return json.loads(body)
+        # Compare bytes: compare_digest raises TypeError on a str with non-ASCII characters.
+        for candidate in candidates:
+            if hmac.compare_digest(expected.encode(), candidate.encode("utf-8")):
+                return json.loads(body)
+        raise failure
 
     def configure_retries(self, max_retries=3, retry_delay=0.1):
         """Configure retry behavior for API requests
