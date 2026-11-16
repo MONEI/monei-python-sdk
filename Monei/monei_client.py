@@ -171,6 +171,9 @@ class MoneiClient(object):
         if not parts.get("t"):
             raise failure
 
+        # Frameworks give the raw body as bytes (Flask request.data); format() would sign "b'...'".
+        if isinstance(body, (bytes, bytearray)):
+            body = body.decode("utf-8")
         payload = "{}.{}".format(parts["t"], body).encode("utf-8")
         if secret is None:
             key = self.api_key

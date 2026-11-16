@@ -235,6 +235,18 @@ class TestMoneiClient(unittest.TestCase):
 
         self.assertEqual(result, SIGNED_OBJECT)
 
+    def test_verify_signature_bytes_body(self):
+        """Flask request.data is bytes: it must sign the same text as the str body."""
+        client = MoneiClient(api_key=self.api_key)
+
+        result = client.verify_signature(
+            SIGNED_BODY.encode("utf-8"),
+            f"t=1794643200,v2={V2_SIGNATURE}",
+            OLD_SECRET,
+        )
+
+        self.assertEqual(result, SIGNED_OBJECT)
+
     def test_verify_signature_wrong_v1(self):
         self.assert_unauthorized("t=1794643200,v1=" + "0" * 64)
 
