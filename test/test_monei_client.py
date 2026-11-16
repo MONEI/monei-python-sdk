@@ -282,6 +282,10 @@ class TestMoneiClient(unittest.TestCase):
             "",
         )
 
+    def test_verify_signature_non_str_secret(self):
+        # v2 is valid for OLD_SECRET: only the bytes type makes it fail.
+        self.assert_unauthorized(f"t=1794643200,v2={V2_SIGNATURE}", OLD_SECRET.encode())
+
     def test_verify_signature_missing_t(self):
         # v1 is valid for t=1794643200: only the missing t makes it fail.
         self.assert_unauthorized(f"v1={V1_SIGNATURE}")
