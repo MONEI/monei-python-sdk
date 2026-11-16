@@ -20,4 +20,7 @@ from Monei.api.customers_api import CustomersApi
 from Monei.api.pos_auth_token_api import POSAuthTokenApi
 from Monei.api.payment_methods_api import PaymentMethodsApi
 from Monei.api.payments_api import PaymentsApi
+from Monei.api.prices_api import PricesApi
+from Monei.api.products_api import ProductsApi
 from Monei.api.subscriptions_api import SubscriptionsApi
+from Monei.api.tax_rates_api import TaxRatesApi
