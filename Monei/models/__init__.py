@@ -25,6 +25,22 @@ from Monei.model.bizum_validate_phone200_response import BizumValidatePhone200Re
 from Monei.model.cancel_payment_request import CancelPaymentRequest
 from Monei.model.cancel_subscription_request import CancelSubscriptionRequest
 from Monei.model.capture_payment_request import CapturePaymentRequest
+from Monei.model.cardholder_verification import CardholderVerification
+from Monei.model.cardholder_verification_card import CardholderVerificationCard
+from Monei.model.checkout_session import CheckoutSession
+from Monei.model.checkout_session_billing_address_collection import (
+    CheckoutSessionBillingAddressCollection,
+)
+from Monei.model.checkout_session_business_purchase import (
+    CheckoutSessionBusinessPurchase,
+)
+from Monei.model.checkout_session_line_item import CheckoutSessionLineItem
+from Monei.model.checkout_session_line_item_request import (
+    CheckoutSessionLineItemRequest,
+)
+from Monei.model.checkout_session_list import CheckoutSessionList
+from Monei.model.checkout_session_mode import CheckoutSessionMode
+from Monei.model.checkout_session_status import CheckoutSessionStatus
 from Monei.model.confirm_payment_request import ConfirmPaymentRequest
 from Monei.model.confirm_payment_request_payment_method import (
     ConfirmPaymentRequestPaymentMethod,
@@ -34,6 +50,7 @@ from Monei.model.confirm_payment_request_payment_method_card import (
 )
 from Monei.model.conflict_error import ConflictError
 from Monei.model.conflict_error_all_of import ConflictErrorAllOf
+from Monei.model.create_checkout_session_request import CreateCheckoutSessionRequest
 from Monei.model.create_customer_request import CreateCustomerRequest
 from Monei.model.create_payment_request import CreatePaymentRequest
 from Monei.model.create_pos_auth_token_request import CreatePosAuthTokenRequest
@@ -49,6 +66,7 @@ from Monei.model.internal_server_error_all_of import InternalServerErrorAllOf
 from Monei.model.not_found_error import NotFoundError
 from Monei.model.not_found_error_all_of import NotFoundErrorAllOf
 from Monei.model.pause_subscription_request import PauseSubscriptionRequest
+from Monei.model.payee_verification import PayeeVerification
 from Monei.model.payment import Payment
 from Monei.model.payment_billing_details import PaymentBillingDetails
 from Monei.model.payment_cancellation_reason import PaymentCancellationReason
@@ -177,3 +195,5 @@ from Monei.model.update_product_request import UpdateProductRequest
 from Monei.model.update_subscription_request import UpdateSubscriptionRequest
 from Monei.model.update_tax_rate_request import UpdateTaxRateRequest
 from Monei.model.validate_bizum_phone_request import ValidateBizumPhoneRequest
+from Monei.model.verify_cardholder_request import VerifyCardholderRequest
+from Monei.model.verify_payee_request import VerifyPayeeRequest

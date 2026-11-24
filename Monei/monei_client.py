@@ -13,6 +13,7 @@ from Monei.apis import (
     ProductsApi,
     PricesApi,
     TaxRatesApi,
+    CheckoutSessionsApi,
     ApplePayDomainApi,
     ApplePayCertificateApi,
     BizumApi,
@@ -94,6 +95,7 @@ class MoneiClient(object):
             self.Products = ProductsApi(api_client)
             self.Prices = PricesApi(api_client)
             self.TaxRates = TaxRatesApi(api_client)
+            self.CheckoutSessions = CheckoutSessionsApi(api_client)
             self.ApplePayDomain = ApplePayDomainApi(api_client)
             self.Bizum = BizumApi(api_client)
             self.ApplePayCertificate = ApplePayCertificateApi(api_client)
@@ -109,6 +111,7 @@ class MoneiClient(object):
             self.products = self.Products
             self.prices = self.Prices
             self.tax_rates = self.TaxRates
+            self.checkout_sessions = self.CheckoutSessions
             self.apple_pay_domain = self.ApplePayDomain
             self.apple_pay_certificate = self.ApplePayCertificate
             self.bizum = self.Bizum
