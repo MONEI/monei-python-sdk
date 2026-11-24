@@ -1,5 +1,18 @@
 # Changelog
 
+# [2.11.0](https://github.com/MONEI/monei-python-sdk/compare/v2.10.0...v2.11.0) (2026-11-24)
+
+
+### Bug Fixes
+
+* mask every card model found by its schema ([273552e](https://github.com/MONEI/monei-python-sdk/commit/273552ea75caa05e451ca936876c905702102581))
+* mask the card number and CVC in the card model's repr ([28f260a](https://github.com/MONEI/monei-python-sdk/commit/28f260a2567fe4827d4f0e0fa1eeb61cad7b62f6))
+
+
+### Features
+
+* add the Checkout Sessions API ([5621f69](https://github.com/MONEI/monei-python-sdk/commit/5621f6966fd7957b42a15bc45320765544c10a96))
+
 # [2.10.0](https://github.com/MONEI/monei-python-sdk/compare/v2.9.0...v2.10.0) (2026-11-16)
 
 
