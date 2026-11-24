@@ -1,7 +1,9 @@
 """Masks card data in the string representation of models.
 
 The generated `to_str` prints `to_dict()`, so `print` or a log line would show the
-full card number and CVC of a card, also when the card is nested in a request.
+full card number and CVC of a card model (`CardholderVerificationCard`,
+`PaymentPaymentMethodCardInput`), also when the card is nested in a request. A card
+model is found by its schema, so a new card model is masked without a change here.
 This module is hand-written (the generator does not create it) and
 `scripts/post-build.sh` imports it from `Monei/__init__.py` after each
 regeneration. `to_dict()` and the request body keep the real values.
@@ -9,8 +11,12 @@ regeneration. `to_dict()` and the request body keep the real values.
 
 import pprint
 
-from Monei.model.cardholder_verification_card import CardholderVerificationCard
 from Monei.model_utils import ModelComposed, ModelNormal
+
+
+def _is_card(model):
+    fields = model.openapi_types
+    return "cvc" in fields or ("number" in fields and "exp_month" in fields)
 
 
 def _mask_card(plain):
@@ -24,7 +30,7 @@ def _mask_card(plain):
 
 
 def _mask_value(value, plain):
-    if isinstance(value, CardholderVerificationCard) and isinstance(plain, dict):
+    if hasattr(value, "_data_store") and _is_card(value) and isinstance(plain, dict):
         return _mask_card(plain)
     if hasattr(value, "_data_store") and isinstance(plain, dict):
         _mask_model(value, plain)
@@ -51,7 +57,7 @@ def _mask_model(model, plain):
 def _masked_to_str(self):
     """Returns the string representation of the model, with card data masked"""
     plain = self.to_dict()
-    if isinstance(self, CardholderVerificationCard):
+    if _is_card(self):
         plain = _mask_card(plain)
     else:
         _mask_model(self, plain)
