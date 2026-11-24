@@ -4,3 +4,4 @@ echo 'from Monei.monei_client import MoneiClient' >>./Monei/__init__.py
 echo 'from Monei.models import *' >>./Monei/__init__.py
 echo 'from Monei.apis import *' >>./Monei/__init__.py
 echo 'from Monei.exceptions import *' >>./Monei/__init__.py
+echo 'import Monei.redaction  # masks card data in model reprs' >>./Monei/__init__.py

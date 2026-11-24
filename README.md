@@ -36,6 +36,7 @@ For collecting customer and payment information in the browser, use [monei.js](h
     - [Creating a Product and a Price](#creating-a-product-and-a-price)
     - [Subscribing to a Price](#subscribing-to-a-price)
     - [Tax Rates](#tax-rates)
+  - [Checkout Sessions](#checkout-sessions)
   - [Integration Methods](#integration-methods)
     - [Using the Prebuilt Payment Page](#using-the-prebuilt-payment-page)
       - [Features](#features)
@@ -340,6 +341,29 @@ tax_rate = monei.tax_rates.create(
     )
 )
 ```
+
+## Checkout Sessions
+
+A checkout session is a cart of prices that the buyer pays on one MONEI page. MONEI computes the amounts and the tax, and returns the session with its `url`. Send the buyer to the `url`.
+
+```python
+from Monei import CheckoutSessionLineItemRequest, CreateCheckoutSessionRequest
+
+session = monei.checkout_sessions.create(
+    CreateCheckoutSessionRequest(
+        line_items=[CheckoutSessionLineItemRequest(price_id=price.id, quantity=1)],
+        success_url='https://example.com/checkout/success',
+        cancel_url='https://example.com/cart',
+    )
+)
+
+# Redirect the buyer to session.url
+
+session = monei.checkout_sessions.get(session.id)
+sessions = monei.checkout_sessions.list(limit=20)
+```
+
+A session with a `RECURRING` price also creates a subscription. The payment and the subscription that a session creates have `checkout_session_id`. To know when a session ends, subscribe a webhook to `checkout_session.completed` and `checkout_session.expired`.
 
 ## Integration Methods
 

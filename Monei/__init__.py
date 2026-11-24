@@ -31,3 +31,4 @@ from Monei.monei_client import MoneiClient
 from Monei.models import *
 from Monei.apis import *
 from Monei.exceptions import *
+import Monei.redaction  # masks card data in model reprs

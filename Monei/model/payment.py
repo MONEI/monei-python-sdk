@@ -145,6 +145,7 @@ class Payment(ModelNormal):
             "sequence_id": (str,),  # noqa: E501
             "store_id": (str,),  # noqa: E501
             "point_of_sale_id": (str,),  # noqa: E501
+            "checkout_session_id": (str,),  # noqa: E501
             "metadata": (
                 {str: (bool, date, datetime, dict, float, int, list, str, none_type)},
             ),  # noqa: E501
@@ -186,6 +187,7 @@ class Payment(ModelNormal):
         "sequence_id": "sequenceId",  # noqa: E501
         "store_id": "storeId",  # noqa: E501
         "point_of_sale_id": "pointOfSaleId",  # noqa: E501
+        "checkout_session_id": "checkoutSessionId",  # noqa: E501
         "metadata": "metadata",  # noqa: E501
         "next_action": "nextAction",  # noqa: E501
         "created_at": "createdAt",  # noqa: E501
@@ -264,6 +266,7 @@ class Payment(ModelNormal):
             sequence_id (str): A permanent identifier that refers to the initial payment of a sequence of payments. This value needs to be sent in the path for `RECURRING` payments. . [optional]  # noqa: E501
             store_id (str): A unique identifier of the Store. If specified the payment is attached to this Store. . [optional]  # noqa: E501
             point_of_sale_id (str): A unique identifier of the Point of Sale. If specified the payment is attached to this Point of Sale. If there is a QR code attached to the same Point of Sale, this payment will be available by scanning the QR code. . [optional]  # noqa: E501
+            checkout_session_id (str): The [checkout session](https://docs.monei.com/apis/rest/checkout-sessions-get/) the payment pays. Absent on a payment created without one. . [optional]  # noqa: E501
             metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.. [optional]  # noqa: E501
             next_action (PaymentNextAction): [optional]  # noqa: E501
             created_at (int): Time at which the resource was created. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501
@@ -396,6 +399,7 @@ class Payment(ModelNormal):
             sequence_id (str): A permanent identifier that refers to the initial payment of a sequence of payments. This value needs to be sent in the path for `RECURRING` payments. . [optional]  # noqa: E501
             store_id (str): A unique identifier of the Store. If specified the payment is attached to this Store. . [optional]  # noqa: E501
             point_of_sale_id (str): A unique identifier of the Point of Sale. If specified the payment is attached to this Point of Sale. If there is a QR code attached to the same Point of Sale, this payment will be available by scanning the QR code. . [optional]  # noqa: E501
+            checkout_session_id (str): The [checkout session](https://docs.monei.com/apis/rest/checkout-sessions-get/) the payment pays. Absent on a payment created without one. . [optional]  # noqa: E501
             metadata ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): A set of key-value pairs that you can attach to a resource. This can be useful for storing additional information about the resource in a structured format.. [optional]  # noqa: E501
             next_action (PaymentNextAction): [optional]  # noqa: E501
             created_at (int): Time at which the resource was created. Measured in seconds since the Unix epoch.. [optional]  # noqa: E501

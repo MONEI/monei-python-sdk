@@ -135,6 +135,7 @@ class Subscription(ModelNormal):
             "description": (str,),  # noqa: E501
             "price_id": (str,),  # noqa: E501
             "product_id": (str,),  # noqa: E501
+            "checkout_session_id": (str,),  # noqa: E501
             "tax": (TaxDetails,),  # noqa: E501
             "customer_id": (str,),  # noqa: E501
             "customer": (PaymentCustomer,),  # noqa: E501
@@ -185,6 +186,7 @@ class Subscription(ModelNormal):
         "description": "description",  # noqa: E501
         "price_id": "priceId",  # noqa: E501
         "product_id": "productId",  # noqa: E501
+        "checkout_session_id": "checkoutSessionId",  # noqa: E501
         "tax": "tax",  # noqa: E501
         "customer_id": "customerId",  # noqa: E501
         "customer": "customer",  # noqa: E501
@@ -281,6 +283,7 @@ class Subscription(ModelNormal):
             description (str): An arbitrary string attached to the subscription. Often useful for displaying to users. . [optional]  # noqa: E501
             price_id (str): The [price](https://docs.monei.com/apis/rest/prices-create/) the subscription bills.  The subscription copies the price's values when it is created or switched to the price. A later change to the price never changes the subscription. . [optional]  # noqa: E501
             product_id (str): The [product](https://docs.monei.com/apis/rest/products-create/) of the subscription's price. MONEI sets it from `priceId`, and removes it together with `priceId`. . [optional]  # noqa: E501
+            checkout_session_id (str): The [checkout session](https://docs.monei.com/apis/rest/checkout-sessions-get/) that created the subscription. While the session is open, only the session can activate, change or cancel the subscription: those requests are rejected with `422`. . [optional]  # noqa: E501
             tax (TaxDetails): [optional]  # noqa: E501
             customer_id (str): The [customer](https://docs.monei.com/apis/rest/customers-create/) this subscription belongs to.  Linking a subscription to a customer turns on **renewal failover**: when a renewal is declined by the issuing bank, MONEI retries it against up to two of the customer's other saved payment methods within the same attempt, before the subscription goes `PAST_DUE`. One declined renewal can therefore produce up to three charge attempts on different cards. If one succeeds the subscription continues and moves to that payment method. . [optional]  # noqa: E501
             customer (PaymentCustomer): [optional]  # noqa: E501
@@ -432,6 +435,7 @@ class Subscription(ModelNormal):
             description (str): An arbitrary string attached to the subscription. Often useful for displaying to users. . [optional]  # noqa: E501
             price_id (str): The [price](https://docs.monei.com/apis/rest/prices-create/) the subscription bills.  The subscription copies the price's values when it is created or switched to the price. A later change to the price never changes the subscription. . [optional]  # noqa: E501
             product_id (str): The [product](https://docs.monei.com/apis/rest/products-create/) of the subscription's price. MONEI sets it from `priceId`, and removes it together with `priceId`. . [optional]  # noqa: E501
+            checkout_session_id (str): The [checkout session](https://docs.monei.com/apis/rest/checkout-sessions-get/) that created the subscription. While the session is open, only the session can activate, change or cancel the subscription: those requests are rejected with `422`. . [optional]  # noqa: E501
             tax (TaxDetails): [optional]  # noqa: E501
             customer_id (str): The [customer](https://docs.monei.com/apis/rest/customers-create/) this subscription belongs to.  Linking a subscription to a customer turns on **renewal failover**: when a renewal is declined by the issuing bank, MONEI retries it against up to two of the customer's other saved payment methods within the same attempt, before the subscription goes `PAST_DUE`. One declined renewal can therefore produce up to three charge attempts on different cards. If one succeeds the subscription continues and moves to that payment method. . [optional]  # noqa: E501
             customer (PaymentCustomer): [optional]  # noqa: E501

@@ -3,6 +3,8 @@ Monei/api/__init__.py
 Monei/api/apple_pay_certificate_api.py
 Monei/api/apple_pay_domain_api.py
 Monei/api/bizum_api.py
+Monei/api/cardholder_verification_api.py
+Monei/api/checkout_sessions_api.py
 Monei/api/customers_api.py
 Monei/api/payment_methods_api.py
 Monei/api/payments_api.py
@@ -11,6 +13,7 @@ Monei/api/prices_api.py
 Monei/api/products_api.py
 Monei/api/subscriptions_api.py
 Monei/api/tax_rates_api.py
+Monei/api/verification_of_payee_api.py
 Monei/api_client.py
 Monei/apis/__init__.py
 Monei/configuration.py
@@ -28,11 +31,22 @@ Monei/model/bizum_validate_phone200_response.py
 Monei/model/cancel_payment_request.py
 Monei/model/cancel_subscription_request.py
 Monei/model/capture_payment_request.py
+Monei/model/cardholder_verification.py
+Monei/model/cardholder_verification_card.py
+Monei/model/checkout_session.py
+Monei/model/checkout_session_billing_address_collection.py
+Monei/model/checkout_session_business_purchase.py
+Monei/model/checkout_session_line_item.py
+Monei/model/checkout_session_line_item_request.py
+Monei/model/checkout_session_list.py
+Monei/model/checkout_session_mode.py
+Monei/model/checkout_session_status.py
 Monei/model/confirm_payment_request.py
 Monei/model/confirm_payment_request_payment_method.py
 Monei/model/confirm_payment_request_payment_method_card.py
 Monei/model/conflict_error.py
 Monei/model/conflict_error_all_of.py
+Monei/model/create_checkout_session_request.py
 Monei/model/create_customer_request.py
 Monei/model/create_payment_request.py
 Monei/model/create_pos_auth_token_request.py
@@ -48,6 +62,7 @@ Monei/model/internal_server_error_all_of.py
 Monei/model/not_found_error.py
 Monei/model/not_found_error_all_of.py
 Monei/model/pause_subscription_request.py
+Monei/model/payee_verification.py
 Monei/model/payment.py
 Monei/model/payment_billing_details.py
 Monei/model/payment_cancellation_reason.py
@@ -156,6 +171,8 @@ Monei/model/update_product_request.py
 Monei/model/update_subscription_request.py
 Monei/model/update_tax_rate_request.py
 Monei/model/validate_bizum_phone_request.py
+Monei/model/verify_cardholder_request.py
+Monei/model/verify_payee_request.py
 Monei/model_utils.py
 Monei/models/__init__.py
 Monei/rest.py
